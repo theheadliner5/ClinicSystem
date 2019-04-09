@@ -12,8 +12,9 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class ClinicSystemDbContext : DbContext
+    using ClinicSystem.Infrastructure.Interfaces;
+
+    public partial class ClinicSystemDbContext : DbContext, IClinicSystemDbContext
     {
         public ClinicSystemDbContext()
             : base("name=ClinicSystemDbContext")

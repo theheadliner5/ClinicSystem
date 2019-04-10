@@ -26,7 +26,46 @@
         </dd>
         @if (User.IsInRole("Administrator"))
         {
-            <p>You're logged as administrator!</p>
+            <p>Użytkownicy:</p>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Pesel</th>
+                    <th>Rola</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.name</td>
+                                <td>@user.last_name</td>
+                                <td>@user.pesel</td>
+                                
+                                @{
+                                    var roleName = user.AspNetUsers.AspNetRoles.SingleOrDefault()?.Name;
+
+                                    if (roleName != null)
+                                    {
+                                        <td>@roleName</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Nieznana</td>
+                                    }
+                                }
+                                
+                                <td>@Html.ActionLink("Edytuj", "Edit", "RoleEdit", new { personId = user.id }, null)</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
         }
         
         @*

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ClinicSystem.Infrastructure.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -13,11 +14,13 @@ namespace ClinicSystem.WebApplication.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly IClinicSystemDbContext _db;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController(IClinicSystemDbContext db)
         {
+            _db = db;
         }
 
         public ApplicationSignInManager SignInManager
@@ -64,7 +67,8 @@ namespace ClinicSystem.WebApplication.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Users = _db.person.ToList()
             };
             return View(model);
         }

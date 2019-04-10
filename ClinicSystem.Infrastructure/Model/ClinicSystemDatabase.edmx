@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicSystemEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -189,6 +189,7 @@
           <Property Name="address" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="pesel" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="birth_date" Type="date" />
+          <Property Name="asp_net_user_id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="unit">
           <Key>
@@ -334,6 +335,18 @@
             </Principal>
             <Dependent Role="employee">
               <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__person__asp_net___14270015">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="person" Type="Self.person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="asp_net_user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -549,7 +562,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClinicSystemEntitiesStoreContainer">
+        <EntityContainer Name="ClinicSystemModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -611,6 +624,10 @@
           <AssociationSet Name="employee_unit_fk" Association="Self.employee_unit_fk">
             <End Role="unit" EntitySet="unit" />
             <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__person__asp_net___14270015" Association="Self.FK__person__asp_net___14270015">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="person" EntitySet="person" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -685,7 +702,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClinicSystemEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ClinicSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -743,6 +760,7 @@
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="person" Relationship="Self.FK__person__asp_net___14270015" FromRole="AspNetUsers" ToRole="person" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="clinic">
@@ -901,6 +919,8 @@
           <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="pesel" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="asp_net_user_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__person__asp_net___14270015" FromRole="person" ToRole="AspNetUsers" />
           <NavigationProperty Name="employee" Relationship="Self.employee_person_fk" FromRole="person" ToRole="employee" />
           <NavigationProperty Name="patient_visit" Relationship="Self.patient_visit_person_fk" FromRole="person" ToRole="patient_visit" />
         </EntityType>
@@ -967,6 +987,18 @@
             </Principal>
             <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__person__asp_net___14270015">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="person" Type="Self.person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="asp_net_user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1280,6 +1312,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK__person__asp_net___14270015" Association="Self.FK__person__asp_net___14270015">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="person" EntitySet="person" />
+          </AssociationSet>
           <AssociationSet Name="patient_visit_clinic_fk" Association="Self.patient_visit_clinic_fk">
             <End Role="clinic" EntitySet="clinic" />
             <End Role="patient_visit" EntitySet="patient_visit" />
@@ -1382,9 +1418,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClinicSystemEntitiesStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
+        <EntityContainerMapping StorageEntityContainer="ClinicSystemModelStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.C__MigrationHistory">
+            <EntityTypeMapping TypeName="ClinicSystemModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
@@ -1394,7 +1430,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.AspNetRoles">
+            <EntityTypeMapping TypeName="ClinicSystemModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1402,7 +1438,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.AspNetUserClaims">
+            <EntityTypeMapping TypeName="ClinicSystemModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1412,7 +1448,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.AspNetUserLogins">
+            <EntityTypeMapping TypeName="ClinicSystemModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -1421,7 +1457,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.AspNetUsers">
+            <EntityTypeMapping TypeName="ClinicSystemModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -1439,7 +1475,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="clinic">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.clinic">
+            <EntityTypeMapping TypeName="ClinicSystemModel.clinic">
               <MappingFragment StoreEntitySet="clinic">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1448,7 +1484,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="diagnostics">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.diagnostics">
+            <EntityTypeMapping TypeName="ClinicSystemModel.diagnostics">
               <MappingFragment StoreEntitySet="diagnostics">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="examination_date" ColumnName="examination_date" />
@@ -1460,7 +1496,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="disease">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.disease">
+            <EntityTypeMapping TypeName="ClinicSystemModel.disease">
               <MappingFragment StoreEntitySet="disease">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="code" ColumnName="code" />
@@ -1469,7 +1505,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="emplacement">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.emplacement">
+            <EntityTypeMapping TypeName="ClinicSystemModel.emplacement">
               <MappingFragment StoreEntitySet="emplacement">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="emplacement_name" ColumnName="emplacement_name" />
@@ -1477,7 +1513,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="employee">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.employee">
+            <EntityTypeMapping TypeName="ClinicSystemModel.employee">
               <MappingFragment StoreEntitySet="employee">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="salary" ColumnName="salary" />
@@ -1490,7 +1526,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="employee_cost">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.employee_cost">
+            <EntityTypeMapping TypeName="ClinicSystemModel.employee_cost">
               <MappingFragment StoreEntitySet="employee_cost">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="employee_cost1" ColumnName="employee_cost" />
@@ -1501,7 +1537,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="examination">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.examination">
+            <EntityTypeMapping TypeName="ClinicSystemModel.examination">
               <MappingFragment StoreEntitySet="examination">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="examination_name" ColumnName="examination_name" />
@@ -1510,7 +1546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="medicine_order">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.medicine_order">
+            <EntityTypeMapping TypeName="ClinicSystemModel.medicine_order">
               <MappingFragment StoreEntitySet="medicine_order">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
@@ -1521,7 +1557,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="medicine_type">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.medicine_type">
+            <EntityTypeMapping TypeName="ClinicSystemModel.medicine_type">
               <MappingFragment StoreEntitySet="medicine_type">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="medicine_name" ColumnName="medicine_name" />
@@ -1530,7 +1566,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="patient_diagnose">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.patient_diagnose">
+            <EntityTypeMapping TypeName="ClinicSystemModel.patient_diagnose">
               <MappingFragment StoreEntitySet="patient_diagnose">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="diagnose" ColumnName="diagnose" />
@@ -1540,7 +1576,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="patient_medicines">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.patient_medicines">
+            <EntityTypeMapping TypeName="ClinicSystemModel.patient_medicines">
               <MappingFragment StoreEntitySet="patient_medicines">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="dose" ColumnName="dose" />
@@ -1551,7 +1587,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="patient_visit">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.patient_visit">
+            <EntityTypeMapping TypeName="ClinicSystemModel.patient_visit">
               <MappingFragment StoreEntitySet="patient_visit">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="date_from" ColumnName="date_from" />
@@ -1564,7 +1600,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="person">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.person">
+            <EntityTypeMapping TypeName="ClinicSystemModel.person">
               <MappingFragment StoreEntitySet="person">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -1572,11 +1608,12 @@
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="pesel" ColumnName="pesel" />
                 <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="asp_net_user_id" ColumnName="asp_net_user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="unit">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.unit">
+            <EntityTypeMapping TypeName="ClinicSystemModel.unit">
               <MappingFragment StoreEntitySet="unit">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="clinic_id" ColumnName="clinic_id" />
@@ -1586,7 +1623,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="unit_plan">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.unit_plan">
+            <EntityTypeMapping TypeName="ClinicSystemModel.unit_plan">
               <MappingFragment StoreEntitySet="unit_plan">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="budget_type" ColumnName="budget_type" />
@@ -1598,14 +1635,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="unit_type">
-            <EntityTypeMapping TypeName="ClinicSystemEntities.unit_type">
+            <EntityTypeMapping TypeName="ClinicSystemModel.unit_type">
               <MappingFragment StoreEntitySet="unit_type">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="unit_name" ColumnName="unit_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ClinicSystemEntities.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="ClinicSystemModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>

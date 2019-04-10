@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ClinicSystem.Infrastructure.Interfaces;
+using ClinicSystem.Infrastructure.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -15,11 +17,13 @@ namespace ClinicSystem.WebApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IClinicSystemDbContext _db;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IClinicSystemDbContext db)
         {
+            _db = db;
         }
 
         public ApplicationSignInManager SignInManager
@@ -149,6 +153,18 @@ namespace ClinicSystem.WebApplication.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _db.person.Add(new person
+                    {
+                        name = model.Name,
+                        last_name = model.LastName,
+                        address = model.Address,
+                        pesel = model.Pesel,
+                        birth_date = model.Birthdate,
+                        asp_net_user_id = user.Id
+                    });
+
+                    _db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

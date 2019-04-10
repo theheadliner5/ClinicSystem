@@ -27,7 +27,9 @@ namespace ClinicSystem.Infrastructure.Model
         public string address { get; set; }
         public string pesel { get; set; }
         public Nullable<System.DateTime> birth_date { get; set; }
+        public string asp_net_user_id { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employee> employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

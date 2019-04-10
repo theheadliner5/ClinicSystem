@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.UI.WebControls;
 
 namespace ClinicSystem.WebApplication.Models
 {
@@ -68,6 +70,32 @@ namespace ClinicSystem.WebApplication.Models
         [EmailAddress]
         [Display(Name = "Adres e-mail")]
         public string Email { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Nazwisko")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Adres")]
+        public string Address { get; set; }
+
+        [Required]
+        [StringLength(11, ErrorMessage = "Numer PESEL musi posiadać dokładnie 11 znaków", MinimumLength = 11)]
+        [Display(Name = "PESEL")]
+        public string Pesel { get; set; }
+
+        [Required]
+        [Display(Name = "Data urodzenia")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Birthdate { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi posiadać przynajmniej {2} znaków.", MinimumLength = 6)]

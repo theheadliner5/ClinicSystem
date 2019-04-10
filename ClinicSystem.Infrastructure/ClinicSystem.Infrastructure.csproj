@@ -136,27 +136,25 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClinicSystemDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Model\ClinicSystemDatabase.edmx.diagram">
       <DependentUpon>ClinicSystemDatabase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\ClinicSystemDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClinicSystemDatabase.Context.cs</LastGenOutput>
       <DependentUpon>ClinicSystemDatabase.edmx</DependentUpon>
+      <LastGenOutput>ClinicSystemDatabase.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\ClinicSystemDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClinicSystemDatabase.edmx</DependentUpon>
       <LastGenOutput>ClinicSystemDatabase.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

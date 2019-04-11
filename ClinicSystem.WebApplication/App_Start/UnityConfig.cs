@@ -2,6 +2,8 @@ using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
 using System;
 using System.Data.Entity;
+using ClinicSystem.WebApplication.Facade;
+using ClinicSystem.WebApplication.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Unity;
@@ -51,6 +53,9 @@ namespace ClinicSystem.WebApplication
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterType<IClinicSystemDbContext, ClinicSystemDbContext>(new PerRequestLifetimeManager());
+
+            container.RegisterType<IPersonRepository, PersonRepository>();
+            container.RegisterType<IAspNetRolesRepository, AspNetRolesRepository>();
         }
     }
 }

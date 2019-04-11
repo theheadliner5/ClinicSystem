@@ -38,7 +38,6 @@
                             <th>Nazwisko</th>
                             <th>Pesel</th>
                             <th>Rola</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -63,11 +62,53 @@
                                             <td>Nieznana</td>
                                         }
                                     }
-
-                                    <td>@Html.ActionLink("Edytuj", "Edit", "RoleEdit", new { personId = user.ID }, null)</td>
+                                    <td>@Html.ActionLink("Edytuj rolę", "Edit", "RoleEdit", new { personId = user.ID }, null)</td>
                                 </tr>
                             }
                         }
+                    </tbody>
+                </table>
+            </dd>
+        }
+        @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+        {
+            <dt>Zarejestrowani użytkownicy:</dt>
+            <dd>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Pesel</th>
+                        <th>Rola</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Users.Any())
+                    {
+                        foreach (var user in Model.Users.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "Administrator")))
+                        {
+                            <tr>
+                                <td>@user.NAME</td>
+                                <td>@user.LAST_NAME</td>
+                                <td>@user.PESEL</td>
+
+                                @{
+                                    var roleName = user.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME;
+
+                                    if (roleName != null)
+                                    {
+                                        <td>@roleName</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Nieznana</td>
+                                    }
+                                }
+                                <td>@Html.ActionLink("Przypisz/edytuj lekarza", "Register", "Doctor", new { personId = user.ID }, null)</td>
+                            </tr>
+                        }
+                    }
                     </tbody>
                 </table>
             </dd>

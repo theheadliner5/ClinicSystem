@@ -94,7 +94,7 @@ namespace ClinicSystem.WebApplication.Models
         [Required]
         [Display(Name = "Data urodzenia")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthdate { get; set; }
 
         [Required]

@@ -12,18 +12,18 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class emplacement
+    public partial class EMPLACEMENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public emplacement()
+        public EMPLACEMENT()
         {
-            this.employee = new HashSet<employee>();
+            this.EMPLOYEE = new HashSet<EMPLOYEE>();
         }
     
-        public long id { get; set; }
-        public string emplacement_name { get; set; }
+        public long ID { get; set; }
+        public string EMPLACEMENT_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee { get; set; }
+        public virtual ICollection<EMPLOYEE> EMPLOYEE { get; set; }
     }
 }

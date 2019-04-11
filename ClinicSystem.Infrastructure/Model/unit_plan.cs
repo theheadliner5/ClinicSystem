@@ -12,26 +12,26 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class unit_plan
+    public partial class UNIT_PLAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public unit_plan()
+        public UNIT_PLAN()
         {
-            this.diagnostics = new HashSet<diagnostics>();
-            this.employee_cost = new HashSet<employee_cost>();
+            this.DIAGNOSTICS = new HashSet<DIAGNOSTICS>();
+            this.EMPLOYEE_COST = new HashSet<EMPLOYEE_COST>();
         }
     
-        public long id { get; set; }
-        public string budget_type { get; set; }
-        public System.DateTime date_from { get; set; }
-        public System.DateTime date_to { get; set; }
-        public decimal value { get; set; }
-        public long unit_id { get; set; }
+        public long ID { get; set; }
+        public string BUDGET_TYPE { get; set; }
+        public System.DateTime DATE_FROM { get; set; }
+        public System.DateTime DATE_TO { get; set; }
+        public decimal VALUE { get; set; }
+        public long UNIT_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<diagnostics> diagnostics { get; set; }
+        public virtual ICollection<DIAGNOSTICS> DIAGNOSTICS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee_cost> employee_cost { get; set; }
-        public virtual unit unit { get; set; }
+        public virtual ICollection<EMPLOYEE_COST> EMPLOYEE_COST { get; set; }
+        public virtual UNIT UNIT { get; set; }
     }
 }

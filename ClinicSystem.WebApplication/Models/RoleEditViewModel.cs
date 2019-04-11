@@ -9,9 +9,9 @@ namespace ClinicSystem.WebApplication.Models
 {
     public class RoleEditViewModel
     {
-        public IEnumerable<AspNetRoles> Roles { get; set; }
+        public IEnumerable<ASPNETROLES> Roles { get; set; }
         [Display(Name = "Rola")]
-        public string RoleName { get; set; }
-        public long PersonId { get; set; }
+        public string RoleId { get; set; }
+        public string AspNetUserId { get; set; }
     }
 }

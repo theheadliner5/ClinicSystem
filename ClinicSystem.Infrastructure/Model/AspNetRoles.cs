@@ -12,18 +12,18 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class ASPNETROLES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public ASPNETROLES()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.ASPNETUSERS = new HashSet<ASPNETUSERS>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public string ID { get; set; }
+        public string NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<ASPNETUSERS> ASPNETUSERS { get; set; }
     }
 }

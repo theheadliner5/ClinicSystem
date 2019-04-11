@@ -12,12 +12,12 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserLogins
+    public partial class ASPNETUSERLOGINS
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string UserId { get; set; }
+        public string LOGINPROVIDER { get; set; }
+        public string PROVIDERKEY { get; set; }
+        public string USERID { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual ASPNETUSERS ASPNETUSERS { get; set; }
     }
 }

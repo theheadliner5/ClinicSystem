@@ -24,77 +24,53 @@
             }
             ]
         </dd>
+        <dd>
+            <br />
+        </dd>
         @if (User.IsInRole("Administrator"))
         {
-            <p>Użytkownicy:</p>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>Pesel</th>
-                    <th>Rola</th>
-                    
-                </tr>
-                </thead>
-                <tbody>
-                    @if (Model.Users.Any())
-                    {
-                        foreach (var user in Model.Users)
-                        {
-                            <tr>
-                                <td>@user.name</td>
-                                <td>@user.last_name</td>
-                                <td>@user.pesel</td>
-                                
-                                @{
-                                    var roleName = user.AspNetUsers.AspNetRoles.SingleOrDefault()?.Name;
-
-                                    if (roleName != null)
-                                    {
-                                        <td>@roleName</td>
-                                    }
-                                    else
-                                    {
-                                        <td>Nieznana</td>
-                                    }
-                                }
-                                
-                                <td>@Html.ActionLink("Edytuj", "Edit", "RoleEdit", new { personId = user.id }, null)</td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        }
-        
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
+            <dt>Zarejestrowani użytkownicy:</dt>
             <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Pesel</th>
+                            <th>Rola</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Users.Any())
+                        {
+                            foreach (var user in Model.Users)
+                            {
+                                <tr>
+                                    <td>@user.NAME</td>
+                                    <td>@user.LAST_NAME</td>
+                                    <td>@user.PESEL</td>
+
+                                    @{
+                                        var roleName = user.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME;
+
+                                        if (roleName != null)
+                                        {
+                                            <td>@roleName</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Nieznana</td>
+                                        }
+                                    }
+
+                                    <td>@Html.ActionLink("Edytuj", "Edit", "RoleEdit", new { personId = user.ID }, null)</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </dd>
-        *@
+        }
     </dl>
 </div>

@@ -19,13 +19,13 @@ namespace ClinicSystem.WebApplication.Controllers
 
         public ActionResult Edit(long personId)
         {
-            var person = _db.person.SingleOrDefault(e => e.id == personId);
+            var person = _db.PERSON.SingleOrDefault(e => e.ID == personId);
 
             var viewModel = new RoleEditViewModel
             {
-                RoleName = person.AspNetUsers.AspNetRoles.SingleOrDefault()?.Name,
-                PersonId = person.id,
-                Roles = _db.AspNetRoles.ToList()
+                RoleId = person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID,
+                AspNetUserId = person?.ASP_NET_USER_ID,
+                Roles = _db.ASPNETROLES.ToList()
             };
 
             return View(viewModel);
@@ -34,13 +34,18 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult Save(RoleEditViewModel roleEditViewModel)
         {
-            //TODO
-            if (!ModelState.IsValid)
+            var newRole = _db.ASPNETROLES.SingleOrDefault(e => e.ID == roleEditViewModel.RoleId);
+            var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == roleEditViewModel.AspNetUserId);
+            var previousRole = aspNetUser?.ASPNETROLES.SingleOrDefault();
+
+            if (previousRole != null)
             {
-                
+                aspNetUser.ASPNETROLES.Remove(previousRole);
             }
 
+            aspNetUser?.ASPNETROLES.Add(newRole);
 
+            _db.SaveChanges();
 
             return null;
         }

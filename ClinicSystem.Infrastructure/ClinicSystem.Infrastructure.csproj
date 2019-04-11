@@ -51,19 +51,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IClinicSystemDbContext.cs" />
-    <Compile Include="Model\AspNetRoles.cs">
+    <Compile Include="Model\ASPNETROLES.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AspNetUserClaims.cs">
+    <Compile Include="Model\ASPNETUSERCLAIMS.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AspNetUserLogins.cs">
+    <Compile Include="Model\ASPNETUSERLOGINS.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\AspNetUsers.cs">
+    <Compile Include="Model\ASPNETUSERS.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\clinic.cs">
+    <Compile Include="Model\CLINIC.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ClinicSystemDatabase.Context.cs">
@@ -81,52 +81,49 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicSystemDatabase.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model\C__MigrationHistory.cs">
+    <Compile Include="Model\DIAGNOSTICS.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\diagnostics.cs">
+    <Compile Include="Model\DISEASE.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\disease.cs">
+    <Compile Include="Model\EMPLACEMENT.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\emplacement.cs">
+    <Compile Include="Model\EMPLOYEE.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\employee.cs">
+    <Compile Include="Model\EMPLOYEE_COST.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\employee_cost.cs">
+    <Compile Include="Model\EXAMINATION.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\examination.cs">
+    <Compile Include="Model\MEDICINE_ORDER.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\medicine_order.cs">
+    <Compile Include="Model\MEDICINE_TYPE.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\medicine_type.cs">
+    <Compile Include="Model\PATIENT_DIAGNOSE.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\patient_diagnose.cs">
+    <Compile Include="Model\PATIENT_MEDICINES.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\patient_medicines.cs">
+    <Compile Include="Model\PATIENT_VISIT.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\patient_visit.cs">
+    <Compile Include="Model\PERSON.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\person.cs">
+    <Compile Include="Model\UNIT.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\unit.cs">
+    <Compile Include="Model\UNIT_PLAN.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\unit_plan.cs">
-      <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\unit_type.cs">
+    <Compile Include="Model\UNIT_TYPE.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,19 +12,19 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class disease
+    public partial class DISEASE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public disease()
+        public DISEASE()
         {
-            this.patient_diagnose = new HashSet<patient_diagnose>();
+            this.PATIENT_DIAGNOSE = new HashSet<PATIENT_DIAGNOSE>();
         }
     
-        public long id { get; set; }
-        public string code { get; set; }
-        public string code_description { get; set; }
+        public long ID { get; set; }
+        public string CODE { get; set; }
+        public string CODE_DESCRIPTION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_diagnose> patient_diagnose { get; set; }
+        public virtual ICollection<PATIENT_DIAGNOSE> PATIENT_DIAGNOSE { get; set; }
     }
 }

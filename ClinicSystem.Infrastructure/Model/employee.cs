@@ -12,33 +12,33 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class employee
+    public partial class EMPLOYEE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public employee()
+        public EMPLOYEE()
         {
-            this.diagnostics = new HashSet<diagnostics>();
-            this.employee_cost = new HashSet<employee_cost>();
-            this.employee1 = new HashSet<employee>();
+            this.DIAGNOSTICS = new HashSet<DIAGNOSTICS>();
+            this.EMPLOYEE_COST = new HashSet<EMPLOYEE_COST>();
+            this.EMPLOYEE1 = new HashSet<EMPLOYEE>();
         }
     
-        public long id { get; set; }
-        public decimal salary { get; set; }
-        public System.DateTime hire_date { get; set; }
-        public Nullable<long> employee_id { get; set; }
-        public long person_id { get; set; }
-        public long unit_id { get; set; }
-        public long emplacement_id { get; set; }
+        public long ID { get; set; }
+        public decimal SALARY { get; set; }
+        public System.DateTime HIRE_DATE { get; set; }
+        public Nullable<long> EMPLOYEE_ID { get; set; }
+        public long PERSON_ID { get; set; }
+        public long UNIT_ID { get; set; }
+        public long EMPLACEMENT_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<diagnostics> diagnostics { get; set; }
-        public virtual emplacement emplacement { get; set; }
+        public virtual ICollection<DIAGNOSTICS> DIAGNOSTICS { get; set; }
+        public virtual EMPLACEMENT EMPLACEMENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee_cost> employee_cost { get; set; }
+        public virtual ICollection<EMPLOYEE_COST> EMPLOYEE_COST { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee1 { get; set; }
-        public virtual employee employee2 { get; set; }
-        public virtual person person { get; set; }
-        public virtual unit unit { get; set; }
+        public virtual ICollection<EMPLOYEE> EMPLOYEE1 { get; set; }
+        public virtual EMPLOYEE EMPLOYEE2 { get; set; }
+        public virtual PERSON PERSON { get; set; }
+        public virtual UNIT UNIT { get; set; }
     }
 }

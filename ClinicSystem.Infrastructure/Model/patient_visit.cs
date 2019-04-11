@@ -12,36 +12,36 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class patient_visit
+    public partial class PATIENT_VISIT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public patient_visit()
+        public PATIENT_VISIT()
         {
-            this.diagnostics = new HashSet<diagnostics>();
-            this.patient_diagnose = new HashSet<patient_diagnose>();
-            this.patient_medicines = new HashSet<patient_medicines>();
-            this.patient_visit1 = new HashSet<patient_visit>();
+            this.DIAGNOSTICS = new HashSet<DIAGNOSTICS>();
+            this.PATIENT_DIAGNOSE = new HashSet<PATIENT_DIAGNOSE>();
+            this.PATIENT_MEDICINES = new HashSet<PATIENT_MEDICINES>();
+            this.PATIENT_VISIT1 = new HashSet<PATIENT_VISIT>();
         }
     
-        public long id { get; set; }
-        public System.DateTime date_from { get; set; }
-        public Nullable<System.DateTime> date_to { get; set; }
-        public long person_id { get; set; }
-        public Nullable<long> patient_visit_id { get; set; }
-        public long clinic_id { get; set; }
-        public long unit_id { get; set; }
+        public long ID { get; set; }
+        public System.DateTime DATE_FROM { get; set; }
+        public Nullable<System.DateTime> DATE_TO { get; set; }
+        public long PERSON_ID { get; set; }
+        public Nullable<long> PATIENT_VISIT_ID { get; set; }
+        public long CLINIC_ID { get; set; }
+        public long UNIT_ID { get; set; }
     
-        public virtual clinic clinic { get; set; }
+        public virtual CLINIC CLINIC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<diagnostics> diagnostics { get; set; }
+        public virtual ICollection<DIAGNOSTICS> DIAGNOSTICS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_diagnose> patient_diagnose { get; set; }
+        public virtual ICollection<PATIENT_DIAGNOSE> PATIENT_DIAGNOSE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_medicines> patient_medicines { get; set; }
+        public virtual ICollection<PATIENT_MEDICINES> PATIENT_MEDICINES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_visit> patient_visit1 { get; set; }
-        public virtual patient_visit patient_visit2 { get; set; }
-        public virtual person person { get; set; }
-        public virtual unit unit { get; set; }
+        public virtual ICollection<PATIENT_VISIT> PATIENT_VISIT1 { get; set; }
+        public virtual PATIENT_VISIT PATIENT_VISIT2 { get; set; }
+        public virtual PERSON PERSON { get; set; }
+        public virtual UNIT UNIT { get; set; }
     }
 }

@@ -12,19 +12,19 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class medicine_type
+    public partial class MEDICINE_TYPE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public medicine_type()
+        public MEDICINE_TYPE()
         {
-            this.medicine_order = new HashSet<medicine_order>();
+            this.MEDICINE_ORDER = new HashSet<MEDICINE_ORDER>();
         }
     
-        public long id { get; set; }
-        public string medicine_name { get; set; }
-        public string active_ingredient { get; set; }
+        public long ID { get; set; }
+        public string MEDICINE_NAME { get; set; }
+        public string ACTIVE_INGREDIENT { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<medicine_order> medicine_order { get; set; }
+        public virtual ICollection<MEDICINE_ORDER> MEDICINE_ORDER { get; set; }
     }
 }

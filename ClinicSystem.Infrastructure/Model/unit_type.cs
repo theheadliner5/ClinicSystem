@@ -12,18 +12,18 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class unit_type
+    public partial class UNIT_TYPE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public unit_type()
+        public UNIT_TYPE()
         {
-            this.unit = new HashSet<unit>();
+            this.UNIT = new HashSet<UNIT>();
         }
     
-        public long id { get; set; }
-        public string unit_name { get; set; }
+        public long ID { get; set; }
+        public string UNIT_NAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<unit> unit { get; set; }
+        public virtual ICollection<UNIT> UNIT { get; set; }
     }
 }

@@ -26,26 +26,25 @@ namespace ClinicSystem.Infrastructure.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<clinic> clinic { get; set; }
-        public virtual DbSet<diagnostics> diagnostics { get; set; }
-        public virtual DbSet<disease> disease { get; set; }
-        public virtual DbSet<emplacement> emplacement { get; set; }
-        public virtual DbSet<employee> employee { get; set; }
-        public virtual DbSet<employee_cost> employee_cost { get; set; }
-        public virtual DbSet<examination> examination { get; set; }
-        public virtual DbSet<medicine_order> medicine_order { get; set; }
-        public virtual DbSet<medicine_type> medicine_type { get; set; }
-        public virtual DbSet<patient_diagnose> patient_diagnose { get; set; }
-        public virtual DbSet<patient_medicines> patient_medicines { get; set; }
-        public virtual DbSet<patient_visit> patient_visit { get; set; }
-        public virtual DbSet<person> person { get; set; }
-        public virtual DbSet<unit> unit { get; set; }
-        public virtual DbSet<unit_plan> unit_plan { get; set; }
-        public virtual DbSet<unit_type> unit_type { get; set; }
+        public virtual DbSet<ASPNETROLES> ASPNETROLES { get; set; }
+        public virtual DbSet<ASPNETUSERCLAIMS> ASPNETUSERCLAIMS { get; set; }
+        public virtual DbSet<ASPNETUSERLOGINS> ASPNETUSERLOGINS { get; set; }
+        public virtual DbSet<ASPNETUSERS> ASPNETUSERS { get; set; }
+        public virtual DbSet<CLINIC> CLINIC { get; set; }
+        public virtual DbSet<DIAGNOSTICS> DIAGNOSTICS { get; set; }
+        public virtual DbSet<DISEASE> DISEASE { get; set; }
+        public virtual DbSet<EMPLACEMENT> EMPLACEMENT { get; set; }
+        public virtual DbSet<EMPLOYEE> EMPLOYEE { get; set; }
+        public virtual DbSet<EMPLOYEE_COST> EMPLOYEE_COST { get; set; }
+        public virtual DbSet<EXAMINATION> EXAMINATION { get; set; }
+        public virtual DbSet<MEDICINE_ORDER> MEDICINE_ORDER { get; set; }
+        public virtual DbSet<MEDICINE_TYPE> MEDICINE_TYPE { get; set; }
+        public virtual DbSet<PATIENT_DIAGNOSE> PATIENT_DIAGNOSE { get; set; }
+        public virtual DbSet<PATIENT_MEDICINES> PATIENT_MEDICINES { get; set; }
+        public virtual DbSet<PATIENT_VISIT> PATIENT_VISIT { get; set; }
+        public virtual DbSet<PERSON> PERSON { get; set; }
+        public virtual DbSet<UNIT> UNIT { get; set; }
+        public virtual DbSet<UNIT_PLAN> UNIT_PLAN { get; set; }
+        public virtual DbSet<UNIT_TYPE> UNIT_TYPE { get; set; }
     }
 }

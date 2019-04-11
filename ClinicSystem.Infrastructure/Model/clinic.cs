@@ -12,22 +12,22 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class clinic
+    public partial class CLINIC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public clinic()
+        public CLINIC()
         {
-            this.patient_visit = new HashSet<patient_visit>();
-            this.unit = new HashSet<unit>();
+            this.PATIENT_VISIT = new HashSet<PATIENT_VISIT>();
+            this.UNIT = new HashSet<UNIT>();
         }
     
-        public long id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
+        public long ID { get; set; }
+        public string NAME { get; set; }
+        public string ADDRESS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_visit> patient_visit { get; set; }
+        public virtual ICollection<PATIENT_VISIT> PATIENT_VISIT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<unit> unit { get; set; }
+        public virtual ICollection<UNIT> UNIT { get; set; }
     }
 }

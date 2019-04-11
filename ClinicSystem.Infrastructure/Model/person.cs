@@ -12,27 +12,27 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class person
+    public partial class PERSON
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public person()
+        public PERSON()
         {
-            this.employee = new HashSet<employee>();
-            this.patient_visit = new HashSet<patient_visit>();
+            this.EMPLOYEE = new HashSet<EMPLOYEE>();
+            this.PATIENT_VISIT = new HashSet<PATIENT_VISIT>();
         }
     
-        public long id { get; set; }
-        public string name { get; set; }
-        public string last_name { get; set; }
-        public string address { get; set; }
-        public string pesel { get; set; }
-        public Nullable<System.DateTime> birth_date { get; set; }
-        public string asp_net_user_id { get; set; }
+        public long ID { get; set; }
+        public string NAME { get; set; }
+        public string LAST_NAME { get; set; }
+        public string ADDRESS { get; set; }
+        public string PESEL { get; set; }
+        public Nullable<System.DateTime> BIRTH_DATE { get; set; }
+        public string ASP_NET_USER_ID { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual ASPNETUSERS ASPNETUSERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee { get; set; }
+        public virtual ICollection<EMPLOYEE> EMPLOYEE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_visit> patient_visit { get; set; }
+        public virtual ICollection<PATIENT_VISIT> PATIENT_VISIT { get; set; }
     }
 }

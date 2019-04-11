@@ -12,15 +12,15 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class employee_cost
+    public partial class EMPLOYEE_COST
     {
-        public long id { get; set; }
-        public decimal employee_cost1 { get; set; }
-        public System.DateTime realization_date { get; set; }
-        public long employee_id { get; set; }
-        public long unit_plan_id { get; set; }
+        public long ID { get; set; }
+        public decimal EMPLOYEE_COST1 { get; set; }
+        public System.DateTime REALIZATION_DATE { get; set; }
+        public long EMPLOYEE_ID { get; set; }
+        public long UNIT_PLAN_ID { get; set; }
     
-        public virtual employee employee { get; set; }
-        public virtual unit_plan unit_plan { get; set; }
+        public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual UNIT_PLAN UNIT_PLAN { get; set; }
     }
 }

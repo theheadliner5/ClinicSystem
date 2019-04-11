@@ -12,15 +12,15 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class patient_medicines
+    public partial class PATIENT_MEDICINES
     {
-        public long id { get; set; }
-        public string dose { get; set; }
-        public System.DateTime treatment_date { get; set; }
-        public long patient_visit_id { get; set; }
-        public long medicine_order_id { get; set; }
+        public long ID { get; set; }
+        public string DOSE { get; set; }
+        public System.DateTime TREATMENT_DATE { get; set; }
+        public long PATIENT_VISIT_ID { get; set; }
+        public long MEDICINE_ORDER_ID { get; set; }
     
-        public virtual medicine_order medicine_order { get; set; }
-        public virtual patient_visit patient_visit { get; set; }
+        public virtual MEDICINE_ORDER MEDICINE_ORDER { get; set; }
+        public virtual PATIENT_VISIT PATIENT_VISIT { get; set; }
     }
 }

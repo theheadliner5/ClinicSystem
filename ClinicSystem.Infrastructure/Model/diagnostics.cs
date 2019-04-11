@@ -12,18 +12,18 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class diagnostics
+    public partial class DIAGNOSTICS
     {
-        public long id { get; set; }
-        public System.DateTime examination_date { get; set; }
-        public long patient_visit_id { get; set; }
-        public long examination_id { get; set; }
-        public long unit_plan_id { get; set; }
-        public long employee_id { get; set; }
+        public long ID { get; set; }
+        public System.DateTime EXAMINATION_DATE { get; set; }
+        public long PATIENT_VISIT_ID { get; set; }
+        public long EXAMINATION_ID { get; set; }
+        public long UNIT_PLAN_ID { get; set; }
+        public long EMPLOYEE_ID { get; set; }
     
-        public virtual employee employee { get; set; }
-        public virtual examination examination { get; set; }
-        public virtual patient_visit patient_visit { get; set; }
-        public virtual unit_plan unit_plan { get; set; }
+        public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public virtual EXAMINATION EXAMINATION { get; set; }
+        public virtual PATIENT_VISIT PATIENT_VISIT { get; set; }
+        public virtual UNIT_PLAN UNIT_PLAN { get; set; }
     }
 }

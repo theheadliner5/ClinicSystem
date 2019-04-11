@@ -13,17 +13,17 @@
             <section id="editRoleForm">
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.RoleName, new {@class = "col-md-2 control-label"})
+                    @Html.LabelFor(m => m.RoleId, new {@class = "col-md-2 control-label"})
                     <div class="col-md-10">
-                        @Html.DropDownListFor(m => m.RoleName,
-                            new SelectList(Model.Roles, "Id", "Name"),
+                        @Html.DropDownListFor(m => m.RoleId,
+                            new SelectList(Model.Roles, "ID", "NAME"),
                             "Wybierz rolę...",
                             new {@class = "form-control"})
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        @Html.HiddenFor(m => m.PersonId)
+                        @Html.HiddenFor(m => m.AspNetUserId)
                         <input type="submit" value="Zapisz" class="btn btn-default"/>
                     </div>
                 </div>

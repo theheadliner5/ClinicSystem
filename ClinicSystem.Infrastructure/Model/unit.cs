@@ -12,32 +12,32 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class unit
+    public partial class UNIT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public unit()
+        public UNIT()
         {
-            this.employee = new HashSet<employee>();
-            this.patient_visit = new HashSet<patient_visit>();
-            this.unit_plan = new HashSet<unit_plan>();
-            this.unit1 = new HashSet<unit>();
+            this.EMPLOYEE = new HashSet<EMPLOYEE>();
+            this.PATIENT_VISIT = new HashSet<PATIENT_VISIT>();
+            this.UNIT_PLAN = new HashSet<UNIT_PLAN>();
+            this.UNIT1 = new HashSet<UNIT>();
         }
     
-        public long id { get; set; }
-        public long clinic_id { get; set; }
-        public long unit_type_id { get; set; }
-        public Nullable<long> unit_id { get; set; }
+        public long ID { get; set; }
+        public long CLINIC_ID { get; set; }
+        public long UNIT_TYPE_ID { get; set; }
+        public Nullable<long> UNIT_ID { get; set; }
     
-        public virtual clinic clinic { get; set; }
+        public virtual CLINIC CLINIC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<employee> employee { get; set; }
+        public virtual ICollection<EMPLOYEE> EMPLOYEE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_visit> patient_visit { get; set; }
+        public virtual ICollection<PATIENT_VISIT> PATIENT_VISIT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<unit_plan> unit_plan { get; set; }
+        public virtual ICollection<UNIT_PLAN> UNIT_PLAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<unit> unit1 { get; set; }
-        public virtual unit unit2 { get; set; }
-        public virtual unit_type unit_type { get; set; }
+        public virtual ICollection<UNIT> UNIT1 { get; set; }
+        public virtual UNIT UNIT2 { get; set; }
+        public virtual UNIT_TYPE UNIT_TYPE { get; set; }
     }
 }

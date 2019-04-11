@@ -12,37 +12,37 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUsers
+    public partial class ASPNETUSERS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetUsers()
+        public ASPNETUSERS()
         {
-            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
-            this.person = new HashSet<person>();
-            this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.ASPNETUSERCLAIMS = new HashSet<ASPNETUSERCLAIMS>();
+            this.ASPNETUSERLOGINS = new HashSet<ASPNETUSERLOGINS>();
+            this.PERSON = new HashSet<PERSON>();
+            this.ASPNETROLES = new HashSet<ASPNETROLES>();
         }
     
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public bool EmailConfirmed { get; set; }
-        public string PasswordHash { get; set; }
-        public string SecurityStamp { get; set; }
-        public string PhoneNumber { get; set; }
-        public bool PhoneNumberConfirmed { get; set; }
-        public bool TwoFactorEnabled { get; set; }
-        public Nullable<System.DateTime> LockoutEndDateUtc { get; set; }
-        public bool LockoutEnabled { get; set; }
-        public int AccessFailedCount { get; set; }
-        public string UserName { get; set; }
+        public string ID { get; set; }
+        public string EMAIL { get; set; }
+        public bool EMAILCONFIRMED { get; set; }
+        public string PASSWORDHASH { get; set; }
+        public string SECURITYSTAMP { get; set; }
+        public string PHONENUMBER { get; set; }
+        public bool PHONENUMBERCONFIRMED { get; set; }
+        public bool TWOFACTORENABLED { get; set; }
+        public Nullable<System.DateTime> LOCKOUTENDDATEUTC { get; set; }
+        public bool LOCKOUTENABLED { get; set; }
+        public int ACCESSFAILEDCOUNT { get; set; }
+        public string USERNAME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual ICollection<ASPNETUSERCLAIMS> ASPNETUSERCLAIMS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<ASPNETUSERLOGINS> ASPNETUSERLOGINS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<person> person { get; set; }
+        public virtual ICollection<PERSON> PERSON { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<ASPNETROLES> ASPNETROLES { get; set; }
     }
 }

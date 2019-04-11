@@ -12,22 +12,22 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class medicine_order
+    public partial class MEDICINE_ORDER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public medicine_order()
+        public MEDICINE_ORDER()
         {
-            this.patient_medicines = new HashSet<patient_medicines>();
+            this.PATIENT_MEDICINES = new HashSet<PATIENT_MEDICINES>();
         }
     
-        public long id { get; set; }
-        public decimal cost { get; set; }
-        public System.DateTime epire_date { get; set; }
-        public string seria { get; set; }
-        public long medicine_type_id { get; set; }
+        public long ID { get; set; }
+        public decimal COST { get; set; }
+        public System.DateTime EXPIRE_DATE { get; set; }
+        public string MEDICINE_BATCH_SERIES { get; set; }
+        public long MEDICINE_TYPE_ID { get; set; }
     
-        public virtual medicine_type medicine_type { get; set; }
+        public virtual MEDICINE_TYPE MEDICINE_TYPE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<patient_medicines> patient_medicines { get; set; }
+        public virtual ICollection<PATIENT_MEDICINES> PATIENT_MEDICINES { get; set; }
     }
 }

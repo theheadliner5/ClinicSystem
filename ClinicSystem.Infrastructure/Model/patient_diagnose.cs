@@ -12,14 +12,14 @@ namespace ClinicSystem.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class patient_diagnose
+    public partial class PATIENT_DIAGNOSE
     {
-        public long id { get; set; }
-        public string diagnose { get; set; }
-        public long patient_visit_id { get; set; }
-        public long disease_id { get; set; }
+        public long ID { get; set; }
+        public string DIAGNOSE { get; set; }
+        public long PATIENT_VISIT_ID { get; set; }
+        public long DISEASE_ID { get; set; }
     
-        public virtual disease disease { get; set; }
-        public virtual patient_visit patient_visit { get; set; }
+        public virtual DISEASE DISEASE { get; set; }
+        public virtual PATIENT_VISIT PATIENT_VISIT { get; set; }
     }
 }

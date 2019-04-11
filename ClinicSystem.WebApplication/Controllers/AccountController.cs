@@ -153,32 +153,30 @@ namespace ClinicSystem.WebApplication.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    _db.person.Add(new person
+                    var person = new PERSON
                     {
-                        name = model.Name,
-                        last_name = model.LastName,
-                        address = model.Address,
-                        pesel = model.Pesel,
-                        birth_date = model.Birthdate,
-                        asp_net_user_id = user.Id
-                    });
+                        NAME = model.Name,
+                        LAST_NAME = model.LastName,
+                        ADDRESS = model.Address,
+                        PESEL = model.Pesel,
+                        BIRTH_DATE = model.Birthdate,
+                        ASP_NET_USER_ID = user.Id
+                    };
 
+                    _db.PERSON.Add(person);
+
+                    var patientRole = _db.ASPNETROLES.SingleOrDefault(e => e.NAME == "Patient");
+                    var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == person.ASP_NET_USER_ID);
+
+                    aspNetUser?.ASPNETROLES.Add(patientRole);
                     _db.SaveChanges();
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
+            
             return View(model);
         }
 

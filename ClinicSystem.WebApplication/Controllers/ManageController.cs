@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -37,6 +38,8 @@ namespace ClinicSystem.WebApplication.Controllers
                 message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
                 : message == ManageMessageId.EditRoleSuccess ? "Rola edytowana pomyślnie."
                 : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
+                : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
+                : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
 
@@ -89,20 +92,20 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var person = _manageRepository.GetPersonById(personId);
 
-            var viewModel = new EditRoleViewModel
+            var model = new EditRoleViewModel
             {
                 RoleId = person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID,
                 AspNetUserId = person?.ASP_NET_USER_ID,
                 Roles = _manageRepository.GetAllRoles()
             };
 
-            return View(viewModel);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult EditRole(EditRoleViewModel editRoleViewModel)
+        public ActionResult EditRole(EditRoleViewModel model)
         {
-            _manageRepository.AssignNewRole(editRoleViewModel.RoleId, editRoleViewModel.AspNetUserId);
+            _manageRepository.AssignNewRole(model.RoleId, model.AspNetUserId);
 
             return RedirectToAction("Index", new { Message = ManageMessageId.EditRoleSuccess });
         }
@@ -128,15 +131,13 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var person = _manageRepository.GetPersonById(registerDoctorViewModel.PersonId);
 
-            var employee = new EMPLOYEE
+            _manageRepository.CreateOrUpdateEmployee(new EMPLOYEE
             {
                 PERSON = person,
                 PERSON_ID = person.ID,
                 HIRE_DATE = registerDoctorViewModel.HireDate,
                 SALARY = registerDoctorViewModel.Salary
-            };
-
-            _manageRepository.CreateOrUpdateEmployee(employee);
+            });
 
             var roleId = _manageRepository.GetRoleIdFromName("Doctor");
             _manageRepository.AssignNewRole(roleId, person.ASP_NET_USER_ID);
@@ -152,16 +153,56 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddClinic(AddClinicViewModel model)
         {
-            var clinic = new CLINIC
+            _manageRepository.CreateClinic(new CLINIC
             {
                 ADDRESS = model.Address,
                 NAME = model.Name
-            };
-
-            _manageRepository.CreateClinic(clinic);
+            });
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddClinicSuccess });
         }
+
+        public ActionResult AddUnit()
+        {
+            var model = new AddUnitViewModel
+            {
+                Clinics = _manageRepository.GetAllClinics(),
+                UnitTypes = _manageRepository.GetAllUnitTypes(),
+                ParentUnitTypes = _manageRepository.GetAllUnitTypes()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUnit(AddUnitViewModel model)
+        {
+            _manageRepository.CreateUnit(new UNIT
+            {
+                CLINIC_ID = model.ClinicId,
+                UNIT_TYPE_ID = model.UnitTypeId,
+                UNIT_ID = _manageRepository.GetUnitIdByClinicIdAndUnitTypeId(model.ClinicId, model.ParentUnitTypeId)
+            }); 
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitSuccess }); ;
+        }
+
+        public ActionResult AddUnitType()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddUnitType(AddUnitTypeViewModel model)
+        {
+            _manageRepository.CreateUnitType(new UNIT_TYPE
+            {
+                UNIT_NAME = model.Name
+            });
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitTypeSuccess }); ;
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -200,6 +241,8 @@ namespace ClinicSystem.WebApplication.Controllers
             ChangePasswordSuccess,
             EditRoleSuccess,
             AddClinicSuccess,
+            AddUnitTypeSuccess,
+            AddUnitSuccess,
             Error
         }
 

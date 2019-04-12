@@ -10,13 +10,19 @@ namespace ClinicSystem.WebApplication.Interfaces
     public interface IManageRepository
     {
         IList<PERSON> GetAllUsers();
+        IEnumerable<ASPNETROLES> GetAllRoles();
+        IEnumerable<CLINIC> GetAllClinics();
+        IEnumerable<UNIT_TYPE> GetAllUnitTypes();
+        IEnumerable<UNIT> GetAllUnits();
         void CreateOrUpdateEmployee(EMPLOYEE employee);
-        EMPLOYEE GetByPersonId(long personId);
+        EMPLOYEE GetEmployeeByPersonId(long personId);
         PERSON GetPersonById(long id);
         void AssignNewRole(string roleId, string aspNetUserId);
-        IEnumerable<ASPNETROLES> GetAllRoles();
         string GetRoleIdFromPersonId(long personId);
         string GetRoleIdFromName(string roleName);
         void CreateClinic(CLINIC clinic);
+        void CreateUnitType(UNIT_TYPE unitType);
+        void CreateUnit(UNIT unit);
+        long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId);
     }
 }

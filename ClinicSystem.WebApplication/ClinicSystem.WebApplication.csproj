@@ -264,6 +264,8 @@
     <Content Include="Views\Manage\EditRole.cshtml" />
     <Content Include="Views\Manage\RegisterDoctor.cshtml" />
     <Content Include="Views\Manage\AddClinic.cshtml" />
+    <Content Include="Views\Manage\AddUnit.cshtml" />
+    <Content Include="Views\Manage\AddUnitType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

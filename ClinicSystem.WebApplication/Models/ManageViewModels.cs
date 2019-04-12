@@ -87,4 +87,26 @@ namespace ClinicSystem.WebApplication.Models
         [Display(Name = "Adres")]
         public string Address { get; set; }
     }
+
+    public class AddUnitViewModel
+    {
+        public IEnumerable<CLINIC> Clinics { get; set; }
+        [Required]
+        [Display(Name = "Przychodnia")]
+        public long ClinicId { get; set; }
+        public IEnumerable<UNIT_TYPE> UnitTypes { get; set; }
+        [Required]
+        [Display(Name = "Typ oddziału")]
+        public long UnitTypeId { get; set; }
+        public IEnumerable<UNIT_TYPE> ParentUnitTypes { get; set; }
+        [Display(Name = "Oddział nadrzędny")]
+        public long? ParentUnitTypeId { get; set; }
+    }
+
+    public class AddUnitTypeViewModel
+    {
+        [Required(ErrorMessage = "Pole Nazwa jednostki jest wymagane")]
+        [Display(Name = "Nazwa jednostki")]
+        public string Name { get; set; }
+    }
 }

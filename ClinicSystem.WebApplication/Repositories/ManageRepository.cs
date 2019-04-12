@@ -22,9 +22,29 @@ namespace ClinicSystem.WebApplication.Repositories
             return _db.PERSON.ToList();
         }
 
+        public IEnumerable<ASPNETROLES> GetAllRoles()
+        {
+            return _db.ASPNETROLES.ToList();
+        }
+
+        public IEnumerable<CLINIC> GetAllClinics()
+        {
+            return _db.CLINIC.ToList();
+        }
+
+        public IEnumerable<UNIT_TYPE> GetAllUnitTypes()
+        {
+            return _db.UNIT_TYPE.ToList();
+        }
+
+        public IEnumerable<UNIT> GetAllUnits()
+        {
+            return _db.UNIT.ToList();
+        }
+
         public void CreateOrUpdateEmployee(EMPLOYEE employee)
         {
-            var existingEmployee = GetByPersonId(employee.PERSON_ID);
+            var existingEmployee = GetEmployeeByPersonId(employee.PERSON_ID);
 
             if (existingEmployee == null)
             {
@@ -54,7 +74,7 @@ namespace ClinicSystem.WebApplication.Repositories
             _db.SaveChanges();
         }
 
-        public EMPLOYEE GetByPersonId(long personId)
+        public EMPLOYEE GetEmployeeByPersonId(long personId)
         {
             return _db.EMPLOYEE.SingleOrDefault(e => e.PERSON_ID == personId);
         }
@@ -80,11 +100,6 @@ namespace ClinicSystem.WebApplication.Repositories
             _db.SaveChanges();
         }
 
-        public IEnumerable<ASPNETROLES> GetAllRoles()
-        {
-            return _db.ASPNETROLES.ToList();
-        }
-
         public string GetRoleIdFromPersonId(long personId)
         {
             var person = _db.PERSON.SingleOrDefault(e => e.ID == personId);
@@ -101,6 +116,23 @@ namespace ClinicSystem.WebApplication.Repositories
         {
             _db.CLINIC.Add(clinic);
             _db.SaveChanges();
+        }
+
+        public void CreateUnitType(UNIT_TYPE unitType)
+        {
+            _db.UNIT_TYPE.Add(unitType);
+            _db.SaveChanges();
+        }
+
+        public void CreateUnit(UNIT unit)
+        {
+            _db.UNIT.Add(unit);
+            _db.SaveChanges();
+        }
+
+        public long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId)
+        {
+            return _db.UNIT.FirstOrDefault(e => e.CLINIC_ID == clinicId && e.UNIT_TYPE_ID == parentUnitTypeId.Value)?.ID;
         }
     }
 }

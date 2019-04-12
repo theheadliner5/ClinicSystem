@@ -212,6 +212,7 @@
     <Compile Include="Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\IPersonRepository.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddClinicViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterDoctorViewModel.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\RoleEdit\Edit.cshtml" />
     <Content Include="Views\Doctor\Register.cshtml" />
+    <Content Include="Views\Manage\AddClinic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

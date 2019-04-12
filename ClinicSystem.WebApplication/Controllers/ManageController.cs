@@ -296,6 +296,17 @@ namespace ClinicSystem.WebApplication.Controllers
                 OtherLogins = otherLogins
             });
         }
+        
+        public ActionResult AddClinic()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddClinic(AddClinicViewModel model)
+        {
+            return View(model);
+        }
 
         //
         // POST: /Manage/LinkLogin

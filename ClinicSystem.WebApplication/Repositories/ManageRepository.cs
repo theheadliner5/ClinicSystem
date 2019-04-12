@@ -96,5 +96,11 @@ namespace ClinicSystem.WebApplication.Repositories
         {
             return _db.ASPNETROLES.SingleOrDefault(e => e.NAME == roleName)?.ID;
         }
+
+        public void CreateClinic(CLINIC clinic)
+        {
+            _db.CLINIC.Add(clinic);
+            _db.SaveChanges();
+        }
     }
 }

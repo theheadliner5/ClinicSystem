@@ -17,5 +17,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<ASPNETROLES> GetAllRoles();
         string GetRoleIdFromPersonId(long personId);
         string GetRoleIdFromName(string roleName);
+        void CreateClinic(CLINIC clinic);
     }
 }

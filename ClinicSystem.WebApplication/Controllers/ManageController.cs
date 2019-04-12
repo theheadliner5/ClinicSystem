@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
 using ClinicSystem.WebApplication.Interfaces;
@@ -33,12 +34,10 @@ namespace ClinicSystem.WebApplication.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
+                : message == ManageMessageId.EditRoleSuccess ? "Rola edytowana pomyślnie."
+                : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
                 : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -51,6 +50,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
                 Users = _manageRepository.GetAllUsers()
             };
+
             return View(model);
         }
 
@@ -104,7 +104,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             _manageRepository.AssignNewRole(editRoleViewModel.RoleId, editRoleViewModel.AspNetUserId);
 
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", new { Message = ManageMessageId.EditRoleSuccess });
         }
 
         public ActionResult RegisterDoctor(long personId)
@@ -152,7 +152,15 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddClinic(AddClinicViewModel model)
         {
-            return View(model);
+            var clinic = new CLINIC
+            {
+                ADDRESS = model.Address,
+                NAME = model.Name
+            };
+
+            _manageRepository.CreateClinic(clinic);
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddClinicSuccess });
         }
 
         protected override void Dispose(bool disposing)
@@ -189,12 +197,9 @@ namespace ClinicSystem.WebApplication.Controllers
 
         public enum ManageMessageId
         {
-            AddPhoneSuccess,
             ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
+            EditRoleSuccess,
+            AddClinicSuccess,
             Error
         }
 

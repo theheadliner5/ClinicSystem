@@ -6,15 +6,20 @@ using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
 using ClinicSystem.WebApplication.Interfaces;
 
-namespace ClinicSystem.WebApplication.Facade
+namespace ClinicSystem.WebApplication.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class ManageRepository : IManageRepository
     {
         private readonly IClinicSystemDbContext _db;
 
-        public EmployeeRepository(IClinicSystemDbContext db)
+        public ManageRepository(IClinicSystemDbContext db)
         {
             _db = db;
+        }
+
+        public IList<PERSON> GetAllUsers()
+        {
+            return _db.PERSON.ToList();
         }
 
         public void CreateOrUpdateEmployee(EMPLOYEE employee)
@@ -52,6 +57,44 @@ namespace ClinicSystem.WebApplication.Facade
         public EMPLOYEE GetByPersonId(long personId)
         {
             return _db.EMPLOYEE.SingleOrDefault(e => e.PERSON_ID == personId);
+        }
+
+        public PERSON GetPersonById(long id)
+        {
+            return _db.PERSON.SingleOrDefault(e => e.ID == id);
+        }
+
+        public void AssignNewRole(string roleId, string aspNetUserId)
+        {
+            var newRole = _db.ASPNETROLES.SingleOrDefault(e => e.ID == roleId);
+            var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == aspNetUserId);
+            var previousRole = aspNetUser?.ASPNETROLES.SingleOrDefault();
+
+            if (previousRole != null)
+            {
+                aspNetUser.ASPNETROLES.Remove(previousRole);
+            }
+
+            aspNetUser?.ASPNETROLES.Add(newRole);
+
+            _db.SaveChanges();
+        }
+
+        public IEnumerable<ASPNETROLES> GetAllRoles()
+        {
+            return _db.ASPNETROLES.ToList();
+        }
+
+        public string GetRoleIdFromPersonId(long personId)
+        {
+            var person = _db.PERSON.SingleOrDefault(e => e.ID == personId);
+
+            return person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID;
+        }
+
+        public string GetRoleIdFromName(string roleName)
+        {
+            return _db.ASPNETROLES.SingleOrDefault(e => e.NAME == roleName)?.ID;
         }
     }
 }

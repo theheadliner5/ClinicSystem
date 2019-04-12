@@ -1,6 +1,6 @@
 ﻿@using ClinicSystem.WebApplication.Models;
 
-@model RoleEditViewModel
+@model EditRoleViewModel
 
 @{
     ViewBag.Title = "Edytuj rolę";
@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-md-8">
         <section id="editRoleForm">
-            @using (Html.BeginForm("Save", "RoleEdit", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("EditRole", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 <br />
                 <div class="form-group">

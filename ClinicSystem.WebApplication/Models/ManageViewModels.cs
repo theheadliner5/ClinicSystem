@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ClinicSystem.Infrastructure.Model;
 using Microsoft.AspNet.Identity;
@@ -14,17 +15,6 @@ namespace ClinicSystem.WebApplication.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
         public IList<PERSON> Users { get; set; }
-    }
-
-    public class ManageLoginsViewModel
-    {
-        public IList<UserLoginInfo> CurrentLogins { get; set; }
-        public IList<AuthenticationDescription> OtherLogins { get; set; }
-    }
-
-    public class FactorViewModel
-    {
-        public string Purpose { get; set; }
     }
 
     public class SetPasswordViewModel
@@ -60,29 +50,41 @@ namespace ClinicSystem.WebApplication.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class AddPhoneNumberViewModel
+    public class EditRoleViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Numer telefonu")]
-        public string Number { get; set; }
+        public IEnumerable<ASPNETROLES> Roles { get; set; }
+        [Display(Name = "Rola")]
+        public string RoleId { get; set; }
+        public string AspNetUserId { get; set; }
     }
 
-    public class VerifyPhoneNumberViewModel
+    public class RegisterDoctorViewModel
     {
         [Required]
-        [Display(Name = "Kod")]
-        public string Code { get; set; }
-
+        public long PersonId { get; set; }
         [Required]
-        [Phone]
-        [Display(Name = "Numer telefonu")]
-        public string PhoneNumber { get; set; }
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Nazwisko")]
+        public string LastName { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Data zatrudnienia")]
+        public DateTime HireDate { get; set; }
+        [Required]
+        [Display(Name = "Wynagrodzenie")]
+        public decimal Salary { get; set; }
     }
 
-    public class ConfigureTwoFactorViewModel
+    public class AddClinicViewModel
     {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        [Required(ErrorMessage = "Pole Nazwa jest wymagane")]
+        [Display(Name = "Nazwa")]
+        public string Name { get; set; }
+        [Required(ErrorMessage = "Pole Adres jest wymagane")]
+        [Display(Name = "Adres")]
+        public string Address { get; set; }
     }
 }

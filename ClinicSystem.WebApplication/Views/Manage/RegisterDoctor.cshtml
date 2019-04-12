@@ -6,7 +6,7 @@
 
 <h2>Rejestruj lekarza</h2>
 
-@using (Html.BeginForm("Save", "Doctor", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterDoctor", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Zarejestruj lekarza lub edytuj dane</h4>

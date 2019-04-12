@@ -21,5 +21,17 @@ namespace ClinicSystem.WebApplication.Facade
         {
             return _db.ASPNETROLES.ToList();
         }
+
+        public string GetRoleIdFromPersonId(long personId)
+        {
+            var person = _db.PERSON.SingleOrDefault(e => e.ID == personId);
+
+            return person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID;
+        }
+
+        public string GetRoleIdFromName(string roleName)
+        {
+            return _db.ASPNETROLES.SingleOrDefault(e => e.NAME == roleName)?.ID;
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace ClinicSystem.WebApplication.Models
     public class RegisterDoctorViewModel
     {
         [Required]
+        public long PersonId { get; set; }
+        [Required]
         [Display(Name = "Imię")]
         public string Name { get; set; }
         [Required]

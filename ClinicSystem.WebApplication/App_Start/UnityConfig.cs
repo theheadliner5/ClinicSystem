@@ -56,6 +56,7 @@ namespace ClinicSystem.WebApplication
 
             container.RegisterType<IPersonRepository, PersonRepository>();
             container.RegisterType<IAspNetRolesRepository, AspNetRolesRepository>();
+            container.RegisterType<IEmployeeRepository, EmployeeRepository>();
         }
     }
 }

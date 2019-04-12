@@ -203,11 +203,13 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleEditController.cs" />
     <Compile Include="Facade\AspNetRolesRepository.cs" />
+    <Compile Include="Facade\EmployeeRepository.cs" />
     <Compile Include="Facade\PersonRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAspNetRolesRepository.cs" />
+    <Compile Include="Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\IPersonRepository.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

@@ -7,10 +7,9 @@ using ClinicSystem.Infrastructure.Model;
 
 namespace ClinicSystem.WebApplication.Interfaces
 {
-    public interface IAspNetRolesRepository
+    public interface IEmployeeRepository
     {
-        IEnumerable<ASPNETROLES> GetAllRoles();
-        string GetRoleIdFromPersonId(long personId);
-        string GetRoleIdFromName(string roleName);
+        void CreateOrUpdateEmployee(EMPLOYEE employee);
+        EMPLOYEE GetByPersonId(long personId);
     }
 }

@@ -19,12 +19,14 @@ namespace ClinicSystem.WebApplication.Controllers
     public class ManageController : Controller
     {
         private readonly IManageRepository _manageRepository;
+        private readonly IManageValidationService _validationService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(IManageRepository manageRepository)
+        public ManageController(IManageRepository manageRepository, IManageValidationService validationService)
         {
             _manageRepository = manageRepository;
+            _validationService = validationService;
         }
 
         public ApplicationSignInManager SignInManager => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -40,7 +42,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
                 : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
                 : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
-                : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.Error ? "Wystąpił nieoczekiwany błąd."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -177,12 +179,17 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddUnit(AddUnitViewModel model)
         {
-            _manageRepository.CreateUnit(new UNIT
+            var unit = new UNIT
             {
                 CLINIC_ID = model.ClinicId,
                 UNIT_TYPE_ID = model.UnitTypeId,
                 UNIT_ID = _manageRepository.GetUnitIdByClinicIdAndUnitTypeId(model.ClinicId, model.ParentUnitTypeId)
-            }); 
+            };
+
+            if (_validationService.IsInsertedUnitValid(unit))
+            {
+                _manageRepository.CreateUnit(unit);
+            }
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitSuccess }); ;
         }

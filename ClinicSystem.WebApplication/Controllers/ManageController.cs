@@ -132,14 +132,15 @@ namespace ClinicSystem.WebApplication.Controllers
         public ActionResult RegisterDoctor(RegisterDoctorViewModel registerDoctorViewModel)
         {
             var person = _manageRepository.GetPersonById(registerDoctorViewModel.PersonId);
-
-            _manageRepository.CreateOrUpdateEmployee(new EMPLOYEE
+            var employee = new EMPLOYEE
             {
                 PERSON = person,
                 PERSON_ID = person.ID,
                 HIRE_DATE = registerDoctorViewModel.HireDate,
                 SALARY = registerDoctorViewModel.Salary
-            });
+            };
+
+            _manageRepository.CreateOrUpdateEmployee(employee);
 
             var roleId = _manageRepository.GetRoleIdFromName("Doctor");
             _manageRepository.AssignNewRole(roleId, person.ASP_NET_USER_ID);
@@ -155,11 +156,13 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddClinic(AddClinicViewModel model)
         {
-            _manageRepository.CreateClinic(new CLINIC
+            var clinic = new CLINIC
             {
                 ADDRESS = model.Address,
                 NAME = model.Name
-            });
+            };
+
+            _manageRepository.CreateClinic(clinic);
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddClinicSuccess });
         }
@@ -202,10 +205,12 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddUnitType(AddUnitTypeViewModel model)
         {
-            _manageRepository.CreateUnitType(new UNIT_TYPE
+            var unitType = new UNIT_TYPE
             {
                 UNIT_NAME = model.Name
-            });
+            };
+
+            _manageRepository.CreateUnitType(unitType);
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitTypeSuccess }); ;
         }

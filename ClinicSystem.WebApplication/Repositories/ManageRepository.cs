@@ -99,6 +99,8 @@ namespace ClinicSystem.WebApplication.Repositories
             var newRole = _db.ASPNETROLES.SingleOrDefault(e => e.ID == roleId);
             var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == aspNetUserId);
             var previousRole = aspNetUser?.ASPNETROLES.SingleOrDefault();
+            var employee = _db.EMPLOYEE.FirstOrDefault(e => e.PERSON.ASP_NET_USER_ID == aspNetUserId);
+            var existingEmplacement = _db.EMPLACEMENT.FirstOrDefault(e => e.EMPLACEMENT_NAME == newRole.NAME);
 
             if (previousRole != null)
             {
@@ -106,6 +108,21 @@ namespace ClinicSystem.WebApplication.Repositories
             }
 
             aspNetUser?.ASPNETROLES.Add(newRole);
+
+            if (existingEmplacement == null)
+            {
+                var emplacement = new EMPLACEMENT
+                {
+                    EMPLACEMENT_NAME = newRole?.NAME,
+                    EMPLOYEE = employee != null ? new List<EMPLOYEE> { employee } : null
+                };
+
+                _db.EMPLACEMENT.Add(emplacement);
+            }
+            else
+            {
+                existingEmplacement.EMPLOYEE.Add(employee);
+            }
 
             _db.SaveChanges();
         }
@@ -161,6 +178,15 @@ namespace ClinicSystem.WebApplication.Repositories
             }
 
             return new DoctorDataDto { HireDate = DateTime.Now, Salary = 0.0m };
+        }
+
+        public IEnumerable<ManagerDto> GetManagerDtos()
+        {
+            return _db.EMPLOYEE.Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "Manager").Select(e => new ManagerDto
+            {
+                ManagerId = e.ID,
+                FullName = $"{e.PERSON.NAME} {e.PERSON.LAST_NAME}, {e.UNIT.CLINIC.NAME}, {e.UNIT.CLINIC.ADDRESS}"
+            });
         }
     }
 }

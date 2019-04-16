@@ -8,7 +8,7 @@ using Microsoft.Owin.Security;
 
 namespace ClinicSystem.WebApplication.Models
 {
-    public class IndexViewModel
+    public class ManageIndexViewModel
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
@@ -84,6 +84,11 @@ namespace ClinicSystem.WebApplication.Models
         [Required]
         [Display(Name = "Oddział")]
         public long UnitId { get; set; }
+        [Required]
+        public IEnumerable<ManagerDto> ManagerDtos { get; set; }
+        [Required]
+        [Display(Name = "Przełożony")]
+        public long ManagerId { get; set; }
     }
 
     public class AddClinicViewModel

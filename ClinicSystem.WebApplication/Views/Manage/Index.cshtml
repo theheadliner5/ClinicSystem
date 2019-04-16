@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@model ClinicSystem.WebApplication.Models.IndexViewModel
+@model ClinicSystem.WebApplication.Models.ManageIndexViewModel
 @{
     ViewBag.Title = "Zarządzanie kontem";
 }
@@ -17,10 +17,6 @@
             @if (Model.HasPassword)
             {
                 @Html.ActionLink("Zmień hasło", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Dodaj hasło", "SetPassword")
             }
             ]
         </dd>

@@ -44,7 +44,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            var model = new ManageIndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
@@ -123,7 +123,8 @@ namespace ClinicSystem.WebApplication.Controllers
                 HireDate = doctorDataDto.HireDate,
                 Salary = doctorDataDto.Salary,
                 UnitName = doctorDataDto.UnitName,
-                UnitDtos = _manageRepository.GetUnitDtos()
+                UnitDtos = _manageRepository.GetUnitDtos(),
+                ManagerDtos = _manageRepository.GetManagerDtos()
             };
 
             return View(viewModel);

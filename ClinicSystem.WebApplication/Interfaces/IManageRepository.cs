@@ -27,5 +27,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         void CreateUnit(UNIT unit);
         long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId);
         DoctorDataDto GetDoctorDataDtoByPersonId(long personId);
+        IEnumerable<ManagerDto> GetManagerDtos();
     }
 }

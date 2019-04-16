@@ -5,12 +5,16 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Zalogowano: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Panel użytkownika" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("Doctor") || User.IsInRole("Administrator") || User.IsInRole("Manager"))
+            {
+                <li>@Html.ActionLink("Lekarstwa", "Index", "Medicine")</li>
+            }
+            <li>
+                @Html.ActionLink("Zalogowano: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Panel użytkownika"})
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+        </ul>
     }
 }
 else

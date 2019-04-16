@@ -16,10 +16,5 @@ namespace ClinicSystem.WebApplication.Services
         {
             _db = db;
         }
-
-        public bool IsInsertedUnitValid(UNIT unit)
-        {
-            return true;
-        }
     }
 }

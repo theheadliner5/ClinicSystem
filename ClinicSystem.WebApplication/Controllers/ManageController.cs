@@ -19,14 +19,12 @@ namespace ClinicSystem.WebApplication.Controllers
     public class ManageController : Controller
     {
         private readonly IManageRepository _manageRepository;
-        private readonly IManageValidationService _validationService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(IManageRepository manageRepository, IManageValidationService validationService)
+        public ManageController(IManageRepository manageRepository)
         {
             _manageRepository = manageRepository;
-            _validationService = validationService;
         }
 
         public ApplicationSignInManager SignInManager => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -189,10 +187,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 UNIT_ID = _manageRepository.GetUnitIdByClinicIdAndUnitTypeId(model.ClinicId, model.ParentUnitTypeId)
             };
 
-            if (_validationService.IsInsertedUnitValid(unit))
-            {
-                _manageRepository.CreateUnit(unit);
-            }
+            _manageRepository.CreateUnit(unit);
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitSuccess }); ;
         }

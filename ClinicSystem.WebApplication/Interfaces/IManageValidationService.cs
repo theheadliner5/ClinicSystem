@@ -9,6 +9,6 @@ namespace ClinicSystem.WebApplication.Interfaces
 {
     public interface IManageValidationService
     {
-        bool IsInsertedUnitValid(UNIT unit);
+        
     }
 }

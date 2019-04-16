@@ -1,7 +1,7 @@
 ﻿@model ClinicSystem.WebApplication.Models.AddUnitTypeViewModel
 
 @{
-    ViewBag.Title = "Dodawanie typu jednostki";
+    ViewBag.Title = "Dodawanie typu oddziału";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,7 +9,7 @@
 @using (Html.BeginForm("AddUnitType", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Formularz dodawania nowego typu jednostki</h4>
+    <h4>Formularz dodawania nowego typu oddziału</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">

@@ -105,8 +105,8 @@ namespace ClinicSystem.WebApplication.Models
 
     public class AddUnitTypeViewModel
     {
-        [Required(ErrorMessage = "Pole Nazwa jednostki jest wymagane")]
-        [Display(Name = "Nazwa jednostki")]
+        [Required(ErrorMessage = "Pole Nazwa oddziału jest wymagane")]
+        [Display(Name = "Nazwa oddziału")]
         public string Name { get; set; }
     }
 }

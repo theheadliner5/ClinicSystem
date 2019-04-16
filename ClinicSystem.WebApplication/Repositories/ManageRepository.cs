@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
 using ClinicSystem.WebApplication.Interfaces;
@@ -40,6 +41,15 @@ namespace ClinicSystem.WebApplication.Repositories
         public IEnumerable<UNIT> GetAllUnits()
         {
             return _db.UNIT.ToList();
+        }
+
+        public IEnumerable<UnitDto> GetUnitDtos()
+        {
+            return _db.UNIT.ToList().Select(e => new UnitDto
+            {
+                UnitId = e.ID,
+                UnitName = $"{e.UNIT_TYPE.UNIT_NAME}, {e.CLINIC.NAME}, {e.CLINIC.ADDRESS}"
+            });
         }
 
         public void CreateOrUpdateEmployee(EMPLOYEE employee)
@@ -133,6 +143,24 @@ namespace ClinicSystem.WebApplication.Repositories
         public long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId)
         {
             return _db.UNIT.FirstOrDefault(e => e.CLINIC_ID == clinicId && e.UNIT_TYPE_ID == parentUnitTypeId.Value)?.ID;
+        }
+
+        public DoctorDataDto GetDoctorDataDtoByPersonId(long personId)
+        {
+            var doctor = _db.EMPLOYEE.FirstOrDefault(e =>
+                e.PERSON_ID == personId && e.EMPLACEMENT.EMPLACEMENT_NAME == "Doctor");
+
+            if (doctor != null)
+            {
+                return new DoctorDataDto
+                {
+                    HireDate = doctor.HIRE_DATE,
+                    Salary = doctor.SALARY,
+                    UnitName = doctor.UNIT.UNIT_TYPE.UNIT_NAME
+                };
+            }
+
+            return new DoctorDataDto { HireDate = DateTime.Now, Salary = 0.0m };
         }
     }
 }

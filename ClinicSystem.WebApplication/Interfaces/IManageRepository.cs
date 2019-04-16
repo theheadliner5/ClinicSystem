@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Model;
 
 namespace ClinicSystem.WebApplication.Interfaces
@@ -14,6 +15,7 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<CLINIC> GetAllClinics();
         IEnumerable<UNIT_TYPE> GetAllUnitTypes();
         IEnumerable<UNIT> GetAllUnits();
+        IEnumerable<UnitDto> GetUnitDtos();
         void CreateOrUpdateEmployee(EMPLOYEE employee);
         EMPLOYEE GetEmployeeByPersonId(long personId);
         PERSON GetPersonById(long id);
@@ -24,5 +26,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         void CreateUnitType(UNIT_TYPE unitType);
         void CreateUnit(UNIT unit);
         long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId);
+        DoctorDataDto GetDoctorDataDtoByPersonId(long personId);
     }
 }

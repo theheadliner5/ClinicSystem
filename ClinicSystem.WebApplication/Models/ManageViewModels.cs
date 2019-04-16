@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -76,6 +77,13 @@ namespace ClinicSystem.WebApplication.Models
         [Required]
         [Display(Name = "Wynagrodzenie")]
         public decimal Salary { get; set; }
+        [Display(Name = "Aktualny oddział")]
+        public string UnitName { get; set; }
+        [Required]
+        public IEnumerable<UnitDto> UnitDtos { get; set; }
+        [Required]
+        [Display(Name = "Oddział")]
+        public long UnitId { get; set; }
     }
 
     public class AddClinicViewModel

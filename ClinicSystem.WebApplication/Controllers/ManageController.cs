@@ -96,7 +96,7 @@ namespace ClinicSystem.WebApplication.Controllers
             {
                 RoleId = person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID,
                 AspNetUserId = person?.ASP_NET_USER_ID,
-                Roles = _manageRepository.GetAllRoles()
+                Roles = _manageRepository.GetAllRoles().Where(e => e.NAME != "Doctor")
             };
 
             return View(model);
@@ -113,14 +113,17 @@ namespace ClinicSystem.WebApplication.Controllers
         public ActionResult RegisterDoctor(long personId)
         {
             var person = _manageRepository.GetPersonById(personId);
+            var doctorDataDto = _manageRepository.GetDoctorDataDtoByPersonId(personId);
 
             var viewModel = new RegisterDoctorViewModel
             {
                 PersonId = personId,
                 Name = person.NAME,
                 LastName = person.LAST_NAME,
-                HireDate = DateTime.Now,
-                Salary = 0.0m
+                HireDate = doctorDataDto.HireDate,
+                Salary = doctorDataDto.Salary,
+                UnitName = doctorDataDto.UnitName,
+                UnitDtos = _manageRepository.GetUnitDtos()
             };
 
             return View(viewModel);
@@ -135,7 +138,8 @@ namespace ClinicSystem.WebApplication.Controllers
                 PERSON = person,
                 PERSON_ID = person.ID,
                 HIRE_DATE = registerDoctorViewModel.HireDate,
-                SALARY = registerDoctorViewModel.Salary
+                SALARY = registerDoctorViewModel.Salary,
+                UNIT_ID = registerDoctorViewModel.UnitId
             };
 
             _manageRepository.CreateOrUpdateEmployee(employee);

@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\DoctorDataDto.cs" />
+    <Compile Include="Dtos\UnitDto.cs" />
     <Compile Include="Interfaces\IClinicSystemDbContext.cs" />
     <Compile Include="Model\ASPNETROLES.cs">
       <DependentUpon>ClinicSystemDatabase.tt</DependentUpon>

@@ -96,7 +96,7 @@ namespace ClinicSystem.WebApplication.Controllers
             {
                 RoleId = person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID,
                 AspNetUserId = person?.ASP_NET_USER_ID,
-                Roles = _manageRepository.GetAllRoles().Where(e => e.NAME != "Doctor")
+                Roles = _manageRepository.GetAllRoles().Where(e => e.NAME != "DOCTOR")
             };
 
             return View(model);
@@ -145,7 +145,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             _manageRepository.CreateOrUpdateEmployee(employee);
 
-            var roleId = _manageRepository.GetRoleIdFromName("Doctor");
+            var roleId = _manageRepository.GetRoleIdFromName("DOCTOR");
             _manageRepository.AssignNewRole(roleId, person.ASP_NET_USER_ID);
 
             return RedirectToAction("Index", "Manage");

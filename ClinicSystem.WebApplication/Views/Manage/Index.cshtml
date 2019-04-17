@@ -23,23 +23,24 @@
         <dd>
             <br />
         </dd>
-        @if (User.IsInRole("Manager") || User.IsInRole("Administrator"))
+        @if (User.IsInRole("MANAGER") || User.IsInRole("ADMINISTRATOR"))
         {
             <dt>Zarejestrowani użytkownicy:</dt>
             <dd>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>Pesel</th>
-                            <th>Rola</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model.Users.Any())
-                        {
-                            foreach (var user in Model.Users.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "Administrator")))
+                @if (Model.Users.Any(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR")))
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Pesel</th>
+                                <th>Rola</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var user in Model.Users.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR")))
                             {
                                 <tr>
                                     <td>@user.NAME</td>
@@ -65,9 +66,17 @@
                                     }
                                 </tr>
                             }
-                        }
-                    </tbody>
-                </table>
+
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>Brak</p>
+                }
+            </dd>
+            <dd>
+                <br />
             </dd>
             <dt>Operacje:</dt>
             <dd>

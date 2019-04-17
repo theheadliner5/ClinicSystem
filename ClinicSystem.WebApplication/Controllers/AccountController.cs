@@ -99,7 +99,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
                     _db.PERSON.Add(person);
 
-                    var patientRole = _db.ASPNETROLES.SingleOrDefault(e => e.NAME == "Patient");
+                    var patientRole = _db.ASPNETROLES.SingleOrDefault(e => e.NAME == "PATIENT");
                     var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == person.ASP_NET_USER_ID);
 
                     aspNetUser?.ASPNETROLES.Add(patientRole);

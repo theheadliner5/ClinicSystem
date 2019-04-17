@@ -58,13 +58,13 @@ namespace ClinicSystem.WebApplication.Repositories
 
             if (existingEmployee == null)
             {
-                var emplacement = _db.EMPLACEMENT.SingleOrDefault(e => e.EMPLACEMENT_NAME == "Doctor");
+                var emplacement = _db.EMPLACEMENT.SingleOrDefault(e => e.EMPLACEMENT_NAME == "DOCTOR");
 
                 if (emplacement == null)
                 {
                     _db.EMPLACEMENT.Add(new EMPLACEMENT
                     {
-                        EMPLACEMENT_NAME = "Doctor",
+                        EMPLACEMENT_NAME = "DOCTOR",
                         EMPLOYEE = new List<EMPLOYEE> { employee }
                     });
                 }
@@ -165,7 +165,7 @@ namespace ClinicSystem.WebApplication.Repositories
         public DoctorDataDto GetDoctorDataDtoByPersonId(long personId)
         {
             var doctor = _db.EMPLOYEE.FirstOrDefault(e =>
-                e.PERSON_ID == personId && e.EMPLACEMENT.EMPLACEMENT_NAME == "Doctor");
+                e.PERSON_ID == personId && e.EMPLACEMENT.EMPLACEMENT_NAME == "DOCTOR");
 
             if (doctor != null)
             {
@@ -182,7 +182,7 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public IEnumerable<ManagerDto> GetManagerDtos()
         {
-            return _db.EMPLOYEE.Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "Manager").Select(e => new ManagerDto
+            return _db.EMPLOYEE.Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "MANAGER").Select(e => new ManagerDto
             {
                 ManagerId = e.ID,
                 FullName = $"{e.PERSON.NAME} {e.PERSON.LAST_NAME}, {e.UNIT.CLINIC.NAME}, {e.UNIT.CLINIC.ADDRESS}"

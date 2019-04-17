@@ -8,7 +8,7 @@ namespace ClinicSystem.WebApplication.Controllers
 {
     public class MedicineController : Controller
     {
-        [Authorize(Roles = "Administrator, Manager, Doctor")]
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
         // GET: Medicine
         public ActionResult Index(MedicineMessageId? message)
         {

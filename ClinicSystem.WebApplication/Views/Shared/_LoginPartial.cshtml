@@ -6,7 +6,7 @@
     @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            @if (User.IsInRole("Doctor") || User.IsInRole("Administrator") || User.IsInRole("Manager"))
+            @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
             {
                 <li>@Html.ActionLink("Lekarstwa", "Index", "Medicine")</li>
             }

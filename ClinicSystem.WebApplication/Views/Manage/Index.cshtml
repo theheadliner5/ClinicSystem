@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@model ClinicSystem.WebApplication.Models.ManageIndexViewModel
+﻿@model ClinicSystem.WebApplication.Models.ManageIndexViewModel
 @{
     ViewBag.Title = "Zarządzanie kontem";
 }
@@ -59,8 +58,8 @@
                                             <td>Nieznana</td>
                                         }
                                     }
-                                    <td>@Html.ActionLink("Przypisz/edytuj lekarza", "RegisterDoctor", new { personId = user.ID }, null)</td>
-                                    @if (User.IsInRole("Administrator"))
+                                    <td>@Html.ActionLink("Zarejestruj pracownika", "RegisterEmployee", new { personId = user.ID }, null)</td>
+                                    @if (User.IsInRole("ADMINISTRATOR"))
                                     {
                                         <td>@Html.ActionLink("Edytuj rolę", "EditRole", new { personId = user.ID }, null)</td>
                                     }
@@ -83,6 +82,7 @@
                 @Html.ActionLink("Dodaj przychodnię", "AddClinic", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
                 @Html.ActionLink("Dodaj oddział dla przychodni", "AddUnit", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
                 @Html.ActionLink("Dodaj typ oddziału", "AddUnitType", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                @Html.ActionLink("Dodaj stanowisko pracownika", "AddEmplacement", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
             </dd>
         }
     </dl>

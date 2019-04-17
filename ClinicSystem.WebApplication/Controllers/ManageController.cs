@@ -40,6 +40,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
                 : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
                 : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
+                : message == ManageMessageId.AddEmplacementSuccess ? "Stanowisko dodane poprawnie"
                 : message == ManageMessageId.Error ? "Wystąpił nieoczekiwany błąd."
                 : "";
 
@@ -110,12 +111,12 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.EditRoleSuccess });
         }
 
-        public ActionResult RegisterDoctor(long personId)
+        public ActionResult RegisterEmployee(long personId)
         {
             var person = _manageRepository.GetPersonById(personId);
             var doctorDataDto = _manageRepository.GetDoctorDataDtoByPersonId(personId);
 
-            var viewModel = new RegisterDoctorViewModel
+            var viewModel = new RegisterEmployeeViewModel
             {
                 PersonId = personId,
                 Name = person.NAME,
@@ -131,16 +132,16 @@ namespace ClinicSystem.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterDoctor(RegisterDoctorViewModel registerDoctorViewModel)
+        public ActionResult RegisterEmployee(RegisterEmployeeViewModel registerEmployeeViewModel)
         {
-            var person = _manageRepository.GetPersonById(registerDoctorViewModel.PersonId);
+            var person = _manageRepository.GetPersonById(registerEmployeeViewModel.PersonId);
             var employee = new EMPLOYEE
             {
                 PERSON = person,
                 PERSON_ID = person.ID,
-                HIRE_DATE = registerDoctorViewModel.HireDate,
-                SALARY = registerDoctorViewModel.Salary,
-                UNIT_ID = registerDoctorViewModel.UnitId
+                HIRE_DATE = registerEmployeeViewModel.HireDate,
+                SALARY = registerEmployeeViewModel.Salary,
+                UNIT_ID = registerEmployeeViewModel.UnitId
             };
 
             _manageRepository.CreateOrUpdateEmployee(employee);
@@ -215,6 +216,23 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitTypeSuccess }); ;
         }
 
+        public ActionResult AddEmplacement()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddEmplacement(AddEmplacementViewModel model)
+        {
+            var emplacement = new EMPLACEMENT
+            {
+                EMPLACEMENT_NAME = model.Name
+            };
+
+            _manageRepository.CreateEmplacement(emplacement);
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddEmplacementSuccess });
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -255,6 +273,7 @@ namespace ClinicSystem.WebApplication.Controllers
             AddClinicSuccess,
             AddUnitTypeSuccess,
             AddUnitSuccess,
+            AddEmplacementSuccess,
             Error
         }
 

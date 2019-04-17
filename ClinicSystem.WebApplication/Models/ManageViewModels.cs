@@ -59,7 +59,7 @@ namespace ClinicSystem.WebApplication.Models
         public string AspNetUserId { get; set; }
     }
 
-    public class RegisterDoctorViewModel
+    public class RegisterEmployeeViewModel
     {
         [Required]
         public long PersonId { get; set; }
@@ -120,6 +120,13 @@ namespace ClinicSystem.WebApplication.Models
     {
         [Required(ErrorMessage = "Pole Nazwa oddziału jest wymagane")]
         [Display(Name = "Nazwa oddziału")]
+        public string Name { get; set; }
+    }
+
+    public class AddEmplacementViewModel
+    {
+        [Required(ErrorMessage = "Pole Nazwa stanowiska jest wymagane")]
+        [Display(Name = "Nazwa stanowiska")]
         public string Name { get; set; }
     }
 }

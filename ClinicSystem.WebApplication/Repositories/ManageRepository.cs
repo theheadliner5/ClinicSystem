@@ -188,5 +188,11 @@ namespace ClinicSystem.WebApplication.Repositories
                 FullName = $"{e.PERSON.NAME} {e.PERSON.LAST_NAME}, {e.UNIT.CLINIC.NAME}, {e.UNIT.CLINIC.ADDRESS}"
             });
         }
+
+        public void CreateEmplacement(EMPLACEMENT emplacement)
+        {
+            _db.EMPLACEMENT.Add(emplacement);
+            _db.SaveChanges();
+        }
     }
 }

@@ -28,5 +28,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId);
         DoctorDataDto GetDoctorDataDtoByPersonId(long personId);
         IEnumerable<ManagerDto> GetManagerDtos();
+        void CreateEmplacement(EMPLACEMENT emplacement);
     }
 }

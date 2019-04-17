@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dtos\DoctorDataDto.cs" />
+    <Compile Include="Dtos\EmployeeDataDto.cs" />
     <Compile Include="Dtos\ManagerDto.cs" />
     <Compile Include="Dtos\UnitDto.cs" />
     <Compile Include="Interfaces\IClinicSystemDbContext.cs" />

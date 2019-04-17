@@ -79,16 +79,22 @@ namespace ClinicSystem.WebApplication.Models
         public decimal Salary { get; set; }
         [Display(Name = "Aktualny oddział")]
         public string UnitName { get; set; }
-        [Required]
         public IEnumerable<UnitDto> UnitDtos { get; set; }
         [Required]
         [Display(Name = "Oddział")]
         public long UnitId { get; set; }
-        [Required]
         public IEnumerable<ManagerDto> ManagerDtos { get; set; }
-        [Required]
         [Display(Name = "Przełożony")]
-        public long ManagerId { get; set; }
+        public long? ManagerId { get; set; }
+        public IEnumerable<EMPLACEMENT> Emplacements { get; set; }
+        [Required]
+        [Display(Name = "Stanowisko")]
+        public long EmplacementId { get; set; }
+        public IEnumerable<ASPNETROLES> Roles { get; set; }
+        [Required]
+        [Display(Name = "Uprawnienia")]
+        public string RoleId { get; set; }
+
     }
 
     public class AddClinicViewModel

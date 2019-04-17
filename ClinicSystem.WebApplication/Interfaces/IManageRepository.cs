@@ -16,7 +16,7 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<UNIT_TYPE> GetAllUnitTypes();
         IEnumerable<UNIT> GetAllUnits();
         IEnumerable<UnitDto> GetUnitDtos();
-        void CreateOrUpdateEmployee(EMPLOYEE employee);
+        void CreateOrUpdateEmployee(EMPLOYEE employee, string roleId);
         EMPLOYEE GetEmployeeByPersonId(long personId);
         PERSON GetPersonById(long id);
         void AssignNewRole(string roleId, string aspNetUserId);
@@ -26,8 +26,10 @@ namespace ClinicSystem.WebApplication.Interfaces
         void CreateUnitType(UNIT_TYPE unitType);
         void CreateUnit(UNIT unit);
         long? GetUnitIdByClinicIdAndUnitTypeId(long clinicId, long? parentUnitTypeId);
-        DoctorDataDto GetDoctorDataDtoByPersonId(long personId);
+        EmployeeDataDto GetEmployeeDataDtoByPersonId(long personId);
         IEnumerable<ManagerDto> GetManagerDtos();
         void CreateEmplacement(EMPLACEMENT emplacement);
+        IEnumerable<EMPLACEMENT> GetAssignableEmplacements();
+        IEnumerable<ASPNETROLES> GetAssignableRoles();
     }
 }

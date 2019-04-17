@@ -16,5 +16,17 @@ namespace ClinicSystem.WebApplication.Services
         {
             _db = db;
         }
+
+        public bool IsEditedEmployeesManagerValid(long unitId, long? managerId)
+        {
+            if (managerId == null)
+            {
+                return true;
+            }
+
+            var manager = _db.EMPLOYEE.SingleOrDefault(e => e.ID == managerId);
+
+            return manager?.UNIT.ID == unitId;
+        }
     }
 }

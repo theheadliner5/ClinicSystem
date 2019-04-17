@@ -19,12 +19,14 @@ namespace ClinicSystem.WebApplication.Controllers
     public class ManageController : Controller
     {
         private readonly IManageRepository _manageRepository;
+        private readonly IManageValidationService _validationService;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController(IManageRepository manageRepository)
+        public ManageController(IManageRepository manageRepository, IManageValidationService validationService)
         {
             _manageRepository = manageRepository;
+            _validationService = validationService;
         }
 
         public ApplicationSignInManager SignInManager => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -38,6 +40,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
                 : message == ManageMessageId.EditRoleSuccess ? "Rola edytowana pomyślnie."
                 : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
+                : message == ManageMessageId.AddEmployeeSuccess ? "Pracownik dodany/edytowany poprawnie"
                 : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
                 : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
                 : message == ManageMessageId.AddEmplacementSuccess ? "Stanowisko dodane poprawnie"
@@ -111,21 +114,26 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.EditRoleSuccess });
         }
 
-        public ActionResult RegisterEmployee(long personId)
+        public ActionResult RegisterEmployee(long personId, ManageMessageId? message)
         {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.AddEmployeeInvalidManager ? "Niepoprawny przełożony" : "";
+
             var person = _manageRepository.GetPersonById(personId);
-            var doctorDataDto = _manageRepository.GetDoctorDataDtoByPersonId(personId);
+            var employeeDataDto = _manageRepository.GetEmployeeDataDtoByPersonId(personId);
 
             var viewModel = new RegisterEmployeeViewModel
             {
                 PersonId = personId,
                 Name = person.NAME,
                 LastName = person.LAST_NAME,
-                HireDate = doctorDataDto.HireDate,
-                Salary = doctorDataDto.Salary,
-                UnitName = doctorDataDto.UnitName,
+                HireDate = employeeDataDto.HireDate,
+                Salary = employeeDataDto.Salary,
+                UnitName = employeeDataDto.UnitName,
                 UnitDtos = _manageRepository.GetUnitDtos(),
-                ManagerDtos = _manageRepository.GetManagerDtos()
+                ManagerDtos = _manageRepository.GetManagerDtos(),
+                Emplacements = _manageRepository.GetAssignableEmplacements(),
+                Roles = _manageRepository.GetAssignableRoles()
             };
 
             return View(viewModel);
@@ -135,21 +143,31 @@ namespace ClinicSystem.WebApplication.Controllers
         public ActionResult RegisterEmployee(RegisterEmployeeViewModel registerEmployeeViewModel)
         {
             var person = _manageRepository.GetPersonById(registerEmployeeViewModel.PersonId);
+
             var employee = new EMPLOYEE
             {
                 PERSON = person,
                 PERSON_ID = person.ID,
                 HIRE_DATE = registerEmployeeViewModel.HireDate,
                 SALARY = registerEmployeeViewModel.Salary,
-                UNIT_ID = registerEmployeeViewModel.UnitId
+                UNIT_ID = registerEmployeeViewModel.UnitId,
+                EMPLOYEE_ID = registerEmployeeViewModel.ManagerId,
+                EMPLACEMENT_ID = registerEmployeeViewModel.EmplacementId
             };
 
-            _manageRepository.CreateOrUpdateEmployee(employee);
+            if (!_validationService.IsEditedEmployeesManagerValid(employee.UNIT_ID, registerEmployeeViewModel.ManagerId))
+            {
+                return RedirectToAction("RegisterEmployee",
+                    new
+                    {
+                        personId = registerEmployeeViewModel.PersonId,
+                        message = ManageMessageId.AddEmployeeInvalidManager
+                    });
+            }
 
-            var roleId = _manageRepository.GetRoleIdFromName("DOCTOR");
-            _manageRepository.AssignNewRole(roleId, person.ASP_NET_USER_ID);
+            _manageRepository.CreateOrUpdateEmployee(employee, registerEmployeeViewModel.RoleId);
 
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddEmployeeSuccess });
         }
 
         public ActionResult AddClinic()
@@ -270,6 +288,8 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ChangePasswordSuccess,
             EditRoleSuccess,
+            AddEmployeeSuccess,
+            AddEmployeeInvalidManager,
             AddClinicSuccess,
             AddUnitTypeSuccess,
             AddUnitSuccess,

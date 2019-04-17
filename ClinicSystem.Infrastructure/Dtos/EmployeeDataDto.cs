@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClinicSystem.Infrastructure.Dtos
 {
-    public class DoctorDataDto
+    public class EmployeeDataDto
     {
         public decimal Salary { get; set; }
         public DateTime HireDate { get; set; }

@@ -52,33 +52,31 @@ namespace ClinicSystem.WebApplication.Repositories
             });
         }
 
-        public void CreateOrUpdateEmployee(EMPLOYEE employee)
+        public void CreateOrUpdateEmployee(EMPLOYEE employee, string roleId)
         {
             var existingEmployee = GetEmployeeByPersonId(employee.PERSON_ID);
+            var newRole = _db.ASPNETROLES.SingleOrDefault(e => e.ID == roleId);
 
             if (existingEmployee == null)
             {
-                var emplacement = _db.EMPLACEMENT.SingleOrDefault(e => e.EMPLACEMENT_NAME == "DOCTOR");
+                var currentRole = employee.PERSON.ASPNETUSERS.ASPNETROLES.SingleOrDefault();
+                currentRole?.ASPNETUSERS.Remove(employee.PERSON.ASPNETUSERS);
 
-                if (emplacement == null)
-                {
-                    _db.EMPLACEMENT.Add(new EMPLACEMENT
-                    {
-                        EMPLACEMENT_NAME = "DOCTOR",
-                        EMPLOYEE = new List<EMPLOYEE> { employee }
-                    });
-                }
-                else
-                {
-                    emplacement.EMPLOYEE.Add(employee);
-                }
-
+                employee.PERSON.ASPNETUSERS.ASPNETROLES.Add(newRole);
                 _db.EMPLOYEE.Add(employee);
             }
             else
             {
                 existingEmployee.HIRE_DATE = employee.HIRE_DATE;
                 existingEmployee.SALARY = employee.SALARY;
+                existingEmployee.UNIT_ID = employee.UNIT_ID;
+                existingEmployee.EMPLOYEE_ID = employee.EMPLOYEE_ID;
+                existingEmployee.EMPLACEMENT_ID = employee.EMPLACEMENT_ID;
+
+                var currentRole = existingEmployee.PERSON.ASPNETUSERS.ASPNETROLES.SingleOrDefault();
+                currentRole?.ASPNETUSERS.Remove(existingEmployee.PERSON.ASPNETUSERS);
+
+                existingEmployee.PERSON.ASPNETUSERS.ASPNETROLES.Add(newRole);
             }
 
             _db.SaveChanges();
@@ -162,27 +160,26 @@ namespace ClinicSystem.WebApplication.Repositories
             return _db.UNIT.FirstOrDefault(e => e.CLINIC_ID == clinicId && e.UNIT_TYPE_ID == parentUnitTypeId.Value)?.ID;
         }
 
-        public DoctorDataDto GetDoctorDataDtoByPersonId(long personId)
+        public EmployeeDataDto GetEmployeeDataDtoByPersonId(long personId)
         {
-            var doctor = _db.EMPLOYEE.FirstOrDefault(e =>
-                e.PERSON_ID == personId && e.EMPLACEMENT.EMPLACEMENT_NAME == "DOCTOR");
+            var employee = _db.EMPLOYEE.FirstOrDefault(e => e.PERSON_ID == personId);
 
-            if (doctor != null)
+            if (employee != null)
             {
-                return new DoctorDataDto
+                return new EmployeeDataDto
                 {
-                    HireDate = doctor.HIRE_DATE,
-                    Salary = doctor.SALARY,
-                    UnitName = doctor.UNIT.UNIT_TYPE.UNIT_NAME
+                    HireDate = employee.HIRE_DATE,
+                    Salary = employee.SALARY,
+                    UnitName = employee.UNIT.UNIT_TYPE.UNIT_NAME
                 };
             }
 
-            return new DoctorDataDto { HireDate = DateTime.Now, Salary = 0.0m };
+            return new EmployeeDataDto { HireDate = DateTime.Now, Salary = 0.0m };
         }
 
         public IEnumerable<ManagerDto> GetManagerDtos()
         {
-            return _db.EMPLOYEE.Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "MANAGER").Select(e => new ManagerDto
+            return _db.EMPLOYEE.ToList().Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "Manager").Select(e => new ManagerDto
             {
                 ManagerId = e.ID,
                 FullName = $"{e.PERSON.NAME} {e.PERSON.LAST_NAME}, {e.UNIT.CLINIC.NAME}, {e.UNIT.CLINIC.ADDRESS}"
@@ -193,6 +190,16 @@ namespace ClinicSystem.WebApplication.Repositories
         {
             _db.EMPLACEMENT.Add(emplacement);
             _db.SaveChanges();
+        }
+
+        public IEnumerable<EMPLACEMENT> GetAssignableEmplacements()
+        {
+            return _db.EMPLACEMENT.ToList();
+        }
+
+        public IEnumerable<ASPNETROLES> GetAssignableRoles()
+        {
+            return _db.ASPNETROLES.Where(e => e.NAME != "ADMINISTRATOR").ToList();
         }
     }
 }

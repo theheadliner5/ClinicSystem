@@ -15,6 +15,7 @@ namespace ClinicSystem.Infrastructure.Model
     public partial class EMPLOYEE_COST
     {
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public decimal EMPLOYEE_COST1 { get; set; }
         public System.DateTime REALIZATION_DATE { get; set; }
         public long EMPLOYEE_ID { get; set; }

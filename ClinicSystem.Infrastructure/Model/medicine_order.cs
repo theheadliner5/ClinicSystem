@@ -21,6 +21,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public decimal COST { get; set; }
         public System.DateTime EXPIRE_DATE { get; set; }
         public string MEDICINE_BATCH_SERIES { get; set; }

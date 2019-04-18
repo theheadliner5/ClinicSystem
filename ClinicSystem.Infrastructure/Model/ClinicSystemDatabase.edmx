@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicSystemDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ASPNETROLES">
           <Key>
             <PropertyRef Name="ID" />
@@ -61,6 +61,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="NAME" Type="varchar" MaxLength="255" />
           <Property Name="ADDRESS" Type="varchar" MaxLength="255" />
         </EntityType>
@@ -69,6 +70,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EXAMINATION_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="PATIENT_VISIT_ID" Type="bigint" Nullable="false" />
           <Property Name="EXAMINATION_ID" Type="bigint" Nullable="false" />
@@ -80,6 +82,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CODE_DESCRIPTION" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -88,6 +91,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EMPLACEMENT_NAME" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="EMPLOYEE">
@@ -95,6 +99,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="SALARY" Type="money" Nullable="false" />
           <Property Name="HIRE_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="bigint" />
@@ -107,6 +112,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EMPLOYEE_COST" Type="money" Nullable="false" />
           <Property Name="REALIZATION_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EMPLOYEE_ID" Type="bigint" Nullable="false" />
@@ -117,6 +123,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="EXAMINATION_NAME" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="COST" Type="money" Nullable="false" />
         </EntityType>
@@ -125,6 +132,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="COST" Type="money" Nullable="false" />
           <Property Name="EXPIRE_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="MEDICINE_BATCH_SERIES" Type="varchar" MaxLength="255" Nullable="false" />
@@ -135,6 +143,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="MEDICINE_NAME" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="ACTIVE_INGREDIENT" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
@@ -143,6 +152,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DIAGNOSE" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="PATIENT_VISIT_ID" Type="bigint" Nullable="false" />
           <Property Name="DISEASE_ID" Type="bigint" Nullable="false" />
@@ -152,6 +162,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DOSE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TREATMENT_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="PATIENT_VISIT_ID" Type="bigint" Nullable="false" />
@@ -162,6 +173,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DATE_FROM" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DATE_TO" Type="datetime2" Precision="7" />
           <Property Name="PERSON_ID" Type="bigint" Nullable="false" />
@@ -174,18 +186,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="NAME" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="LAST_NAME" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="ADDRESS" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="PESEL" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="BIRTH_DATE" Type="date" />
-          <Property Name="ASP_NET_USER_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="UNIT">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CLINIC_ID" Type="bigint" Nullable="false" />
           <Property Name="UNIT_TYPE_ID" Type="bigint" Nullable="false" />
           <Property Name="UNIT_ID" Type="bigint" />
@@ -195,6 +209,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="BUDGET_TYPE" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="DATE_FROM" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DATE_TO" Type="datetime2" Precision="7" Nullable="false" />
@@ -206,6 +221,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LAST_MOD_DATE" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="UNIT_NAME" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <Association Name="DIAGNOSTICS_EMPLOYEE_FK">
@@ -328,7 +344,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PERSON__ASP_NET___19AACF41">
+        <Association Name="FK__PERSON__USER_ID__40257DE4">
           <End Role="ASPNETUSERS" Type="Self.ASPNETUSERS" Multiplicity="1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -336,7 +352,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PERSON">
-              <PropertyRef Name="ASP_NET_USER_ID" />
+              <PropertyRef Name="USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -552,7 +568,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClinicSystemModelStoreContainer">
+        <EntityContainer Name="ClinicSystemDbModelStoreContainer">
           <EntitySet Name="ASPNETROLES" EntityType="Self.ASPNETROLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASPNETUSERCLAIMS" EntityType="Self.ASPNETUSERCLAIMS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASPNETUSERLOGINS" EntityType="Self.ASPNETUSERLOGINS" Schema="dbo" store:Type="Tables" />
@@ -614,7 +630,7 @@
             <End Role="UNIT" EntitySet="UNIT" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
-          <AssociationSet Name="FK__PERSON__ASP_NET___19AACF41" Association="Self.FK__PERSON__ASP_NET___19AACF41">
+          <AssociationSet Name="FK__PERSON__USER_ID__40257DE4" Association="Self.FK__PERSON__USER_ID__40257DE4">
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
@@ -691,7 +707,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClinicSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ClinicSystemDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ASPNETROLES">
           <Key>
             <PropertyRef Name="ID" />
@@ -739,7 +755,7 @@
           <Property Name="USERNAME" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ASPNETUSERCLAIMS" Relationship="Self.FK_DBO_ASPNETUSERCLAIMS_DBO_ASPNETUSERS_USERID" FromRole="ASPNETUSERS" ToRole="ASPNETUSERCLAIMS" />
           <NavigationProperty Name="ASPNETUSERLOGINS" Relationship="Self.FK_DBO_ASPNETUSERLOGINS_DBO_ASPNETUSERS_USERID" FromRole="ASPNETUSERS" ToRole="ASPNETUSERLOGINS" />
-          <NavigationProperty Name="PERSON" Relationship="Self.FK__PERSON__ASP_NET___19AACF41" FromRole="ASPNETUSERS" ToRole="PERSON" />
+          <NavigationProperty Name="PERSON" Relationship="Self.FK__PERSON__USER_ID__40257DE4" FromRole="ASPNETUSERS" ToRole="PERSON" />
           <NavigationProperty Name="ASPNETROLES" Relationship="Self.ASPNETUSERROLES" FromRole="ASPNETUSERS" ToRole="ASPNETROLES" />
         </EntityType>
         <EntityType Name="CLINIC">
@@ -747,6 +763,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PATIENT_VISIT" Relationship="Self.PATIENT_VISIT_CLINIC_FK" FromRole="CLINIC" ToRole="PATIENT_VISIT" />
@@ -757,6 +774,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EXAMINATION_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="PATIENT_VISIT_ID" Type="Int64" Nullable="false" />
           <Property Name="EXAMINATION_ID" Type="Int64" Nullable="false" />
@@ -772,6 +790,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CODE_DESCRIPTION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PATIENT_DIAGNOSE" Relationship="Self.PATIENT_DIAGNOSE_DISEASE_FK" FromRole="DISEASE" ToRole="PATIENT_DIAGNOSE" />
@@ -781,6 +800,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EMPLACEMENT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.EMPLOYEE_EMPLACEMENT_FK" FromRole="EMPLACEMENT" ToRole="EMPLOYEE" />
         </EntityType>
@@ -789,6 +809,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="SALARY" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="HIRE_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EMPLOYEE_ID" Type="Int64" />
@@ -808,6 +829,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EMPLOYEE_COST1" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="REALIZATION_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EMPLOYEE_ID" Type="Int64" Nullable="false" />
@@ -820,6 +842,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="EXAMINATION_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="COST" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="DIAGNOSTICS" Relationship="Self.DIAGNOSTICS_EXAMINATION_FK" FromRole="EXAMINATION" ToRole="DIAGNOSTICS" />
@@ -829,6 +852,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="COST" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="EXPIRE_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="MEDICINE_BATCH_SERIES" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
@@ -841,6 +865,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="MEDICINE_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ACTIVE_INGREDIENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="MEDICINE_ORDER" Relationship="Self.MEDICINE_ORDER_MEDICINE_TYPE_FK" FromRole="MEDICINE_TYPE" ToRole="MEDICINE_ORDER" />
@@ -850,6 +875,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DIAGNOSE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PATIENT_VISIT_ID" Type="Int64" Nullable="false" />
           <Property Name="DISEASE_ID" Type="Int64" Nullable="false" />
@@ -861,6 +887,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DOSE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TREATMENT_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="PATIENT_VISIT_ID" Type="Int64" Nullable="false" />
@@ -873,6 +900,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DATE_FROM" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DATE_TO" Type="DateTime" Precision="7" />
           <Property Name="PERSON_ID" Type="Int64" Nullable="false" />
@@ -893,13 +921,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LAST_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BIRTH_DATE" Type="DateTime" Precision="0" />
-          <Property Name="ASP_NET_USER_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ASPNETUSERS" Relationship="Self.FK__PERSON__ASP_NET___19AACF41" FromRole="PERSON" ToRole="ASPNETUSERS" />
+          <Property Name="USER_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ASPNETUSERS" Relationship="Self.FK__PERSON__USER_ID__40257DE4" FromRole="PERSON" ToRole="ASPNETUSERS" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.EMPLOYEE_PERSON_FK" FromRole="PERSON" ToRole="EMPLOYEE" />
           <NavigationProperty Name="PATIENT_VISIT" Relationship="Self.PATIENT_VISIT_PERSON_FK" FromRole="PERSON" ToRole="PATIENT_VISIT" />
         </EntityType>
@@ -908,6 +937,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CLINIC_ID" Type="Int64" Nullable="false" />
           <Property Name="UNIT_TYPE_ID" Type="Int64" Nullable="false" />
           <Property Name="UNIT_ID" Type="Int64" />
@@ -924,6 +954,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="BUDGET_TYPE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DATE_FROM" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DATE_TO" Type="DateTime" Nullable="false" Precision="7" />
@@ -938,6 +969,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LAST_MOD_DATE" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="UNIT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UNIT" Relationship="Self.UNIT_UNIT_TYPE_FK" FromRole="UNIT_TYPE" ToRole="UNIT" />
         </EntityType>
@@ -969,7 +1001,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PERSON__ASP_NET___19AACF41">
+        <Association Name="FK__PERSON__USER_ID__40257DE4">
           <End Role="ASPNETUSERS" Type="Self.ASPNETUSERS" Multiplicity="1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -977,7 +1009,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PERSON">
-              <PropertyRef Name="ASP_NET_USER_ID" />
+              <PropertyRef Name="USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1290,7 +1322,7 @@
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="ASPNETUSERLOGINS" EntitySet="ASPNETUSERLOGINS" />
           </AssociationSet>
-          <AssociationSet Name="FK__PERSON__ASP_NET___19AACF41" Association="Self.FK__PERSON__ASP_NET___19AACF41">
+          <AssociationSet Name="FK__PERSON__USER_ID__40257DE4" Association="Self.FK__PERSON__USER_ID__40257DE4">
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
@@ -1396,9 +1428,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClinicSystemModelStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
+        <EntityContainerMapping StorageEntityContainer="ClinicSystemDbModelStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
           <EntitySetMapping Name="ASPNETROLES">
-            <EntityTypeMapping TypeName="ClinicSystemModel.ASPNETROLES">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETROLES">
               <MappingFragment StoreEntitySet="ASPNETROLES">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -1406,7 +1438,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERCLAIMS">
-            <EntityTypeMapping TypeName="ClinicSystemModel.ASPNETUSERCLAIMS">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERCLAIMS">
               <MappingFragment StoreEntitySet="ASPNETUSERCLAIMS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
@@ -1416,7 +1448,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERLOGINS">
-            <EntityTypeMapping TypeName="ClinicSystemModel.ASPNETUSERLOGINS">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERLOGINS">
               <MappingFragment StoreEntitySet="ASPNETUSERLOGINS">
                 <ScalarProperty Name="LOGINPROVIDER" ColumnName="LOGINPROVIDER" />
                 <ScalarProperty Name="PROVIDERKEY" ColumnName="PROVIDERKEY" />
@@ -1425,7 +1457,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERS">
-            <EntityTypeMapping TypeName="ClinicSystemModel.ASPNETUSERS">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERS">
               <MappingFragment StoreEntitySet="ASPNETUSERS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
@@ -1443,18 +1475,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CLINIC">
-            <EntityTypeMapping TypeName="ClinicSystemModel.CLINIC">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.CLINIC">
               <MappingFragment StoreEntitySet="CLINIC">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DIAGNOSTICS">
-            <EntityTypeMapping TypeName="ClinicSystemModel.DIAGNOSTICS">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.DIAGNOSTICS">
               <MappingFragment StoreEntitySet="DIAGNOSTICS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="EXAMINATION_DATE" ColumnName="EXAMINATION_DATE" />
                 <ScalarProperty Name="PATIENT_VISIT_ID" ColumnName="PATIENT_VISIT_ID" />
                 <ScalarProperty Name="EXAMINATION_ID" ColumnName="EXAMINATION_ID" />
@@ -1464,26 +1498,29 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DISEASE">
-            <EntityTypeMapping TypeName="ClinicSystemModel.DISEASE">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.DISEASE">
               <MappingFragment StoreEntitySet="DISEASE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="CODE" ColumnName="CODE" />
                 <ScalarProperty Name="CODE_DESCRIPTION" ColumnName="CODE_DESCRIPTION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLACEMENT">
-            <EntityTypeMapping TypeName="ClinicSystemModel.EMPLACEMENT">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLACEMENT">
               <MappingFragment StoreEntitySet="EMPLACEMENT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="EMPLACEMENT_NAME" ColumnName="EMPLACEMENT_NAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEE">
-            <EntityTypeMapping TypeName="ClinicSystemModel.EMPLOYEE">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="SALARY" ColumnName="SALARY" />
                 <ScalarProperty Name="HIRE_DATE" ColumnName="HIRE_DATE" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -1494,9 +1531,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEE_COST">
-            <EntityTypeMapping TypeName="ClinicSystemModel.EMPLOYEE_COST">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLOYEE_COST">
               <MappingFragment StoreEntitySet="EMPLOYEE_COST">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="EMPLOYEE_COST1" ColumnName="EMPLOYEE_COST" />
                 <ScalarProperty Name="REALIZATION_DATE" ColumnName="REALIZATION_DATE" />
                 <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
@@ -1505,18 +1543,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EXAMINATION">
-            <EntityTypeMapping TypeName="ClinicSystemModel.EXAMINATION">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.EXAMINATION">
               <MappingFragment StoreEntitySet="EXAMINATION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="EXAMINATION_NAME" ColumnName="EXAMINATION_NAME" />
                 <ScalarProperty Name="COST" ColumnName="COST" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MEDICINE_ORDER">
-            <EntityTypeMapping TypeName="ClinicSystemModel.MEDICINE_ORDER">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.MEDICINE_ORDER">
               <MappingFragment StoreEntitySet="MEDICINE_ORDER">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="COST" ColumnName="COST" />
                 <ScalarProperty Name="EXPIRE_DATE" ColumnName="EXPIRE_DATE" />
                 <ScalarProperty Name="MEDICINE_BATCH_SERIES" ColumnName="MEDICINE_BATCH_SERIES" />
@@ -1525,18 +1565,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MEDICINE_TYPE">
-            <EntityTypeMapping TypeName="ClinicSystemModel.MEDICINE_TYPE">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.MEDICINE_TYPE">
               <MappingFragment StoreEntitySet="MEDICINE_TYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="MEDICINE_NAME" ColumnName="MEDICINE_NAME" />
                 <ScalarProperty Name="ACTIVE_INGREDIENT" ColumnName="ACTIVE_INGREDIENT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_DIAGNOSE">
-            <EntityTypeMapping TypeName="ClinicSystemModel.PATIENT_DIAGNOSE">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_DIAGNOSE">
               <MappingFragment StoreEntitySet="PATIENT_DIAGNOSE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="DIAGNOSE" ColumnName="DIAGNOSE" />
                 <ScalarProperty Name="PATIENT_VISIT_ID" ColumnName="PATIENT_VISIT_ID" />
                 <ScalarProperty Name="DISEASE_ID" ColumnName="DISEASE_ID" />
@@ -1544,9 +1586,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_MEDICINES">
-            <EntityTypeMapping TypeName="ClinicSystemModel.PATIENT_MEDICINES">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_MEDICINES">
               <MappingFragment StoreEntitySet="PATIENT_MEDICINES">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="DOSE" ColumnName="DOSE" />
                 <ScalarProperty Name="TREATMENT_DATE" ColumnName="TREATMENT_DATE" />
                 <ScalarProperty Name="PATIENT_VISIT_ID" ColumnName="PATIENT_VISIT_ID" />
@@ -1555,9 +1598,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_VISIT">
-            <EntityTypeMapping TypeName="ClinicSystemModel.PATIENT_VISIT">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_VISIT">
               <MappingFragment StoreEntitySet="PATIENT_VISIT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="DATE_FROM" ColumnName="DATE_FROM" />
                 <ScalarProperty Name="DATE_TO" ColumnName="DATE_TO" />
                 <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
@@ -1568,22 +1612,24 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERSON">
-            <EntityTypeMapping TypeName="ClinicSystemModel.PERSON">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.PERSON">
               <MappingFragment StoreEntitySet="PERSON">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
                 <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
                 <ScalarProperty Name="PESEL" ColumnName="PESEL" />
                 <ScalarProperty Name="BIRTH_DATE" ColumnName="BIRTH_DATE" />
-                <ScalarProperty Name="ASP_NET_USER_ID" ColumnName="ASP_NET_USER_ID" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT">
-            <EntityTypeMapping TypeName="ClinicSystemModel.UNIT">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT">
               <MappingFragment StoreEntitySet="UNIT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="CLINIC_ID" ColumnName="CLINIC_ID" />
                 <ScalarProperty Name="UNIT_TYPE_ID" ColumnName="UNIT_TYPE_ID" />
                 <ScalarProperty Name="UNIT_ID" ColumnName="UNIT_ID" />
@@ -1591,9 +1637,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT_PLAN">
-            <EntityTypeMapping TypeName="ClinicSystemModel.UNIT_PLAN">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT_PLAN">
               <MappingFragment StoreEntitySet="UNIT_PLAN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="BUDGET_TYPE" ColumnName="BUDGET_TYPE" />
                 <ScalarProperty Name="DATE_FROM" ColumnName="DATE_FROM" />
                 <ScalarProperty Name="DATE_TO" ColumnName="DATE_TO" />
@@ -1603,14 +1650,15 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT_TYPE">
-            <EntityTypeMapping TypeName="ClinicSystemModel.UNIT_TYPE">
+            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT_TYPE">
               <MappingFragment StoreEntitySet="UNIT_TYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="UNIT_NAME" ColumnName="UNIT_NAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ASPNETUSERROLES" TypeName="ClinicSystemModel.ASPNETUSERROLES" StoreEntitySet="ASPNETUSERROLES">
+          <AssociationSetMapping Name="ASPNETUSERROLES" TypeName="ClinicSystemDbModel.ASPNETUSERROLES" StoreEntitySet="ASPNETUSERROLES">
             <EndProperty Name="ASPNETROLES">
               <ScalarProperty Name="ID" ColumnName="ROLEID" />
             </EndProperty>

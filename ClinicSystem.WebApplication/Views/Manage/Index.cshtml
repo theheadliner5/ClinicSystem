@@ -59,10 +59,6 @@
                                         }
                                     }
                                     <td>@Html.ActionLink("Zarejestruj/edytuj pracownika", "RegisterEmployee", new { personId = user.ID }, null)</td>
-                                    @if (User.IsInRole("ADMINISTRATOR"))
-                                    {
-                                        <td>@Html.ActionLink("Edytuj rolę", "EditRole", new { personId = user.ID }, null)</td>
-                                    }
                                 </tr>
                             }
 

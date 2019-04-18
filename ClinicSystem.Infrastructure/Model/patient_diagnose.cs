@@ -15,6 +15,7 @@ namespace ClinicSystem.Infrastructure.Model
     public partial class PATIENT_DIAGNOSE
     {
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public string DIAGNOSE { get; set; }
         public long PATIENT_VISIT_ID { get; set; }
         public long DISEASE_ID { get; set; }

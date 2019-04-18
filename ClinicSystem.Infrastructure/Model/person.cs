@@ -22,12 +22,13 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public string NAME { get; set; }
         public string LAST_NAME { get; set; }
         public string ADDRESS { get; set; }
         public string PESEL { get; set; }
         public Nullable<System.DateTime> BIRTH_DATE { get; set; }
-        public string ASP_NET_USER_ID { get; set; }
+        public string USER_ID { get; set; }
     
         public virtual ASPNETUSERS ASPNETUSERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -38,7 +38,6 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
-                : message == ManageMessageId.EditRoleSuccess ? "Rola edytowana pomyślnie."
                 : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
                 : message == ManageMessageId.AddEmployeeSuccess ? "Pracownik dodany/edytowany poprawnie"
                 : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
@@ -92,28 +91,6 @@ namespace ClinicSystem.WebApplication.Controllers
             return View(model);
         }
 
-        public ActionResult EditRole(long personId)
-        {
-            var person = _manageRepository.GetPersonById(personId);
-
-            var model = new EditRoleViewModel
-            {
-                RoleId = person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID,
-                AspNetUserId = person?.ASP_NET_USER_ID,
-                Roles = _manageRepository.GetAllRoles().Where(e => e.NAME != "DOCTOR")
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult EditRole(EditRoleViewModel model)
-        {
-            _manageRepository.AssignNewRole(model.RoleId, model.AspNetUserId);
-
-            return RedirectToAction("Index", new { Message = ManageMessageId.EditRoleSuccess });
-        }
-
         public ActionResult RegisterEmployee(long personId, ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -146,6 +123,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             var employee = new EMPLOYEE
             {
+                LAST_MOD_DATE = DateTime.Now,
                 PERSON = person,
                 PERSON_ID = person.ID,
                 HIRE_DATE = registerEmployeeViewModel.HireDate,
@@ -180,6 +158,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var clinic = new CLINIC
             {
+                LAST_MOD_DATE = DateTime.Now,
                 ADDRESS = model.Address,
                 NAME = model.Name
             };
@@ -206,6 +185,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var unit = new UNIT
             {
+                LAST_MOD_DATE = DateTime.Now,
                 CLINIC_ID = model.ClinicId,
                 UNIT_TYPE_ID = model.UnitTypeId,
                 UNIT_ID = _manageRepository.GetUnitIdByClinicIdAndUnitTypeId(model.ClinicId, model.ParentUnitTypeId)
@@ -226,6 +206,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var unitType = new UNIT_TYPE
             {
+                LAST_MOD_DATE = DateTime.Now,
                 UNIT_NAME = model.Name
             };
 
@@ -244,6 +225,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var emplacement = new EMPLACEMENT
             {
+                LAST_MOD_DATE = DateTime.Now,
                 EMPLACEMENT_NAME = model.Name
             };
 
@@ -287,7 +269,6 @@ namespace ClinicSystem.WebApplication.Controllers
         public enum ManageMessageId
         {
             ChangePasswordSuccess,
-            EditRoleSuccess,
             AddEmployeeSuccess,
             AddEmployeeInvalidManager,
             AddClinicSuccess,

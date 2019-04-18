@@ -21,6 +21,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public string CODE { get; set; }
         public string CODE_DESCRIPTION { get; set; }
     

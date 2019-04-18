@@ -67,6 +67,7 @@ namespace ClinicSystem.WebApplication.Repositories
             }
             else
             {
+                existingEmployee.LAST_MOD_DATE = employee.LAST_MOD_DATE;
                 existingEmployee.HIRE_DATE = employee.HIRE_DATE;
                 existingEmployee.SALARY = employee.SALARY;
                 existingEmployee.UNIT_ID = employee.UNIT_ID;
@@ -74,8 +75,8 @@ namespace ClinicSystem.WebApplication.Repositories
                 existingEmployee.EMPLACEMENT_ID = employee.EMPLACEMENT_ID;
 
                 var currentRole = existingEmployee.PERSON.ASPNETUSERS.ASPNETROLES.SingleOrDefault();
-                currentRole?.ASPNETUSERS.Remove(existingEmployee.PERSON.ASPNETUSERS);
 
+                existingEmployee.PERSON.ASPNETUSERS.ASPNETROLES.Remove(currentRole);
                 existingEmployee.PERSON.ASPNETUSERS.ASPNETROLES.Add(newRole);
             }
 
@@ -90,51 +91,6 @@ namespace ClinicSystem.WebApplication.Repositories
         public PERSON GetPersonById(long id)
         {
             return _db.PERSON.SingleOrDefault(e => e.ID == id);
-        }
-
-        public void AssignNewRole(string roleId, string aspNetUserId)
-        {
-            var newRole = _db.ASPNETROLES.SingleOrDefault(e => e.ID == roleId);
-            var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == aspNetUserId);
-            var previousRole = aspNetUser?.ASPNETROLES.SingleOrDefault();
-            var employee = _db.EMPLOYEE.FirstOrDefault(e => e.PERSON.ASP_NET_USER_ID == aspNetUserId);
-            var existingEmplacement = _db.EMPLACEMENT.FirstOrDefault(e => e.EMPLACEMENT_NAME == newRole.NAME);
-
-            if (previousRole != null)
-            {
-                aspNetUser.ASPNETROLES.Remove(previousRole);
-            }
-
-            aspNetUser?.ASPNETROLES.Add(newRole);
-
-            if (existingEmplacement == null)
-            {
-                var emplacement = new EMPLACEMENT
-                {
-                    EMPLACEMENT_NAME = newRole?.NAME,
-                    EMPLOYEE = employee != null ? new List<EMPLOYEE> { employee } : null
-                };
-
-                _db.EMPLACEMENT.Add(emplacement);
-            }
-            else
-            {
-                existingEmplacement.EMPLOYEE.Add(employee);
-            }
-
-            _db.SaveChanges();
-        }
-
-        public string GetRoleIdFromPersonId(long personId)
-        {
-            var person = _db.PERSON.SingleOrDefault(e => e.ID == personId);
-
-            return person?.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.ID;
-        }
-
-        public string GetRoleIdFromName(string roleName)
-        {
-            return _db.ASPNETROLES.SingleOrDefault(e => e.NAME == roleName)?.ID;
         }
 
         public void CreateClinic(CLINIC clinic)
@@ -179,7 +135,7 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public IEnumerable<ManagerDto> GetManagerDtos()
         {
-            return _db.EMPLOYEE.ToList().Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "Manager").Select(e => new ManagerDto
+            return _db.EMPLOYEE.Where(e => e.EMPLACEMENT.EMPLACEMENT_NAME == "Manager").ToList().Select(e => new ManagerDto
             {
                 ManagerId = e.ID,
                 FullName = $"{e.PERSON.NAME} {e.PERSON.LAST_NAME}, {e.UNIT.CLINIC.NAME}, {e.UNIT.CLINIC.ADDRESS}"

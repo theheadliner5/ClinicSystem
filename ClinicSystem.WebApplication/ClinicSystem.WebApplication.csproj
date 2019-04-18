@@ -205,9 +205,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IManageRepository.cs" />
     <Compile Include="Interfaces\IManageValidationService.cs" />
     <Compile Include="Models\MedicineViewModels.cs" />
+    <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\ManageRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -269,7 +271,6 @@
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Manage\EditRole.cshtml" />
     <Content Include="Views\Manage\RegisterEmployee.cshtml" />
     <Content Include="Views\Manage\AddClinic.cshtml" />
     <Content Include="Views\Manage\AddUnit.cshtml" />

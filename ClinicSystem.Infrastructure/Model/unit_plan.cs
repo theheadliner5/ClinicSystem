@@ -22,6 +22,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public string BUDGET_TYPE { get; set; }
         public System.DateTime DATE_FROM { get; set; }
         public System.DateTime DATE_TO { get; set; }

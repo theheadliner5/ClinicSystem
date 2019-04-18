@@ -19,9 +19,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         void CreateOrUpdateEmployee(EMPLOYEE employee, string roleId);
         EMPLOYEE GetEmployeeByPersonId(long personId);
         PERSON GetPersonById(long id);
-        void AssignNewRole(string roleId, string aspNetUserId);
-        string GetRoleIdFromPersonId(long personId);
-        string GetRoleIdFromName(string roleName);
         void CreateClinic(CLINIC clinic);
         void CreateUnitType(UNIT_TYPE unitType);
         void CreateUnit(UNIT unit);

@@ -55,6 +55,7 @@ namespace ClinicSystem.WebApplication
 
             container.RegisterType<IClinicSystemDbContext, ClinicSystemDbContext>(new PerRequestLifetimeManager());
 
+            container.RegisterType<IAccountRepository, AccountRepository>();
             container.RegisterType<IManageRepository, ManageRepository>();
 
             container.RegisterType<IManageValidationService, ManageValidationService>();

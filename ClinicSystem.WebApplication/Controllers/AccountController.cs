@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
+using ClinicSystem.WebApplication.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -17,13 +18,13 @@ namespace ClinicSystem.WebApplication.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IClinicSystemDbContext _db;
+        private readonly IAccountRepository _accountRepository;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController(IClinicSystemDbContext db)
+        public AccountController(IAccountRepository accountRepository)
         {
-            _db = db;
+            _accountRepository = accountRepository;
         }
 
         public ApplicationSignInManager SignInManager => _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
@@ -89,23 +90,18 @@ namespace ClinicSystem.WebApplication.Controllers
                 {
                     var person = new PERSON
                     {
+                        LAST_MOD_DATE = DateTime.Now,
                         NAME = model.Name,
                         LAST_NAME = model.LastName,
                         ADDRESS = model.Address,
                         PESEL = model.Pesel,
                         BIRTH_DATE = model.Birthdate,
-                        ASP_NET_USER_ID = user.Id
+                        USER_ID = user.Id
                     };
 
-                    _db.PERSON.Add(person);
+                    _accountRepository.RegisterPerson(person);
 
-                    var patientRole = _db.ASPNETROLES.SingleOrDefault(e => e.NAME == "PATIENT");
-                    var aspNetUser = _db.ASPNETUSERS.SingleOrDefault(e => e.ID == person.ASP_NET_USER_ID);
-
-                    aspNetUser?.ASPNETROLES.Add(patientRole);
-                    _db.SaveChanges();
-
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

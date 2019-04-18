@@ -24,6 +24,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public System.DateTime DATE_FROM { get; set; }
         public Nullable<System.DateTime> DATE_TO { get; set; }
         public long PERSON_ID { get; set; }

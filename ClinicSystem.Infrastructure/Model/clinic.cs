@@ -22,6 +22,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public string NAME { get; set; }
         public string ADDRESS { get; set; }
     

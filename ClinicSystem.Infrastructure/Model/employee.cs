@@ -23,6 +23,7 @@ namespace ClinicSystem.Infrastructure.Model
         }
     
         public long ID { get; set; }
+        public System.DateTime LAST_MOD_DATE { get; set; }
         public decimal SALARY { get; set; }
         public System.DateTime HIRE_DATE { get; set; }
         public Nullable<long> EMPLOYEE_ID { get; set; }

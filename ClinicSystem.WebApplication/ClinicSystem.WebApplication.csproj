@@ -208,6 +208,7 @@
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IManageRepository.cs" />
     <Compile Include="Interfaces\IManageValidationService.cs" />
+    <Compile Include="Interfaces\IMedicineRepository.cs" />
     <Compile Include="Models\MedicineViewModels.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\ManageRepository.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MedicineRepository.cs" />
     <Compile Include="Services\ManageValidationService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -277,6 +279,8 @@
     <Content Include="Views\Manage\AddUnitType.cshtml" />
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Manage\AddEmplacement.cshtml" />
+    <Content Include="Views\Medicine\AddMedicine.cshtml" />
+    <Content Include="Views\Medicine\AddMedicineType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

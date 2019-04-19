@@ -38,13 +38,11 @@ namespace ClinicSystem.WebApplication.Models
         [DataType(DataType.Password)]
         [Display(Name = "Aktualne hasło")]
         public string OldPassword { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi posiadać przynajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
-
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź nowe hasło")]
         [Compare("NewPassword", ErrorMessage = "Nowe hasło i potwierdzenie są różne.")]

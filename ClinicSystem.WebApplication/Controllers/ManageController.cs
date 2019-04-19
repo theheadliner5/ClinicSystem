@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Services.Description;
-using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
 using ClinicSystem.WebApplication.Interfaces;
 using Microsoft.AspNet.Identity;

@@ -1,18 +1,45 @@
-﻿
+﻿@model ClinicSystem.WebApplication.Models.MedicineIndexViewModel
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lekarstwa";
 }
 
+<h2>@ViewBag.Title</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
     <h4>Zarządzanie danymi lekarstw</h4>
     <hr />
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Składniki</th>
+            <th>Cena</th>
+            <th>Seria</th>
+            <th>Data przydatności</th>
+            <th>Ilość</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var medicine in Model.MedicineDtos)
+        {
+            <tr>
+                <td>@medicine.Name</td>
+                <td>@medicine.ActiveIngredient</td>
+                <td>@medicine.Cost</td>
+                <td>@medicine.BatchSeries</td>
+                <td>@medicine.ExpirationDate.ToString("d")</td>
+                <td>@medicine.Amount</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <hr />
     <dl class="dl-horizontal">
-        <dt>
-
-        </dt>
+        <dt>Operacje:</dt>
         <dd>
-
+            @Html.ActionLink("Dodaj typ leku", "AddMedicineType", "Medicine", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+            @Html.ActionLink("Dodaj lek", "AddMedicine", "Medicine", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
         </dd>
     </dl>
 </div>

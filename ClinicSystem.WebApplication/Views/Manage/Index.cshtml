@@ -33,6 +33,7 @@
                             <tr>
                                 <th>Imię</th>
                                 <th>Nazwisko</th>
+                                <th>Login</th>
                                 <th>Pesel</th>
                                 <th>Rola</th>
                             </tr>
@@ -44,8 +45,8 @@
                                 <tr>
                                     <td>@user.NAME</td>
                                     <td>@user.LAST_NAME</td>
+                                    <td>@user.ASPNETUSERS.USERNAME</td>
                                     <td>@user.PESEL</td>
-
                                     @{
                                         var roleName = user.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME;
 

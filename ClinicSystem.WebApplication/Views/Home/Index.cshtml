@@ -5,7 +5,13 @@
 <div class="jumbotron">
     <h1>Przychodnia Luxcover</h1>
     <p class="lead">Już od ponad 25 lat dbamy o zdrowie naszych pacjentów. Każdego dnia dokładamy wszelkich starań, aby osoby znajdujące się pod naszą opieką były zadowolone ze świadczonych przez nas usług, czuły się bezpiecznie i wiedziały, że mogą liczyć na pomoc i poradę doświadczonych specjalistów.</p>
-    <!--<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>-->
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Rejestracja »", "Register", "Account", null, new { @class = "btn btn-primary", @role = "button" })
+        <p></p>
+        <p><small>Posiadasz już konto?</small></p>
+        @Html.ActionLink("Zaloguj się »", "Login", "Account", null, new { @class = "btn btn-primary", @role = "button" })
+    }
 </div>
 
 <div class="row">
@@ -14,16 +20,16 @@
         <p>
             Zarezerwuj wizytę u najpopularniejszych specjalistów w kilku prostych krokach, w placówce odpowiadającej Twoim potrzebom.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Umów wizytę &raquo;</a></p>
+        <p><a class="btn btn-default" href="">Umów wizytę &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Nasze placówki</h2>
         <p>Sprawdź dostępne placówki Luxcover i wybierz odpowiednią dla Twoich oczekiwań.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Sprawdź &raquo;</a></p>
+        @Html.ActionLink("Sprawdź »", "Index", "Clinic", null, new { @class = "btn btn-default", @role = "button" })
     </div>
     <div class="col-md-4">
         <h2>Nasi specjaliści</h2>
         <p>Sprawdź najlepszych specjalistów pracujących w Luxcover.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Sprawdź &raquo;</a></p>
+        @Html.ActionLink("Sprawdź »", "Index", "Doctor", null, new { @class = "btn btn-default", @role = "button" })
     </div>
 </div>

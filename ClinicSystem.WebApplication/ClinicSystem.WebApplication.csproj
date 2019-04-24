@@ -202,15 +202,23 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClinicController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
+    <Compile Include="Interfaces\IClinicRepository.cs" />
+    <Compile Include="Interfaces\IDoctorRepository.cs" />
     <Compile Include="Interfaces\IManageRepository.cs" />
     <Compile Include="Interfaces\IManageValidationService.cs" />
     <Compile Include="Interfaces\IMedicineRepository.cs" />
+    <Compile Include="Models\ClinicViewModels.cs" />
+    <Compile Include="Models\DoctorViewModels.cs" />
     <Compile Include="Models\MedicineViewModels.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
+    <Compile Include="Repositories\ClinicRepository.cs" />
+    <Compile Include="Repositories\DoctorRepository.cs" />
     <Compile Include="Repositories\ManageRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -281,6 +289,8 @@
     <Content Include="Views\Manage\AddEmplacement.cshtml" />
     <Content Include="Views\Medicine\AddMedicine.cshtml" />
     <Content Include="Views\Medicine\AddMedicineType.cshtml" />
+    <Content Include="Views\Clinic\Index.cshtml" />
+    <Content Include="Views\Doctor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

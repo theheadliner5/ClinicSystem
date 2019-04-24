@@ -1,0 +1,36 @@
+﻿@model ClinicSystem.WebApplication.Models.DoctorIndexViewModel
+
+@{
+    ViewBag.Title = "Specjaliści Luxcover";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    <h4>Sprawdź specjalistów naszych przychodni</h4>
+    <hr />
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Specjalizacja</th>
+            <th>Przychodnia</th>
+            <th>Adres przychodni</th>
+            <th>Oddział</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var doctorDto in Model.DoctorDtos)
+        {
+            <tr>
+                <td>@doctorDto.Name</td>
+                <td>@doctorDto.LastName</td>
+                <td>@doctorDto.EmplacementName</td>
+                <td>@doctorDto.ClinicName</td>
+                <td>@doctorDto.ClinicAddress</td>
+                <td>@doctorDto.UnitName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

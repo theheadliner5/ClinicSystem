@@ -58,6 +58,8 @@ namespace ClinicSystem.WebApplication
             container.RegisterType<IAccountRepository, AccountRepository>();
             container.RegisterType<IManageRepository, ManageRepository>();
             container.RegisterType<IMedicineRepository, MedicineRepository>();
+            container.RegisterType<IClinicRepository, ClinicRepository>();
+            container.RegisterType<IDoctorRepository, DoctorRepository>();
 
             container.RegisterType<IManageValidationService, ManageValidationService>();
         }

@@ -17,10 +17,8 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Umów wizytę</h2>
-        <p>
-            Zarezerwuj wizytę u najpopularniejszych specjalistów w kilku prostych krokach, w placówce odpowiadającej Twoim potrzebom.
-        </p>
-        <p><a class="btn btn-default" href="">Umów wizytę &raquo;</a></p>
+        <p>Zarezerwuj wizytę u najpopularniejszych specjalistów w kilku prostych krokach, w placówce odpowiadającej Twoim potrzebom.</p>
+        @Html.ActionLink("Umów wizytę »", "BookVisitFirstStep", "Visit", null, new { @class = "btn btn-default", @role = "button" })
     </div>
     <div class="col-md-4">
         <h2>Nasze placówki</h2>

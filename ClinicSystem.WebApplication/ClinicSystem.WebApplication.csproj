@@ -297,6 +297,7 @@
     <Content Include="Views\Doctor\Index.cshtml" />
     <Content Include="Views\Visit\BookVisitFirstStep.cshtml" />
     <Content Include="Views\Visit\BookVisitSecondStep.cshtml" />
+    <Content Include="Views\Visit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

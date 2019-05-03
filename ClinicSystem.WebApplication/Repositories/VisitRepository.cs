@@ -36,5 +36,18 @@ namespace ClinicSystem.WebApplication.Repositories
                 UnitName = e.UNIT_TYPE.UNIT_NAME
             });
         }
+
+        public void SaveVisit(PATIENT_VISIT visit)
+        {
+            _db.PATIENT_VISIT.Add(visit);
+            _db.SaveChanges();
+        }
+
+        public string GetClinicNameAndAddressById(long clinicId)
+        {
+            var clinic = _db.CLINIC.SingleOrDefault(e => e.ID == clinicId);
+
+            return clinic?.NAME + " " + clinic?.ADDRESS;
+        }
     }
 }

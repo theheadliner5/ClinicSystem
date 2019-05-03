@@ -12,6 +12,7 @@
     <h4>Umów wizytę w jednej z przychodni Luxcover</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.ClinicId)
     <div class="form-group">
         @Html.LabelFor(m => m.DateFrom, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

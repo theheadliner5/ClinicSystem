@@ -13,5 +13,7 @@ namespace ClinicSystem.WebApplication.Interfaces
         PERSON GetPersonByUserName(string userName);
         IEnumerable<CLINIC> GetAllClinics();
         IEnumerable<UnitDto> GetUnitDtosForClinic(long clinicId);
+        void SaveVisit(PATIENT_VISIT visit);
+        string GetClinicNameAndAddressById(long clinicId);
     }
 }

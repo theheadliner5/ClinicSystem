@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClinicController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\ExaminationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
@@ -211,17 +212,20 @@
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IClinicRepository.cs" />
     <Compile Include="Interfaces\IDoctorRepository.cs" />
+    <Compile Include="Interfaces\IExaminationRepository.cs" />
     <Compile Include="Interfaces\IManageRepository.cs" />
     <Compile Include="Interfaces\IManageValidationService.cs" />
     <Compile Include="Interfaces\IMedicineRepository.cs" />
     <Compile Include="Interfaces\IVisitRepository.cs" />
     <Compile Include="Models\ClinicViewModels.cs" />
     <Compile Include="Models\DoctorViewModels.cs" />
+    <Compile Include="Models\ExaminationViewModels.cs" />
     <Compile Include="Models\MedicineViewModels.cs" />
     <Compile Include="Models\VisitViewModels.cs" />
     <Compile Include="Repositories\AccountRepository.cs" />
     <Compile Include="Repositories\ClinicRepository.cs" />
     <Compile Include="Repositories\DoctorRepository.cs" />
+    <Compile Include="Repositories\ExaminationRepository.cs" />
     <Compile Include="Repositories\ManageRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -298,6 +302,9 @@
     <Content Include="Views\Visit\BookVisitFirstStep.cshtml" />
     <Content Include="Views\Visit\BookVisitSecondStep.cshtml" />
     <Content Include="Views\Visit\Index.cshtml" />
+    <Content Include="Views\Examination\Index.cshtml" />
+    <Content Include="Views\Examination\Diseases.cshtml" />
+    <Content Include="Views\Examination\AddDisease.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

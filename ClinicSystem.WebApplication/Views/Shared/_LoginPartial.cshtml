@@ -8,11 +8,10 @@
         <ul class="nav navbar-nav navbar-right">
             @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
             {
+                <li>@Html.ActionLink("Wizyty i badania", "Index", "Examination")</li>
                 <li>@Html.ActionLink("Lekarstwa", "Index", "Medicine")</li>
             }
-            <li>
-                @Html.ActionLink("Zalogowano: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Panel użytkownika"})
-            </li>
+            <li>@Html.ActionLink("Panel użytkownika", "Index", "Manage")</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
         </ul>
     }

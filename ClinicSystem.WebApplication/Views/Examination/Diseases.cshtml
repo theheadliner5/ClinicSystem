@@ -1,0 +1,31 @@
+﻿@model ClinicSystem.WebApplication.Models.DiseasesViewModel
+
+@{
+    ViewBag.Title = "Słownik chorób";
+}
+
+<h2>@ViewBag.Title</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Zarządzanie danymi słownika chorób</h4>
+    <hr />
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Kod choroby</th>
+            <th>Opis</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var disease in Model.Diseases)
+        {
+            <tr>
+                <td>@disease.CODE</td>
+                <td>@disease.CODE_DESCRIPTION</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br />
+    @Html.ActionLink("Dodaj chorobę", "AddDisease", "Examination", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })    
+</div>

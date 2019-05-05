@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Model;
 
 namespace ClinicSystem.WebApplication.Models
 {
     public class ExaminationIndexViewModel
     {
-
+        public string UnitName { get; set; }
+        public IEnumerable<VisitDto> UnitVisitDtos { get; set; }
+        public IEnumerable<VisitDto> PatientVisitDtos { get; set; }
     }
 
     public class DiseasesViewModel
@@ -25,5 +28,10 @@ namespace ClinicSystem.WebApplication.Models
         [Required]
         [Display(Name = "Opis")]
         public string Description { get; set; }
+    }
+
+    public class VisitDetailsViewModel
+    {
+
     }
 }

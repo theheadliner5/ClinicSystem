@@ -13,6 +13,7 @@ namespace ClinicSystem.WebApplication.Models
         public string UnitName { get; set; }
         public IEnumerable<VisitDto> UnitVisitDtos { get; set; }
         public IEnumerable<VisitDto> PatientVisitDtos { get; set; }
+        public IEnumerable<PATIENT_DIAGNOSE> PatientDiagnoses { get; set; }
     }
 
     public class DiseasesViewModel
@@ -32,6 +33,18 @@ namespace ClinicSystem.WebApplication.Models
 
     public class VisitDetailsViewModel
     {
+        public VisitDto VisitDto { get; set; }
+        public IEnumerable<PATIENT_DIAGNOSE> PatientDiagnoses { get; set; }
+        public IEnumerable<DIAGNOSTICS> Diagnostics { get; set; }
+    }
 
+    public class AddDiagnoseViewModel
+    {
+        public long VisitId { get; set; }
+    }
+
+    public class AddExaminationViewModel
+    {
+        public long VisitId { get; set; }
     }
 }

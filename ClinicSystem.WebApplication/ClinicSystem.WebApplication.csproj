@@ -306,6 +306,8 @@
     <Content Include="Views\Examination\Diseases.cshtml" />
     <Content Include="Views\Examination\AddDisease.cshtml" />
     <Content Include="Views\Examination\VisitDetails.cshtml" />
+    <Content Include="Views\Examination\AddDiagnose.cshtml" />
+    <Content Include="Views\Examination\AddExamination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

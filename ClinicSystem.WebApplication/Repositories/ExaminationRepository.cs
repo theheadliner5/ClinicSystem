@@ -31,6 +31,13 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public PERSON GetLoggedPersonByUserName(string userName)
         {
+            var user = _db.ASPNETUSERS.SingleOrDefault(e => e.USERNAME == userName);
+
+            if (user != null && user.ASPNETROLES.Any(e => e.NAME == "ADMINISTRATOR"))
+            {
+                return null;
+            }
+
             return _db.PERSON.SingleOrDefault(e => e.ASPNETUSERS.USERNAME == userName);
         }
 
@@ -62,6 +69,57 @@ namespace ClinicSystem.WebApplication.Repositories
                 PersonAddress = e.PERSON.ADDRESS,
                 PersonPesel = e.PERSON.PESEL
             });
+        }
+
+        public IEnumerable<VisitDto> GetAllVisitDtos()
+        {
+            return _db.PATIENT_VISIT.ToList().Select(e => new VisitDto
+            {
+                Id = e.ID,
+                DateFrom = e.DATE_FROM,
+                DateTo = e.DATE_TO.GetValueOrDefault(),
+                PersonAddress = e.PERSON.ADDRESS,
+                PersonName = e.PERSON.NAME + " " + e.PERSON.LAST_NAME,
+                PersonPesel = e.PERSON.PESEL
+            });
+        }
+
+        public IEnumerable<PATIENT_DIAGNOSE> GetPatientDiagnosesByUnitId(long unitId)
+        {
+            return _db.PATIENT_DIAGNOSE.Where(e => e.PATIENT_VISIT.UNIT_ID == unitId).ToList();
+        }
+
+        public IEnumerable<PATIENT_DIAGNOSE> GetPatientDiagnosesByPersonId(long personId)
+        {
+            return _db.PATIENT_DIAGNOSE.Where(e => e.PATIENT_VISIT.PERSON_ID == personId);
+        }
+
+        public IEnumerable<PATIENT_DIAGNOSE> GetAllPatientDiagnoses()
+        {
+            return _db.PATIENT_DIAGNOSE.ToList();
+        }
+
+        public IEnumerable<DIAGNOSTICS> GetDiagnosticsByPatientVisitId(long visitId)
+        {
+            return _db.DIAGNOSTICS.Where(e => e.PATIENT_VISIT_ID == visitId).ToList();
+        }
+
+        public IEnumerable<PATIENT_DIAGNOSE> GetPatientDiagnosesByPatientVisitId(long visitId)
+        {
+            return _db.PATIENT_DIAGNOSE.Where(e => e.PATIENT_VISIT_ID == visitId).ToList();
+        }
+
+        public VisitDto GetVisitDtoByVisitId(long visitId)
+        {
+            return _db.PATIENT_VISIT.Where(e => e.PATIENT_VISIT_ID == visitId).Select(e => new VisitDto
+            {
+                Id = e.ID,
+                DateFrom = e.DATE_FROM,
+                DateTo = e.DATE_TO.GetValueOrDefault(),
+                PersonAddress = e.PERSON.ADDRESS,
+                PersonName = e.PERSON.NAME + " " + e.PERSON.LAST_NAME,
+                PersonPesel = e.PERSON.PESEL
+            }).SingleOrDefault();
         }
     }
 }

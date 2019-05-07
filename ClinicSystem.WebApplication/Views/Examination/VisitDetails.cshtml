@@ -4,4 +4,81 @@
     ViewBag.Title = "Szczegóły wizyty";
 }
 
-<h2>VisitDetails</h2>
+<h2>@ViewBag.Title</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Dane wizyty:</h4>
+    <hr />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Składniki</th>
+                <th>Cena</th>
+                <th>Seria</th>
+                <th>Data przydatności</th>
+                <th>Ilość</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.VisitDto.PersonName</td>
+                <td>@Model.VisitDto.PersonAddress</td>
+                <td>@Model.VisitDto.PersonPesel</td>
+                <td>@Model.VisitDto.DateFrom.ToString("d")</td>
+                <td>@Model.VisitDto.DateTo.ToString("d")</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <h4>Diagnozy:</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Diagnoza</th>
+                <th>Choroba</th>
+                <th>Opis choroby</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patientDiagnose in Model.PatientDiagnoses)
+            {
+                <tr>
+                    <td>@patientDiagnose.DIAGNOSE</td>
+                    <td>@patientDiagnose.DISEASE.CODE</td>
+                    <td>@patientDiagnose.DISEASE.CODE_DESCRIPTION</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>Badania:</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Nazwa badania</th>
+            <th>Koszt</th>
+            <th>Wykonujący badanie</th>
+            <th>Data badania</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var diagnostic in Model.Diagnostics)
+        {
+            <tr>
+                <td>@diagnostic.EXAMINATION.EXAMINATION_NAME</td>
+                <td>@diagnostic.EXAMINATION.COST</td>
+                <td>@(diagnostic.EMPLOYEE.PERSON.NAME + " " + diagnostic.EMPLOYEE.PERSON.LAST_NAME)</td>
+                <td>@diagnostic.EXAMINATION_DATE</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
+    {
+        <h4>Operacje:</h4>
+        @Html.ActionLink("Diagnozuj", "AddDiagnose", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new {@class = "btn btn-primary", @role = "button"})
+        <br />
+        <br />
+        @Html.ActionLink("Wykonaj badanie", "AddExamination", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new {@class = "btn btn-primary", @role = "button"})
+    }
+</div>

@@ -23,18 +23,28 @@ namespace ClinicSystem.WebApplication.Controllers
         public ActionResult Index()
         {
             var person = _examinationRepository.GetLoggedPersonByUserName(User.Identity.Name);
-            var employee = _examinationRepository.GetEmployeeByPersonId(person.ID);
-
             var model = new ExaminationIndexViewModel();
 
-            if (employee != null)
+            if (person != null)
             {
-                model.UnitName = employee.UNIT.UNIT_TYPE.UNIT_NAME + ", " + employee.UNIT.CLINIC.NAME + " " + employee.UNIT.CLINIC.ADDRESS;
-                model.UnitVisitDtos = _examinationRepository.GetUnitVisitDtosByUnitId(employee.UNIT_ID);
+                var employee = _examinationRepository.GetEmployeeByPersonId(person.ID);
+                if (employee != null)
+                {
+                    model.UnitName = employee.UNIT.UNIT_TYPE.UNIT_NAME + ", " + employee.UNIT.CLINIC.NAME + " " +
+                                     employee.UNIT.CLINIC.ADDRESS;
+                    model.UnitVisitDtos = _examinationRepository.GetUnitVisitDtosByUnitId(employee.UNIT_ID);
+                    model.PatientDiagnoses = _examinationRepository.GetPatientDiagnosesByUnitId(employee.UNIT_ID);
+                }
+                else
+                {
+                    model.PatientVisitDtos = _examinationRepository.GetPatientVisitDtos(person.ID);
+                    model.PatientDiagnoses = _examinationRepository.GetPatientDiagnosesByPersonId(person.ID);
+                }
             }
             else
             {
-                model.PatientVisitDtos = _examinationRepository.GetPatientVisitDtos(person.ID);
+                model.UnitVisitDtos = _examinationRepository.GetAllVisitDtos();
+                model.PatientDiagnoses = _examinationRepository.GetAllPatientDiagnoses();
             }
 
             return View(model);
@@ -74,6 +84,45 @@ namespace ClinicSystem.WebApplication.Controllers
         }
 
         public ActionResult VisitDetails(long visitId)
+        {
+            var model = new VisitDetailsViewModel
+            {
+                VisitDto = _examinationRepository.GetVisitDtoByVisitId(visitId),
+                Diagnostics = _examinationRepository.GetDiagnosticsByPatientVisitId(visitId),
+                PatientDiagnoses = _examinationRepository.GetPatientDiagnosesByPatientVisitId(visitId)
+            };
+
+            return View(model);
+        }
+
+        public ActionResult AddDiagnose(long visitId)
+        {
+            var model = new AddDiagnoseViewModel
+            {
+                VisitId = visitId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddDiagnose(AddDiagnoseViewModel model)
+        {
+            return View();
+        }
+
+        public ActionResult AddExamination(long visitId)
+        {
+            var model = new AddExaminationViewModel
+            {
+                VisitId = visitId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddExamination(AddExaminationViewModel model)
         {
             return View();
         }

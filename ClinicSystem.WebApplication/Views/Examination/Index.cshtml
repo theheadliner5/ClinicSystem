@@ -19,7 +19,14 @@
             <dd>
                 <br />
             </dd>
-            <dt>Wizyty na oddziale @Model.UnitName:</dt>
+            if (!string.IsNullOrEmpty(Model.UnitName))
+            {
+                <dt>Wizyty na oddziale @Model.UnitName:</dt>
+            }
+            else
+            {
+                <dt>Wizyty na wszystkich oddziałach:</dt>
+            }
             <dd>
                 @if (Model.UnitVisitDtos.Any())
                 {
@@ -62,24 +69,24 @@
                 {
                     <table class="table table-bordered">
                         <thead>
-                        <tr>
-                            <th>Data od</th>
-                            <th>Data do</th>
-                            <th>Pesel</th>
-                            <th>Adres</th>
-                        </tr>
+                            <tr>
+                                <th>Data od</th>
+                                <th>Data do</th>
+                                <th>Pesel</th>
+                                <th>Adres</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach (var visit in Model.PatientVisitDtos)
-                        {
-                            <tr>
-                                <td>@visit.DateFrom</td>
-                                <td>@visit.DateTo</td>
-                                <td>@visit.PersonPesel</td>
-                                <td>@visit.PersonAddress</td>
-                                <td>@Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null)</td>
-                            </tr>
-                        }
+                            @foreach (var visit in Model.PatientVisitDtos)
+                            {
+                                <tr>
+                                    <td>@visit.DateFrom</td>
+                                    <td>@visit.DateTo</td>
+                                    <td>@visit.PersonPesel</td>
+                                    <td>@visit.PersonAddress</td>
+                                    <td>@Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null)</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 }
@@ -89,5 +96,36 @@
                 }
             </dd>
         }
+        <dt>Moje diagnozy:</dt>
+        <dd>
+            @if (Model.PatientDiagnoses.Any())
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Diagnoza</th>
+                            <th>Choroba</th>
+                            <th>Nazwa przychodni</th>
+                            <th>Adres przychodni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var patientDiagnose in Model.PatientDiagnoses)
+                        {
+                            <tr>
+                                <td>@patientDiagnose.DIAGNOSE</td>
+                                <td>@patientDiagnose.DISEASE.CODE</td>
+                                <td>@patientDiagnose.PATIENT_VISIT.CLINIC.NAME</td>
+                                <td>@patientDiagnose.PATIENT_VISIT.CLINIC.ADDRESS</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>Brak</p>
+            }
+        </dd>
     </dl>
 </div>

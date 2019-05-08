@@ -158,6 +158,9 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddPatientMedicine(AddPatientMedicineViewModel model)
         {
+            _examinationRepository.CreatePatientMedicine(model.TypeId, model.Dose,
+                model.TreatmentDate.GetValueOrDefault(), model.VisitId);
+
             return RedirectToAction("VisitDetails",
                 routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddPatientMedicineSuccess });
         }

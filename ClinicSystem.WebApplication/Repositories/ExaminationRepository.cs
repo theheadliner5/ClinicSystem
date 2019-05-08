@@ -188,5 +188,10 @@ namespace ClinicSystem.WebApplication.Repositories
 
             return medicineDtos;
         }
+
+        public void CreatePatientMedicine(long typeId, string dose, DateTime treatmentDate, long visitId)
+        {
+            
+        }
     }
 }

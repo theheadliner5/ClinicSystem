@@ -65,6 +65,16 @@ namespace ClinicSystem.WebApplication.Models
     {
         public long VisitId { get; set; }
         public IEnumerable<MedicineDto> MedicineDtos { get; set; }
-
+        [Required]
+        [Display(Name = "Lek")]
+        public long TypeId { get; set; }
+        [Required]
+        [Display(Name = "Dawkowanie")]
+        public string Dose { get; set; }
+        [Required]
+        [Display(Name = "Data leczenia")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? TreatmentDate { get; set; }
     }
 }

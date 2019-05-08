@@ -1,7 +1,45 @@
-﻿
+﻿@model ClinicSystem.WebApplication.Models.AddPatientMedicineViewModel
+
 @{
-    ViewBag.Title = "AddPatientMedicine";
+    ViewBag.Title = "Przepisz lekarstwo";
 }
 
-<h2>AddPatientMedicine</h2>
+<h2>@ViewBag.Title</h2>
 
+@using (Html.BeginForm("AddPatientMedicine", "Examination", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Formularz przepisywania leku dla pacjenta</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.VisitId)
+    <div class="form-group">
+        @Html.LabelFor(m => m.TypeId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.TypeId,
+                new SelectList(Model.MedicineDtos, "TypeId", "Name"),
+                "Wybierz lek...",
+                new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dose, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Dose, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TreatmentDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.TreatmentDate, new { @class = "form-control", placeholder = "rrrr-MM-dd" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Zapisz" class="btn btn-default" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

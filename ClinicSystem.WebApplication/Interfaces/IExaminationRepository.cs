@@ -28,5 +28,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         EMPLOYEE GetAdministratorAccountEmployee(string userName);
         IEnumerable<PATIENT_MEDICINES> GetPatientMedicinesByPatientVisitId(long visitId);
         IEnumerable<MedicineDto> GetAllMedicineDtos();
+        void CreatePatientMedicine(long typeId, string dose, DateTime treatmentDate, long visitId);
     }
 }

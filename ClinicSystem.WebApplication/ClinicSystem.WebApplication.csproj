@@ -213,6 +213,7 @@
     <Compile Include="Interfaces\IClinicRepository.cs" />
     <Compile Include="Interfaces\IDoctorRepository.cs" />
     <Compile Include="Interfaces\IExaminationRepository.cs" />
+    <Compile Include="Interfaces\IExaminationValidationService.cs" />
     <Compile Include="Interfaces\IManageRepository.cs" />
     <Compile Include="Interfaces\IManageValidationService.cs" />
     <Compile Include="Interfaces\IMedicineRepository.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\MedicineRepository.cs" />
     <Compile Include="Repositories\VisitRepository.cs" />
+    <Compile Include="Services\ExaminationValidationService.cs" />
     <Compile Include="Services\ManageValidationService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

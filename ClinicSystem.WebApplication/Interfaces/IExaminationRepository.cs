@@ -29,5 +29,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<PATIENT_MEDICINES> GetPatientMedicinesByPatientVisitId(long visitId);
         IEnumerable<MedicineDto> GetAllMedicineDtos();
         void CreatePatientMedicine(long typeId, string dose, DateTime treatmentDate, long visitId);
+        void CreateDiagnose(long visitId, long diseaseId, string diagnose);
     }
 }

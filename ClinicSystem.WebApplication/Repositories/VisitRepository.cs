@@ -20,7 +20,9 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public PERSON GetPersonByUserName(string userName)
         {
-            return _db.PERSON.SingleOrDefault(e => e.ASPNETUSERS.USERNAME == userName);
+            var person = _db.PERSON.FirstOrDefault(e => e.ASPNETUSERS.USERNAME == userName);
+
+            return person ?? _db.PERSON.FirstOrDefault();
         }
 
         public IEnumerable<CLINIC> GetAllClinics()

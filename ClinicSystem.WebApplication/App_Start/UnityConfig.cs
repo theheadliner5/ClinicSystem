@@ -64,6 +64,7 @@ namespace ClinicSystem.WebApplication
             container.RegisterType<IExaminationRepository, ExaminationRepository>();
 
             container.RegisterType<IManageValidationService, ManageValidationService>();
+            container.RegisterType<IExaminationValidationService, ExaminationValidationService>();
         }
     }
 }

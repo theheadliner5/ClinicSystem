@@ -43,6 +43,13 @@ namespace ClinicSystem.WebApplication.Models
     public class AddDiagnoseViewModel
     {
         public long VisitId { get; set; }
+        public IEnumerable<DISEASE> Diseases { get; set; }
+        [Required]
+        [Display(Name = "Choroba")]
+        public long DiseaseId { get; set; }
+        [Required]
+        [Display(Name = "Diagnoza")]
+        public string Diagnose { get; set; }
     }
 
     public class AddExaminationViewModel

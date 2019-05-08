@@ -24,8 +24,8 @@
                 <td>@Model.VisitDto.PersonName</td>
                 <td>@Model.VisitDto.PersonAddress</td>
                 <td>@Model.VisitDto.PersonPesel</td>
-                <td>@Model.VisitDto.DateFrom.ToString("d")</td>
-                <td>@Model.VisitDto.DateTo.ToString("d")</td>
+                <td>@Model.VisitDto.DateFrom</td>
+                <td>@Model.VisitDto.DateTo</td>
             </tr>
         </tbody>
     </table>
@@ -67,7 +67,7 @@
                     <td>@diagnostic.EXAMINATION.EXAMINATION_NAME</td>
                     <td>@diagnostic.EXAMINATION.COST</td>
                     <td>@(diagnostic.EMPLOYEE.PERSON.NAME + " " + diagnostic.EMPLOYEE.PERSON.LAST_NAME)</td>
-                    <td>@diagnostic.EXAMINATION_DATE</td>
+                    <td>@diagnostic.EXAMINATION_DATE.ToString("d")</td>
                 </tr>
             }
         </tbody>
@@ -98,7 +98,9 @@
     </table>
     @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
     {
+        <hr />
         <h4>Operacje:</h4>
+        <br />
         @Html.ActionLink("Diagnozuj", "AddDiagnose", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
         <br />
         <br />

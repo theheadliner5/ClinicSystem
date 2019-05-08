@@ -13,10 +13,12 @@ namespace ClinicSystem.WebApplication.Controllers
     public class ExaminationController : Controller
     {
         private readonly IExaminationRepository _examinationRepository;
+        private readonly IExaminationValidationService _validationService;
         
-        public ExaminationController(IExaminationRepository examinationRepository)
+        public ExaminationController(IExaminationRepository examinationRepository, IExaminationValidationService validationService)
         {
             _examinationRepository = examinationRepository;
+            _validationService = validationService;
         }
 
         [Authorize]
@@ -87,6 +89,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ExaminationMessageId.AddExaminationSuccess ? "Poprawnie dodano badanie" :
+                message == ExaminationMessageId.AddExaminationFail ? "Nie udało się dodać badania - wybrany oddział przychodni nie posiada planu budżetowego dla wskazanej daty badania" :
                 message == ExaminationMessageId.AddDiagnoseSuccess ? "Poprawnie dodano diagnozę" :
                 message == ExaminationMessageId.AddPatientMedicineSuccess ? "Poprawnie przepisano lekarstwa" :
                     "";
@@ -106,7 +109,8 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var model = new AddDiagnoseViewModel
             {
-                VisitId = visitId
+                VisitId = visitId,
+                Diseases = _examinationRepository.GetAllDiseases()
             };
 
             return View(model);
@@ -115,7 +119,10 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddDiagnose(AddDiagnoseViewModel model)
         {
-            return View();
+            _examinationRepository.CreateDiagnose(model.VisitId, model.DiseaseId, model.Diagnose);
+
+            return RedirectToAction("VisitDetails",
+                routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddDiagnoseSuccess });
         }
 
         public ActionResult AddExamination(long visitId)
@@ -137,8 +144,17 @@ namespace ClinicSystem.WebApplication.Controllers
                 ? _examinationRepository.GetEmployeeByPersonId(person.ID)
                 : _examinationRepository.GetAdministratorAccountEmployee(User.Identity.Name);
 
-            _examinationRepository.CreateExamination(model.ExaminationName, model.ExaminationDate.GetValueOrDefault(),
-                model.Cost, model.VisitId, employee.ID);
+            if (_validationService.IsUnitPlanValid(model.VisitId, model.ExaminationDate.GetValueOrDefault()))
+            {
+                _examinationRepository.CreateExamination(model.ExaminationName,
+                    model.ExaminationDate.GetValueOrDefault(),
+                    model.Cost, model.VisitId, employee.ID);
+            }
+            else
+            {
+                return RedirectToAction("VisitDetails",
+                    routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddExaminationFail });
+            }
 
             return RedirectToAction("VisitDetails",
                 routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddExaminationSuccess });
@@ -169,6 +185,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             AddDiseaseSuccess,
             AddExaminationSuccess,
+            AddExaminationFail,
             AddDiagnoseSuccess,
             AddPatientMedicineSuccess
         }

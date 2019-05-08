@@ -308,6 +308,8 @@
     <Content Include="Views\Examination\VisitDetails.cshtml" />
     <Content Include="Views\Examination\AddDiagnose.cshtml" />
     <Content Include="Views\Examination\AddExamination.cshtml" />
+    <Content Include="Views\Manage\AddUnitPlan.cshtml" />
+    <Content Include="Views\Examination\AddPatientMedicine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

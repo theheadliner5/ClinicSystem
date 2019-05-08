@@ -133,4 +133,28 @@ namespace ClinicSystem.WebApplication.Models
         [Display(Name = "Nazwa stanowiska")]
         public string Name { get; set; }
     }
+
+    public class AddUnitPlanViewModel
+    {
+        public IEnumerable<UnitDto> UnitDtos { get; set; }
+        [Required]
+        [Display(Name = "Oddział")]
+        public long UnitId { get; set; }
+        [Required]
+        [Display(Name = "Typ budżetu")]
+        public string BudgetType { get; set; }
+        [Required]
+        [Display(Name = "Wartość")]
+        public decimal Value { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Data od")]
+        public DateTime? DateFrom { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Data do")]
+        public DateTime? DateTo { get; set; }
+    }
 }

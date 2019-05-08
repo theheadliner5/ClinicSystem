@@ -25,10 +25,11 @@ namespace ClinicSystem.WebApplication.Repositories
                 join mt in _db.MEDICINE_TYPE on mo.MEDICINE_TYPE_ID equals mt.ID
                 where !_db.PATIENT_MEDICINES.Any(pm => pm.MEDICINE_ORDER_ID == mo.ID)
                 group new { mo, mt } by new
-                    { mt.MEDICINE_NAME, mo.COST, mo.EXPIRE_DATE, mo.MEDICINE_BATCH_SERIES, mt.ACTIVE_INGREDIENT }
+                    { mt.ID, mt.MEDICINE_NAME, mo.COST, mo.EXPIRE_DATE, mo.MEDICINE_BATCH_SERIES, mt.ACTIVE_INGREDIENT }
                 into g
                 select new MedicineDto
                 {
+                    TypeId = g.Key.ID,
                     Name = g.Key.MEDICINE_NAME,
                     Amount = g.Count(),
                     ActiveIngredient = g.Key.ACTIVE_INGREDIENT,

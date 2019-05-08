@@ -83,13 +83,20 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Diseases", new { Message = ExaminationMessageId.AddDiseaseSuccess });
         }
 
-        public ActionResult VisitDetails(long visitId)
+        public ActionResult VisitDetails(long visitId, ExaminationMessageId? message)
         {
+            ViewBag.StatusMessage =
+                message == ExaminationMessageId.AddExaminationSuccess ? "Poprawnie dodano badanie" :
+                message == ExaminationMessageId.AddDiagnoseSuccess ? "Poprawnie dodano diagnozę" :
+                message == ExaminationMessageId.AddPatientMedicineSuccess ? "Poprawnie przepisano lekarstwa" :
+                    "";
+
             var model = new VisitDetailsViewModel
             {
                 VisitDto = _examinationRepository.GetVisitDtoByVisitId(visitId),
                 Diagnostics = _examinationRepository.GetDiagnosticsByPatientVisitId(visitId),
-                PatientDiagnoses = _examinationRepository.GetPatientDiagnosesByPatientVisitId(visitId)
+                PatientDiagnoses = _examinationRepository.GetPatientDiagnosesByPatientVisitId(visitId),
+                Medicines = _examinationRepository.GetPatientMedicinesByPatientVisitId(visitId)
             };
 
             return View(model);
@@ -124,12 +131,43 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddExamination(AddExaminationViewModel model)
         {
-            return View();
+            var person = _examinationRepository.GetLoggedPersonByUserName(User.Identity.Name);
+
+            var employee = person != null
+                ? _examinationRepository.GetEmployeeByPersonId(person.ID)
+                : _examinationRepository.GetAdministratorAccountEmployee(User.Identity.Name);
+
+            _examinationRepository.CreateExamination(model.ExaminationName, model.ExaminationDate.GetValueOrDefault(),
+                model.Cost, model.VisitId, employee.ID);
+
+            return RedirectToAction("VisitDetails",
+                routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddExaminationSuccess });
+        }
+
+        public ActionResult AddPatientMedicine(long visitId)
+        {
+            var model = new AddPatientMedicineViewModel
+            {
+                VisitId = visitId,
+                MedicineDtos = _examinationRepository.GetAllMedicineDtos()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddPatientMedicine(AddPatientMedicineViewModel model)
+        {
+            return RedirectToAction("VisitDetails",
+                routeValues: new { visitId = model.VisitId, message = ExaminationMessageId.AddPatientMedicineSuccess });
         }
 
         public enum ExaminationMessageId
         {
-            AddDiseaseSuccess
+            AddDiseaseSuccess,
+            AddExaminationSuccess,
+            AddDiagnoseSuccess,
+            AddPatientMedicineSuccess
         }
     }
 }

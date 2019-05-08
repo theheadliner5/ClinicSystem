@@ -12,12 +12,11 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Nazwa</th>
-                <th>Składniki</th>
-                <th>Cena</th>
-                <th>Seria</th>
-                <th>Data przydatności</th>
-                <th>Ilość</th>
+                <th>Imię i nazwisko</th>
+                <th>Adres</th>
+                <th>PESEL</th>
+                <th>Data rozpoczęcia wizyty</th>
+                <th>Data zakończenia wizyty</th>
             </tr>
         </thead>
         <tbody>
@@ -54,31 +53,58 @@
     <h4>Badania:</h4>
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>Nazwa badania</th>
-            <th>Koszt</th>
-            <th>Wykonujący badanie</th>
-            <th>Data badania</th>
-        </tr>
+            <tr>
+                <th>Nazwa badania</th>
+                <th>Koszt</th>
+                <th>Wykonujący badanie</th>
+                <th>Data badania</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var diagnostic in Model.Diagnostics)
-        {
+            @foreach (var diagnostic in Model.Diagnostics)
+            {
+                <tr>
+                    <td>@diagnostic.EXAMINATION.EXAMINATION_NAME</td>
+                    <td>@diagnostic.EXAMINATION.COST</td>
+                    <td>@(diagnostic.EMPLOYEE.PERSON.NAME + " " + diagnostic.EMPLOYEE.PERSON.LAST_NAME)</td>
+                    <td>@diagnostic.EXAMINATION_DATE</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h4>Przepisane leki:</h4>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@diagnostic.EXAMINATION.EXAMINATION_NAME</td>
-                <td>@diagnostic.EXAMINATION.COST</td>
-                <td>@(diagnostic.EMPLOYEE.PERSON.NAME + " " + diagnostic.EMPLOYEE.PERSON.LAST_NAME)</td>
-                <td>@diagnostic.EXAMINATION_DATE</td>
+                <th>Dawka</th>
+                <th>Data leczenia</th>
+                <th>Nazwa</th>
+                <th>Składniki</th>
+                <th>Koszt</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var medicine in Model.Medicines)
+            {
+                <tr>
+                    <td>@medicine.DOSE</td>
+                    <td>@medicine.TREATMENT_DATE</td>
+                    <td>@medicine.MEDICINE_ORDER.MEDICINE_TYPE.MEDICINE_NAME</td>
+                    <td>@medicine.MEDICINE_ORDER.MEDICINE_TYPE.ACTIVE_INGREDIENT</td>
+                    <td>@medicine.MEDICINE_ORDER.COST</td>
+                </tr>
+            }
         </tbody>
     </table>
     @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
     {
         <h4>Operacje:</h4>
-        @Html.ActionLink("Diagnozuj", "AddDiagnose", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new {@class = "btn btn-primary", @role = "button"})
+        @Html.ActionLink("Diagnozuj", "AddDiagnose", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
         <br />
         <br />
-        @Html.ActionLink("Wykonaj badanie", "AddExamination", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new {@class = "btn btn-primary", @role = "button"})
+        @Html.ActionLink("Wykonaj badanie", "AddExamination", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+        <br />
+        <br />
+        @Html.ActionLink("Przepisz lekarstwo", "AddPatientMedicine", "Examination", routeValues: new { visitId = Model.VisitDto.Id }, htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
     }
 </div>

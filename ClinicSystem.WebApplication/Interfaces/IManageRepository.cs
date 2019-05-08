@@ -28,5 +28,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         void CreateEmplacement(EMPLACEMENT emplacement);
         IEnumerable<EMPLACEMENT> GetAssignableEmplacements();
         IEnumerable<ASPNETROLES> GetAssignableRoles();
+        void CreateUnitPlan(UNIT_PLAN unitPlan);
     }
 }

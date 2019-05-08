@@ -8,6 +8,7 @@ namespace ClinicSystem.Infrastructure.Dtos
 {
     public class MedicineDto
     {
+        public long TypeId { get; set; }
         public string Name { get; set; }
         public string ActiveIngredient { get; set; }
         public decimal Cost { get; set; }

@@ -39,6 +39,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
                 : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
                 : message == ManageMessageId.AddEmplacementSuccess ? "Stanowisko dodane poprawnie"
+                : message == ManageMessageId.AddUnitTypeSuccess ? "Plan budżetu dodany poprawnie"
                 : message == ManageMessageId.Error ? "Wystąpił nieoczekiwany błąd."
                 : "";
 
@@ -230,6 +231,34 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.AddEmplacementSuccess });
         }
 
+        public ActionResult AddUnitPlan()
+        {
+            var model = new AddUnitPlanViewModel
+            {
+                UnitDtos = _manageRepository.GetUnitDtos()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUnitPlan(AddUnitPlanViewModel model)
+        {
+            var unitPlan = new UNIT_PLAN
+            {
+                LAST_MOD_DATE = DateTime.Now,
+                BUDGET_TYPE = model.BudgetType,
+                DATE_FROM = model.DateFrom.GetValueOrDefault(),
+                DATE_TO = model.DateTo.GetValueOrDefault(),
+                UNIT_ID = model.UnitId,
+                VALUE = model.Value
+            };
+
+            _manageRepository.CreateUnitPlan(unitPlan);
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitPlanSuccess });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -271,6 +300,7 @@ namespace ClinicSystem.WebApplication.Controllers
             AddUnitTypeSuccess,
             AddUnitSuccess,
             AddEmplacementSuccess,
+            AddUnitPlanSuccess,
             Error
         }
 

@@ -157,5 +157,11 @@ namespace ClinicSystem.WebApplication.Repositories
         {
             return _db.ASPNETROLES.Where(e => e.NAME != "ADMINISTRATOR").ToList();
         }
+
+        public void CreateUnitPlan(UNIT_PLAN unitPlan)
+        {
+            _db.UNIT_PLAN.Add(unitPlan);
+            _db.SaveChanges();
+        }
     }
 }

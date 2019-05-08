@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace ClinicSystem.WebApplication.Models
         public VisitDto VisitDto { get; set; }
         public IEnumerable<PATIENT_DIAGNOSE> PatientDiagnoses { get; set; }
         public IEnumerable<DIAGNOSTICS> Diagnostics { get; set; }
+        public IEnumerable<PATIENT_MEDICINES> Medicines { get; set; }
     }
 
     public class AddDiagnoseViewModel
@@ -46,5 +48,23 @@ namespace ClinicSystem.WebApplication.Models
     public class AddExaminationViewModel
     {
         public long VisitId { get; set; }
+        [Required]
+        [Display(Name = "Nazwa badania")]
+        public string ExaminationName { get; set; }
+        [Required]
+        [Display(Name = "Koszt")]
+        public decimal Cost { get; set; }
+        [Required]
+        [Display(Name = "Data badania")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? ExaminationDate { get; set; }
+    }
+
+    public class AddPatientMedicineViewModel
+    {
+        public long VisitId { get; set; }
+        public IEnumerable<MedicineDto> MedicineDtos { get; set; }
+
     }
 }

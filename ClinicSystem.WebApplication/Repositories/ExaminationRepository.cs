@@ -111,7 +111,7 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public VisitDto GetVisitDtoByVisitId(long visitId)
         {
-            return _db.PATIENT_VISIT.Where(e => e.PATIENT_VISIT_ID == visitId).Select(e => new VisitDto
+            return _db.PATIENT_VISIT.Where(e => e.ID == visitId).ToList().Select(e => new VisitDto
             {
                 Id = e.ID,
                 DateFrom = e.DATE_FROM,
@@ -120,6 +120,73 @@ namespace ClinicSystem.WebApplication.Repositories
                 PersonName = e.PERSON.NAME + " " + e.PERSON.LAST_NAME,
                 PersonPesel = e.PERSON.PESEL
             }).SingleOrDefault();
+        }
+
+        public void CreateExamination(string examinationName, DateTime examinationDate, decimal cost,
+            long visitId, long employeeId)
+        {
+            var examination = new EXAMINATION
+            {
+                LAST_MOD_DATE = DateTime.Now,
+                EXAMINATION_NAME = examinationName,
+                COST = cost
+            };
+
+            _db.EXAMINATION.Add(examination);
+
+            var unitId =_db.PATIENT_VISIT.FirstOrDefault(e => e.ID == visitId)?.UNIT_ID;
+
+            var unitPlan = _db.UNIT_PLAN.FirstOrDefault(e => e.UNIT_ID == unitId &&
+                e.DATE_FROM <= examinationDate && examinationDate <= e.DATE_TO);
+
+            var diagnostics = new DIAGNOSTICS
+            {
+                LAST_MOD_DATE = DateTime.Now,
+                EXAMINATION = examination,
+                EXAMINATION_DATE = examinationDate,
+                PATIENT_VISIT_ID = visitId,
+                EMPLOYEE_ID = employeeId,
+                UNIT_PLAN = unitPlan
+            };
+
+            _db.DIAGNOSTICS.Add(diagnostics);
+
+            _db.SaveChanges();
+        }
+
+        public EMPLOYEE GetAdministratorAccountEmployee(string userName)
+        {
+            var person = _db.PERSON.SingleOrDefault(e => e.ASPNETUSERS.USERNAME == userName
+                                                         && e.NAME == "Admin"); // TEMP, BECAUSE OF USER_ID REPETITIONS
+
+            return _db.EMPLOYEE.SingleOrDefault(e => e.PERSON_ID == person.ID);
+        }
+
+        public IEnumerable<PATIENT_MEDICINES> GetPatientMedicinesByPatientVisitId(long visitId)
+        {
+            return _db.PATIENT_MEDICINES.Where(e => e.PATIENT_VISIT_ID == visitId).ToList();
+        }
+
+        public IEnumerable<MedicineDto> GetAllMedicineDtos()
+        {
+            var medicineDtos = (from mo in _db.MEDICINE_ORDER
+                join mt in _db.MEDICINE_TYPE on mo.MEDICINE_TYPE_ID equals mt.ID
+                where !_db.PATIENT_MEDICINES.Any(pm => pm.MEDICINE_ORDER_ID == mo.ID)
+                group new { mo, mt } by new
+                    { mt.ID, mt.MEDICINE_NAME, mo.COST, mo.EXPIRE_DATE, mo.MEDICINE_BATCH_SERIES, mt.ACTIVE_INGREDIENT }
+                into g
+                select new MedicineDto
+                {
+                    TypeId = g.Key.ID,
+                    Name = g.Key.MEDICINE_NAME,
+                    Amount = g.Count(),
+                    ActiveIngredient = g.Key.ACTIVE_INGREDIENT,
+                    BatchSeries = g.Key.MEDICINE_BATCH_SERIES,
+                    Cost = g.Key.COST,
+                    ExpirationDate = g.Key.EXPIRE_DATE
+                }).ToList();
+
+            return medicineDtos;
         }
     }
 }

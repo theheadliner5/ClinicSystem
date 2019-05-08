@@ -1,7 +1,42 @@
-﻿
+﻿@model ClinicSystem.WebApplication.Models.AddExaminationViewModel
+
 @{
-    ViewBag.Title = "AddExamination";
+    ViewBag.Title = "Dodaj badanie";
 }
 
-<h2>AddExamination</h2>
+<h2>@ViewBag.Title</h2>
 
+@using (Html.BeginForm("AddExamination", "Examination", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Formularz dodawania badania</h4>
+    <hr />
+    @Html.HiddenFor(m => m.VisitId)
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExaminationName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ExaminationName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ExaminationDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ExaminationDate, new { @class = "form-control", placeholder = "rrrr-MM-dd" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cost, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Cost, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Zapisz" class="btn btn-default" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

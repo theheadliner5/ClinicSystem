@@ -123,7 +123,7 @@ namespace ClinicSystem.WebApplication.Repositories
         }
 
         public void CreateExamination(string examinationName, DateTime examinationDate, decimal cost,
-            long visitId, long employeeId)
+            long visitId, EMPLOYEE employee)
         {
             var examination = new EXAMINATION
             {
@@ -139,13 +139,15 @@ namespace ClinicSystem.WebApplication.Repositories
             var unitPlan = _db.UNIT_PLAN.FirstOrDefault(e => e.UNIT_ID == unitId &&
                 e.DATE_FROM <= examinationDate && examinationDate <= e.DATE_TO);
 
+            var employeeId = employee?.ID ?? _db.EMPLOYEE.FirstOrDefault()?.ID;
+
             var diagnostics = new DIAGNOSTICS
             {
                 LAST_MOD_DATE = DateTime.Now,
                 EXAMINATION = examination,
                 EXAMINATION_DATE = examinationDate,
                 PATIENT_VISIT_ID = visitId,
-                EMPLOYEE_ID = employeeId,
+                EMPLOYEE_ID = employeeId.GetValueOrDefault(),
                 UNIT_PLAN = unitPlan
             };
 
@@ -156,9 +158,7 @@ namespace ClinicSystem.WebApplication.Repositories
 
         public EMPLOYEE GetAdministratorAccountEmployee(string userName)
         {
-            var person = _db.PERSON.SingleOrDefault(e => e.ASPNETUSERS.USERNAME == userName//);
-            && e.NAME == "Admin");
-            //TEMP, BECAUSE OF USER_ID REPETITIONS
+            var person = _db.PERSON.SingleOrDefault(e => e.ASPNETUSERS.USERNAME == userName);
 
             return _db.EMPLOYEE.SingleOrDefault(e => e.PERSON_ID == person.ID);
         }

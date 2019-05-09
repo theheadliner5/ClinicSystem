@@ -24,7 +24,7 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<PATIENT_DIAGNOSE> GetPatientDiagnosesByPatientVisitId(long visitId);
         VisitDto GetVisitDtoByVisitId(long visitId);
         void CreateExamination(string examinationName, DateTime examinationDate, decimal cost, long visitId,
-            long employeeId);
+            EMPLOYEE employee);
         EMPLOYEE GetAdministratorAccountEmployee(string userName);
         IEnumerable<PATIENT_MEDICINES> GetPatientMedicinesByPatientVisitId(long visitId);
         IEnumerable<MedicineDto> GetAllMedicineDtos();

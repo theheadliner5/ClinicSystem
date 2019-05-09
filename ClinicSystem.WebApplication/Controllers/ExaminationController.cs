@@ -142,13 +142,13 @@ namespace ClinicSystem.WebApplication.Controllers
 
             var employee = person != null
                 ? _examinationRepository.GetEmployeeByPersonId(person.ID)
-                : _examinationRepository.GetAdministratorAccountEmployee(User.Identity.Name);
+                : null;
 
             if (_validationService.IsUnitPlanValid(model.VisitId, model.ExaminationDate.GetValueOrDefault()))
             {
                 _examinationRepository.CreateExamination(model.ExaminationName,
                     model.ExaminationDate.GetValueOrDefault(),
-                    model.Cost, model.VisitId, employee.ID);
+                    model.Cost, model.VisitId, employee);
             }
             else
             {

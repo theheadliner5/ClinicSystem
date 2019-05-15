@@ -20,7 +20,6 @@ namespace ClinicSystem.Infrastructure.Model
             this.DIAGNOSTICS = new HashSet<DIAGNOSTICS>();
             this.PATIENT_DIAGNOSE = new HashSet<PATIENT_DIAGNOSE>();
             this.PATIENT_MEDICINES = new HashSet<PATIENT_MEDICINES>();
-            this.PATIENT_VISIT1 = new HashSet<PATIENT_VISIT>();
         }
     
         public long ID { get; set; }
@@ -28,7 +27,6 @@ namespace ClinicSystem.Infrastructure.Model
         public System.DateTime DATE_FROM { get; set; }
         public Nullable<System.DateTime> DATE_TO { get; set; }
         public long PERSON_ID { get; set; }
-        public Nullable<long> PATIENT_VISIT_ID { get; set; }
         public long CLINIC_ID { get; set; }
         public long UNIT_ID { get; set; }
     
@@ -39,9 +37,6 @@ namespace ClinicSystem.Infrastructure.Model
         public virtual ICollection<PATIENT_DIAGNOSE> PATIENT_DIAGNOSE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PATIENT_MEDICINES> PATIENT_MEDICINES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PATIENT_VISIT> PATIENT_VISIT1 { get; set; }
-        public virtual PATIENT_VISIT PATIENT_VISIT2 { get; set; }
         public virtual PERSON PERSON { get; set; }
         public virtual UNIT UNIT { get; set; }
     }

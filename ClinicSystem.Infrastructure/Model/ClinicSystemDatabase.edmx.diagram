@@ -4,54 +4,53 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="70690b3dc32e46588e119d312223e039" Name="Diagram1">
-        <EntityTypeShape EntityType="ClinicSystemDbModel.ASPNETROLES" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.ASPNETUSERCLAIMS" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.ASPNETUSERLOGINS" Width="1.5" PointX="3.75" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.ASPNETUSERS" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.CLINIC" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.DIAGNOSTICS" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.DISEASE" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.EMPLACEMENT" Width="1.5" PointX="9" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.EMPLOYEE" Width="1.5" PointX="11.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.EMPLOYEE_COST" Width="1.5" PointX="13.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.EXAMINATION" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.MEDICINE_ORDER" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.MEDICINE_TYPE" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.PATIENT_DIAGNOSE" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.PATIENT_MEDICINES" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.PATIENT_VISIT" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.PERSON" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.UNIT" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.UNIT_PLAN" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicSystemDbModel.UNIT_TYPE" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
-        <AssociationConnector Association="ClinicSystemDbModel.FK_DBO_ASPNETUSERCLAIMS_DBO_ASPNETUSERS_USERID" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.FK_DBO_ASPNETUSERLOGINS_DBO_ASPNETUSERS_USERID" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.FK__PERSON__USER_ID__40257DE4" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_VISIT_CLINIC_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.UNIT_CLINIC_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.DIAGNOSTICS_EMPLOYEE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.DIAGNOSTICS_EXAMINATION_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.DIAGNOSTICS_PATIENT_VISIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.DIAGNOSTICS_UNIT_PLAN_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_DIAGNOSE_DISEASE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_EMPLACEMENT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_COST_EMPLOYEE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_EMPLOYEE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_PERSON_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_UNIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.EMPLOYEE_COST_UNIT_PLAN_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.MEDICINE_ORDER_MEDICINE_TYPE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_MEDICINES_MEDICINE_ORDER_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_DIAGNOSE_PATIENT_VISIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_MEDICINES_PATIENT_VISIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_VISIT_PATIENT_VISIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_VISIT_PERSON_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.PATIENT_VISIT_UNIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.UNIT_PLAN_UNIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.UNIT_UNIT_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.UNIT_UNIT_TYPE_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicSystemDbModel.ASPNETUSERROLES" ManuallyRouted="false" />
+      <Diagram DiagramId="4c3f82c24a1f44938fad9ba9d5c6f168" Name="Diagram1">
+        <EntityTypeShape EntityType="ClinicSystemDatabase.ASPNETROLES" Width="1.5" PointX="1.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.ASPNETUSERCLAIMS" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.ASPNETUSERLOGINS" Width="1.5" PointX="3.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.ASPNETUSERS" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.CLINIC" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.DIAGNOSTICS" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.DISEASE" Width="1.5" PointX="6" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.EMPLACEMENT" Width="1.5" PointX="9" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.EMPLOYEE" Width="1.5" PointX="11.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.EMPLOYEE_COST" Width="1.5" PointX="13.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.EXAMINATION" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.MEDICINE_ORDER" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.MEDICINE_TYPE" Width="1.5" PointX="0.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.PATIENT_DIAGNOSE" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.PATIENT_MEDICINES" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.PATIENT_VISIT" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.PERSON" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.UNIT" Width="1.5" PointX="6" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.UNIT_PLAN" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicSystemDatabase.UNIT_TYPE" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="ClinicSystemDatabase.FK_DBO_ASPNETUSERCLAIMS_DBO_ASPNETUSERS_USERID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.FK_DBO_ASPNETUSERLOGINS_DBO_ASPNETUSERS_USERID" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.FK__PERSON__USER_ID__75E27017" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_VISIT_CLINIC_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.UNIT_CLINIC_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.DIAGNOSTICS_EMPLOYEE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.DIAGNOSTICS_EXAMINATION_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.DIAGNOSTICS_PATIENT_VISIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.DIAGNOSTICS_UNIT_PLAN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_DIAGNOSE_DISEASE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_EMPLACEMENT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_COST_EMPLOYEE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_EMPLOYEE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_PERSON_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_UNIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.EMPLOYEE_COST_UNIT_PLAN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.MEDICINE_ORDER_MEDICINE_TYPE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_MEDICINES_MEDICINE_ORDER_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_DIAGNOSE_PATIENT_VISIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_MEDICINES_PATIENT_VISIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_VISIT_PERSON_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.PATIENT_VISIT_UNIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.UNIT_PLAN_UNIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.UNIT_UNIT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.UNIT_UNIT_TYPE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicSystemDatabase.ASPNETUSERROLES" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

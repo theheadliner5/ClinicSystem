@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicSystemDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicSystemDatabase.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ASPNETROLES">
           <Key>
             <PropertyRef Name="ID" />
@@ -177,7 +177,6 @@
           <Property Name="DATE_FROM" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DATE_TO" Type="datetime2" Precision="7" />
           <Property Name="PERSON_ID" Type="bigint" Nullable="false" />
-          <Property Name="PATIENT_VISIT_ID" Type="bigint" />
           <Property Name="CLINIC_ID" Type="bigint" Nullable="false" />
           <Property Name="UNIT_ID" Type="bigint" Nullable="false" />
         </EntityType>
@@ -344,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PERSON__USER_ID__40257DE4">
+        <Association Name="FK__PERSON__USER_ID__75E27017">
           <End Role="ASPNETUSERS" Type="Self.ASPNETUSERS" Multiplicity="1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -484,18 +483,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PATIENT_VISIT_PATIENT_VISIT_FK">
-          <End Role="PATIENT_VISIT" Type="Self.PATIENT_VISIT" Multiplicity="0..1" />
-          <End Role="PATIENT_VISIT1" Type="Self.PATIENT_VISIT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PATIENT_VISIT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PATIENT_VISIT1">
-              <PropertyRef Name="PATIENT_VISIT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PATIENT_VISIT_PERSON_FK">
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
           <End Role="PATIENT_VISIT" Type="Self.PATIENT_VISIT" Multiplicity="*" />
@@ -568,7 +555,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClinicSystemDbModelStoreContainer">
+        <EntityContainer Name="ClinicSystemDatabaseStoreContainer">
           <EntitySet Name="ASPNETROLES" EntityType="Self.ASPNETROLES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASPNETUSERCLAIMS" EntityType="Self.ASPNETUSERCLAIMS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASPNETUSERLOGINS" EntityType="Self.ASPNETUSERLOGINS" Schema="dbo" store:Type="Tables" />
@@ -630,7 +617,7 @@
             <End Role="UNIT" EntitySet="UNIT" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
           </AssociationSet>
-          <AssociationSet Name="FK__PERSON__USER_ID__40257DE4" Association="Self.FK__PERSON__USER_ID__40257DE4">
+          <AssociationSet Name="FK__PERSON__USER_ID__75E27017" Association="Self.FK__PERSON__USER_ID__75E27017">
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
@@ -674,10 +661,6 @@
             <End Role="CLINIC" EntitySet="CLINIC" />
             <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
           </AssociationSet>
-          <AssociationSet Name="PATIENT_VISIT_PATIENT_VISIT_FK" Association="Self.PATIENT_VISIT_PATIENT_VISIT_FK">
-            <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
-            <End Role="PATIENT_VISIT1" EntitySet="PATIENT_VISIT" />
-          </AssociationSet>
           <AssociationSet Name="PATIENT_VISIT_PERSON_FK" Association="Self.PATIENT_VISIT_PERSON_FK">
             <End Role="PERSON" EntitySet="PERSON" />
             <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
@@ -707,7 +690,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClinicSystemDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ClinicSystemDatabase" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ASPNETROLES">
           <Key>
             <PropertyRef Name="ID" />
@@ -755,7 +738,7 @@
           <Property Name="USERNAME" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ASPNETUSERCLAIMS" Relationship="Self.FK_DBO_ASPNETUSERCLAIMS_DBO_ASPNETUSERS_USERID" FromRole="ASPNETUSERS" ToRole="ASPNETUSERCLAIMS" />
           <NavigationProperty Name="ASPNETUSERLOGINS" Relationship="Self.FK_DBO_ASPNETUSERLOGINS_DBO_ASPNETUSERS_USERID" FromRole="ASPNETUSERS" ToRole="ASPNETUSERLOGINS" />
-          <NavigationProperty Name="PERSON" Relationship="Self.FK__PERSON__USER_ID__40257DE4" FromRole="ASPNETUSERS" ToRole="PERSON" />
+          <NavigationProperty Name="PERSON" Relationship="Self.FK__PERSON__USER_ID__75E27017" FromRole="ASPNETUSERS" ToRole="PERSON" />
           <NavigationProperty Name="ASPNETROLES" Relationship="Self.ASPNETUSERROLES" FromRole="ASPNETUSERS" ToRole="ASPNETROLES" />
         </EntityType>
         <EntityType Name="CLINIC">
@@ -904,15 +887,12 @@
           <Property Name="DATE_FROM" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="DATE_TO" Type="DateTime" Precision="7" />
           <Property Name="PERSON_ID" Type="Int64" Nullable="false" />
-          <Property Name="PATIENT_VISIT_ID" Type="Int64" />
           <Property Name="CLINIC_ID" Type="Int64" Nullable="false" />
           <Property Name="UNIT_ID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="CLINIC" Relationship="Self.PATIENT_VISIT_CLINIC_FK" FromRole="PATIENT_VISIT" ToRole="CLINIC" />
           <NavigationProperty Name="DIAGNOSTICS" Relationship="Self.DIAGNOSTICS_PATIENT_VISIT_FK" FromRole="PATIENT_VISIT" ToRole="DIAGNOSTICS" />
           <NavigationProperty Name="PATIENT_DIAGNOSE" Relationship="Self.PATIENT_DIAGNOSE_PATIENT_VISIT_FK" FromRole="PATIENT_VISIT" ToRole="PATIENT_DIAGNOSE" />
           <NavigationProperty Name="PATIENT_MEDICINES" Relationship="Self.PATIENT_MEDICINES_PATIENT_VISIT_FK" FromRole="PATIENT_VISIT" ToRole="PATIENT_MEDICINES" />
-          <NavigationProperty Name="PATIENT_VISIT1" Relationship="Self.PATIENT_VISIT_PATIENT_VISIT_FK" FromRole="PATIENT_VISIT" ToRole="PATIENT_VISIT1" />
-          <NavigationProperty Name="PATIENT_VISIT2" Relationship="Self.PATIENT_VISIT_PATIENT_VISIT_FK" FromRole="PATIENT_VISIT1" ToRole="PATIENT_VISIT" />
           <NavigationProperty Name="PERSON" Relationship="Self.PATIENT_VISIT_PERSON_FK" FromRole="PATIENT_VISIT" ToRole="PERSON" />
           <NavigationProperty Name="UNIT" Relationship="Self.PATIENT_VISIT_UNIT_FK" FromRole="PATIENT_VISIT" ToRole="UNIT" />
         </EntityType>
@@ -928,7 +908,7 @@
           <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BIRTH_DATE" Type="DateTime" Precision="0" />
           <Property Name="USER_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ASPNETUSERS" Relationship="Self.FK__PERSON__USER_ID__40257DE4" FromRole="PERSON" ToRole="ASPNETUSERS" />
+          <NavigationProperty Name="ASPNETUSERS" Relationship="Self.FK__PERSON__USER_ID__75E27017" FromRole="PERSON" ToRole="ASPNETUSERS" />
           <NavigationProperty Name="EMPLOYEE" Relationship="Self.EMPLOYEE_PERSON_FK" FromRole="PERSON" ToRole="EMPLOYEE" />
           <NavigationProperty Name="PATIENT_VISIT" Relationship="Self.PATIENT_VISIT_PERSON_FK" FromRole="PERSON" ToRole="PATIENT_VISIT" />
         </EntityType>
@@ -1001,7 +981,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PERSON__USER_ID__40257DE4">
+        <Association Name="FK__PERSON__USER_ID__75E27017">
           <End Role="ASPNETUSERS" Type="Self.ASPNETUSERS" Multiplicity="1" />
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1217,18 +1197,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="PATIENT_VISIT_PATIENT_VISIT_FK">
-          <End Role="PATIENT_VISIT" Type="Self.PATIENT_VISIT" Multiplicity="0..1" />
-          <End Role="PATIENT_VISIT1" Type="Self.PATIENT_VISIT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PATIENT_VISIT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PATIENT_VISIT1">
-              <PropertyRef Name="PATIENT_VISIT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PATIENT_VISIT_PERSON_FK">
           <End Role="PERSON" Type="Self.PERSON" Multiplicity="1" />
           <End Role="PATIENT_VISIT" Type="Self.PATIENT_VISIT" Multiplicity="*" />
@@ -1322,7 +1290,7 @@
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="ASPNETUSERLOGINS" EntitySet="ASPNETUSERLOGINS" />
           </AssociationSet>
-          <AssociationSet Name="FK__PERSON__USER_ID__40257DE4" Association="Self.FK__PERSON__USER_ID__40257DE4">
+          <AssociationSet Name="FK__PERSON__USER_ID__75E27017" Association="Self.FK__PERSON__USER_ID__75E27017">
             <End Role="ASPNETUSERS" EntitySet="ASPNETUSERS" />
             <End Role="PERSON" EntitySet="PERSON" />
           </AssociationSet>
@@ -1394,10 +1362,6 @@
             <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
             <End Role="PATIENT_MEDICINES" EntitySet="PATIENT_MEDICINES" />
           </AssociationSet>
-          <AssociationSet Name="PATIENT_VISIT_PATIENT_VISIT_FK" Association="Self.PATIENT_VISIT_PATIENT_VISIT_FK">
-            <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
-            <End Role="PATIENT_VISIT1" EntitySet="PATIENT_VISIT" />
-          </AssociationSet>
           <AssociationSet Name="PATIENT_VISIT_PERSON_FK" Association="Self.PATIENT_VISIT_PERSON_FK">
             <End Role="PERSON" EntitySet="PERSON" />
             <End Role="PATIENT_VISIT" EntitySet="PATIENT_VISIT" />
@@ -1428,9 +1392,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClinicSystemDbModelStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
+        <EntityContainerMapping StorageEntityContainer="ClinicSystemDatabaseStoreContainer" CdmEntityContainer="ClinicSystemDbContext">
           <EntitySetMapping Name="ASPNETROLES">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETROLES">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.ASPNETROLES">
               <MappingFragment StoreEntitySet="ASPNETROLES">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
@@ -1438,7 +1402,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERCLAIMS">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERCLAIMS">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.ASPNETUSERCLAIMS">
               <MappingFragment StoreEntitySet="ASPNETUSERCLAIMS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
@@ -1448,7 +1412,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERLOGINS">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERLOGINS">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.ASPNETUSERLOGINS">
               <MappingFragment StoreEntitySet="ASPNETUSERLOGINS">
                 <ScalarProperty Name="LOGINPROVIDER" ColumnName="LOGINPROVIDER" />
                 <ScalarProperty Name="PROVIDERKEY" ColumnName="PROVIDERKEY" />
@@ -1457,7 +1421,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ASPNETUSERS">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.ASPNETUSERS">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.ASPNETUSERS">
               <MappingFragment StoreEntitySet="ASPNETUSERS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
@@ -1475,7 +1439,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CLINIC">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.CLINIC">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.CLINIC">
               <MappingFragment StoreEntitySet="CLINIC">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1485,7 +1449,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DIAGNOSTICS">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.DIAGNOSTICS">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.DIAGNOSTICS">
               <MappingFragment StoreEntitySet="DIAGNOSTICS">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1498,7 +1462,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DISEASE">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.DISEASE">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.DISEASE">
               <MappingFragment StoreEntitySet="DISEASE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1508,7 +1472,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLACEMENT">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLACEMENT">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.EMPLACEMENT">
               <MappingFragment StoreEntitySet="EMPLACEMENT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1517,7 +1481,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEE">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLOYEE">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1531,7 +1495,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEE_COST">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.EMPLOYEE_COST">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.EMPLOYEE_COST">
               <MappingFragment StoreEntitySet="EMPLOYEE_COST">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1543,7 +1507,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EXAMINATION">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.EXAMINATION">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.EXAMINATION">
               <MappingFragment StoreEntitySet="EXAMINATION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1553,7 +1517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MEDICINE_ORDER">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.MEDICINE_ORDER">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.MEDICINE_ORDER">
               <MappingFragment StoreEntitySet="MEDICINE_ORDER">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1565,7 +1529,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MEDICINE_TYPE">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.MEDICINE_TYPE">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.MEDICINE_TYPE">
               <MappingFragment StoreEntitySet="MEDICINE_TYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1575,7 +1539,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_DIAGNOSE">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_DIAGNOSE">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.PATIENT_DIAGNOSE">
               <MappingFragment StoreEntitySet="PATIENT_DIAGNOSE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1586,7 +1550,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_MEDICINES">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_MEDICINES">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.PATIENT_MEDICINES">
               <MappingFragment StoreEntitySet="PATIENT_MEDICINES">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1598,21 +1562,20 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PATIENT_VISIT">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.PATIENT_VISIT">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.PATIENT_VISIT">
               <MappingFragment StoreEntitySet="PATIENT_VISIT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
                 <ScalarProperty Name="DATE_FROM" ColumnName="DATE_FROM" />
                 <ScalarProperty Name="DATE_TO" ColumnName="DATE_TO" />
                 <ScalarProperty Name="PERSON_ID" ColumnName="PERSON_ID" />
-                <ScalarProperty Name="PATIENT_VISIT_ID" ColumnName="PATIENT_VISIT_ID" />
                 <ScalarProperty Name="CLINIC_ID" ColumnName="CLINIC_ID" />
                 <ScalarProperty Name="UNIT_ID" ColumnName="UNIT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PERSON">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.PERSON">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.PERSON">
               <MappingFragment StoreEntitySet="PERSON">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1626,7 +1589,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.UNIT">
               <MappingFragment StoreEntitySet="UNIT">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1637,7 +1600,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT_PLAN">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT_PLAN">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.UNIT_PLAN">
               <MappingFragment StoreEntitySet="UNIT_PLAN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1650,7 +1613,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNIT_TYPE">
-            <EntityTypeMapping TypeName="ClinicSystemDbModel.UNIT_TYPE">
+            <EntityTypeMapping TypeName="ClinicSystemDatabase.UNIT_TYPE">
               <MappingFragment StoreEntitySet="UNIT_TYPE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="LAST_MOD_DATE" ColumnName="LAST_MOD_DATE" />
@@ -1658,7 +1621,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="ASPNETUSERROLES" TypeName="ClinicSystemDbModel.ASPNETUSERROLES" StoreEntitySet="ASPNETUSERROLES">
+          <AssociationSetMapping Name="ASPNETUSERROLES" TypeName="ClinicSystemDatabase.ASPNETUSERROLES" StoreEntitySet="ASPNETUSERROLES">
             <EndProperty Name="ASPNETROLES">
               <ScalarProperty Name="ID" ColumnName="ROLEID" />
             </EndProperty>

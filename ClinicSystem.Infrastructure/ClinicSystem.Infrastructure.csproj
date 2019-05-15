@@ -140,6 +140,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClinicSystemDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Model\ClinicSystemDatabase.edmx.diagram">
       <DependentUpon>ClinicSystemDatabase.edmx</DependentUpon>
     </None>

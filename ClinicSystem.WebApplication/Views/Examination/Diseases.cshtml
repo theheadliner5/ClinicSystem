@@ -1,4 +1,5 @@
-﻿@model ClinicSystem.WebApplication.Models.DiseasesViewModel
+﻿@using GridMvc.Html
+@model ClinicSystem.WebApplication.Models.DiseasesViewModel
 
 @{
     ViewBag.Title = "Słownik chorób";
@@ -9,23 +10,11 @@
 <div>
     <h4>Zarządzanie danymi słownika chorób</h4>
     <hr />
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Kod choroby</th>
-            <th>Opis</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var disease in Model.Diseases)
-        {
-            <tr>
-                <td>@disease.CODE</td>
-                <td>@disease.CODE_DESCRIPTION</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    @Html.Grid(Model.Diseases).Columns(columns =>
+    {
+        columns.Add(c => c.CODE).Titled("Kod choroby");
+        columns.Add(c => c.CODE_DESCRIPTION).Titled("Opis");
+    }).WithPaging(10).Sortable(true).Filterable(true)
     <br />
-    @Html.ActionLink("Dodaj chorobę", "AddDisease", "Examination", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })    
+    @Html.ActionLink("Dodaj chorobę", "AddDisease", "Examination", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
 </div>

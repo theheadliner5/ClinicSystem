@@ -18,11 +18,6 @@ namespace ClinicSystem.WebApplication.Repositories
             _db = db;
         }
 
-        public IList<PERSON> GetAllUsers()
-        {
-            return _db.PERSON.ToList();
-        }
-
         public IEnumerable<ASPNETROLES> GetAllRoles()
         {
             return _db.ASPNETROLES.ToList();
@@ -162,6 +157,20 @@ namespace ClinicSystem.WebApplication.Repositories
         {
             _db.UNIT_PLAN.Add(unitPlan);
             _db.SaveChanges();
+        }
+
+        public IEnumerable<RegisteredUserDto> GetAllRegisteredUsers()
+        {
+            return _db.PERSON.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR"))
+                .ToList().Select(e => new RegisteredUserDto
+            {
+                PersonId = e.ID,
+                Name = e.NAME,
+                LastName = e.LAST_NAME,
+                Pesel = e.PESEL,
+                UserName = e.ASPNETUSERS.USERNAME,
+                RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME
+            });
         }
     }
 }

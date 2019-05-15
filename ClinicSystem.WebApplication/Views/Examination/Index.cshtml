@@ -1,4 +1,5 @@
-﻿@model ClinicSystem.WebApplication.Models.ExaminationIndexViewModel
+﻿@using GridMvc.Html
+@model ClinicSystem.WebApplication.Models.ExaminationIndexViewModel
 
 @{
     ViewBag.Title = "Wizyty i badania";
@@ -30,30 +31,15 @@
             <dd>
                 @if (Model.UnitVisitDtos.Any())
                 {
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Data od</th>
-                                <th>Data do</th>
-                                <th>Pacjent</th>
-                                <th>Pesel</th>
-                                <th>Adres</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var visit in Model.UnitVisitDtos)
-                            {
-                                <tr>
-                                    <td>@visit.DateFrom</td>
-                                    <td>@visit.DateTo</td>
-                                    <td>@visit.PersonName</td>
-                                    <td>@visit.PersonPesel</td>
-                                    <td>@visit.PersonAddress</td>
-                                    <td>@Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null)</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    @Html.Grid(Model.UnitVisitDtos).Columns(columns =>
+                    {
+                        columns.Add(c => c.DateFrom).Titled("Data od");
+                        columns.Add(c => c.DateTo).Titled("Data do");
+                        columns.Add(c => c.PersonName).Titled("Pacjent");
+                        columns.Add(c => c.PersonPesel).Titled("PESEL");
+                        columns.Add(c => c.PersonAddress).Titled("Adres");
+                        columns.Add().Sanitized(false).Encoded(false).RenderValueAs(visit => Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null).ToHtmlString());
+                    }).WithPaging(10).Sortable(true).Filterable(true)
                 }
                 else
                 {
@@ -67,28 +53,14 @@
             <dd>
                 @if (Model.PatientVisitDtos.Any())
                 {
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Data od</th>
-                                <th>Data do</th>
-                                <th>Pesel</th>
-                                <th>Adres</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var visit in Model.PatientVisitDtos)
-                            {
-                                <tr>
-                                    <td>@visit.DateFrom</td>
-                                    <td>@visit.DateTo</td>
-                                    <td>@visit.PersonPesel</td>
-                                    <td>@visit.PersonAddress</td>
-                                    <td>@Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null)</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    @Html.Grid(Model.PatientVisitDtos).Columns(columns =>
+                    {
+                        columns.Add(c => c.DateFrom).Titled("Data od");
+                        columns.Add(c => c.DateTo).Titled("Data do");
+                        columns.Add(c => c.PersonPesel).Titled("PESEL");
+                        columns.Add(c => c.PersonAddress).Titled("Adres");
+                        columns.Add().Sanitized(false).Encoded(false).RenderValueAs(visit => Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null).ToHtmlString());
+                    }).WithPaging(10).Sortable(true).Filterable(true)
                 }
                 else
                 {
@@ -96,31 +68,20 @@
                 }
             </dd>
         }
+        <dd>
+            <br />
+        </dd>
         <dt>Moje diagnozy:</dt>
         <dd>
             @if (Model.PatientDiagnoses.Any())
             {
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Diagnoza</th>
-                            <th>Choroba</th>
-                            <th>Nazwa przychodni</th>
-                            <th>Adres przychodni</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var patientDiagnose in Model.PatientDiagnoses)
-                        {
-                            <tr>
-                                <td>@patientDiagnose.DIAGNOSE</td>
-                                <td>@patientDiagnose.DISEASE.CODE</td>
-                                <td>@patientDiagnose.PATIENT_VISIT.CLINIC.NAME</td>
-                                <td>@patientDiagnose.PATIENT_VISIT.CLINIC.ADDRESS</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                @Html.Grid(Model.PatientDiagnoses.ToList()).Columns(columns =>
+                {
+                    columns.Add(c => c.DIAGNOSE).Titled("Diagnoza");
+                    columns.Add(c => c.DISEASE.CODE).Titled("Choroba");
+                    columns.Add(c => c.PATIENT_VISIT.CLINIC.NAME).Titled("Nazwa przychodni");
+                    columns.Add(c => c.PATIENT_VISIT.CLINIC.ADDRESS).Titled("Adres przychodni");
+                }).WithPaging(10).Sortable(true).Filterable(true)
             }
             else
             {

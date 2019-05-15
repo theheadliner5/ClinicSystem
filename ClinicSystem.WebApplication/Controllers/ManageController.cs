@@ -51,7 +51,7 @@ namespace ClinicSystem.WebApplication.Controllers
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
-                Users = _manageRepository.GetAllUsers()
+                RegisteredUsers = _manageRepository.GetAllRegisteredUsers()
             };
 
             return View(model);

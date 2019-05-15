@@ -1,4 +1,5 @@
-﻿@model ClinicSystem.WebApplication.Models.ManageIndexViewModel
+﻿@using GridMvc.Html
+@model ClinicSystem.WebApplication.Models.ManageIndexViewModel
 @{
     ViewBag.Title = "Zarządzanie kontem";
 }
@@ -26,45 +27,17 @@
         {
             <dt>Zarejestrowani użytkownicy:</dt>
             <dd>
-                @if (Model.Users.Any(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR")))
+                @if (Model.RegisteredUsers.Any())
                 {
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Imię</th>
-                                <th>Nazwisko</th>
-                                <th>Login</th>
-                                <th>Pesel</th>
-                                <th>Rola</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var user in Model.Users.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR")))
-                            {
-                                <tr>
-                                    <td>@user.NAME</td>
-                                    <td>@user.LAST_NAME</td>
-                                    <td>@user.ASPNETUSERS.USERNAME</td>
-                                    <td>@user.PESEL</td>
-                                    @{
-                                        var roleName = user.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME;
-
-                                        if (roleName != null)
-                                        {
-                                            <td>@roleName</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Nieznana</td>
-                                        }
-                                    }
-                                    <td>@Html.ActionLink("Zarejestruj/edytuj pracownika", "RegisterEmployee", new { personId = user.ID }, null)</td>
-                                </tr>
-                            }
-
-                        </tbody>
-                    </table>
+                    @Html.Grid(Model.RegisteredUsers).Columns(columns =>
+                    {
+                        columns.Add(c => c.Name).Titled("Imię");
+                        columns.Add(c => c.LastName).Titled("Nazwisko");
+                        columns.Add(c => c.UserName).Titled("Login");
+                        columns.Add(c => c.Pesel).Titled("PESEL");
+                        columns.Add(c => c.RoleName).Titled("Rola");
+                        columns.Add().Sanitized(false).Encoded(false).RenderValueAs(user => Html.ActionLink("Zarejestruj/edytuj pracownika", "RegisterEmployee", new { personId = user.PersonId }, null).ToHtmlString());
+                    }).WithPaging(10).Sortable(true).Filterable(true)
                 }
                 else
                 {

@@ -10,7 +10,6 @@ namespace ClinicSystem.WebApplication.Interfaces
 {
     public interface IManageRepository
     {
-        IList<PERSON> GetAllUsers();
         IEnumerable<ASPNETROLES> GetAllRoles();
         IEnumerable<CLINIC> GetAllClinics();
         IEnumerable<UNIT_TYPE> GetAllUnitTypes();
@@ -29,5 +28,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<EMPLACEMENT> GetAssignableEmplacements();
         IEnumerable<ASPNETROLES> GetAssignableRoles();
         void CreateUnitPlan(UNIT_PLAN unitPlan);
+        IEnumerable<RegisteredUserDto> GetAllRegisteredUsers();
     }
 }

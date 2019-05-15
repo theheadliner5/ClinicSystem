@@ -55,6 +55,7 @@
     <Compile Include="Dtos\EmployeeDataDto.cs" />
     <Compile Include="Dtos\ManagerDto.cs" />
     <Compile Include="Dtos\MedicineDto.cs" />
+    <Compile Include="Dtos\RegisteredUserDto.cs" />
     <Compile Include="Dtos\UnitDto.cs" />
     <Compile Include="Dtos\VisitDto.cs" />
     <Compile Include="Interfaces\IClinicSystemDbContext.cs" />

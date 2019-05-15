@@ -1,4 +1,5 @@
-﻿@model ClinicSystem.WebApplication.Models.ClinicIndexViewModel
+﻿@using GridMvc.Html
+@model ClinicSystem.WebApplication.Models.ClinicIndexViewModel
 
 @{
     ViewBag.Title = "Placówki Luxcover";
@@ -8,23 +9,10 @@
 <div>
     <h4>Sprawdź przychodnię i oddziały, gdzie możesz umówić wizytę u specjalistów Luxcover</h4>
     <hr />
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Adres</th>
-                <th>Oddziały</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var clinicDto in Model.ClinicDtos)
-            {
-                <tr>
-                    <td>@clinicDto.Name</td>
-                    <td>@clinicDto.Address</td>
-                    <td>@clinicDto.Units</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @Html.Grid(Model.ClinicDtos).Columns(columns =>
+    {
+        columns.Add(c => c.Name).Titled("Nazwa");
+        columns.Add(c => c.Address).Titled("Adres");
+        columns.Add(c => c.Units).Titled("Oddziały");
+    }).WithPaging(10).Sortable(true).Filterable(true)
 </div>

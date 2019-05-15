@@ -1,4 +1,5 @@
-﻿@model ClinicSystem.WebApplication.Models.MedicineIndexViewModel
+﻿@using GridMvc.Html
+@model ClinicSystem.WebApplication.Models.MedicineIndexViewModel
 
 @{
     ViewBag.Title = "Lekarstwa";
@@ -9,31 +10,16 @@
 <div>
     <h4>Zarządzanie danymi lekarstw</h4>
     <hr />
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Składniki</th>
-                <th>Cena</th>
-                <th>Seria</th>
-                <th>Data przydatności</th>
-                <th>Ilość</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var medicine in Model.MedicineDtos)
-            {
-                <tr>
-                    <td>@medicine.Name</td>
-                    <td>@medicine.ActiveIngredient</td>
-                    <td>@medicine.Cost</td>
-                    <td>@medicine.BatchSeries</td>
-                    <td>@medicine.ExpirationDate.ToString("d")</td>
-                    <td>@medicine.Amount</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @Html.Grid(Model.MedicineDtos.ToList()).Columns(columns =>
+    {
+        columns.Add(c => c.Name).Titled("Nazwa");
+        columns.Add(c => c.ActiveIngredient).Titled("Składniki");
+        columns.Add(c => c.Cost).Titled("Cena");
+        columns.Add(c => c.BatchSeries).Titled("Seria");
+        columns.Add(c => c.ExpirationDate).Titled("Data przydatności");
+        columns.Add(c => c.Amount).Titled("Ilość");
+    }).WithPaging(10).Sortable(true).Filterable(true)
+    <br/>
     <h4>Operacje:</h4>
     @Html.ActionLink("Dodaj lek", "AddMedicine", "Medicine", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
     @Html.ActionLink("Dodaj typ leku", "AddMedicineType", "Medicine", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })

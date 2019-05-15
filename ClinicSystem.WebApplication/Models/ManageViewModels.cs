@@ -15,7 +15,7 @@ namespace ClinicSystem.WebApplication.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-        public IList<PERSON> Users { get; set; }
+        public IEnumerable<RegisteredUserDto> RegisteredUsers { get; set; }
     }
 
     public class SetPasswordViewModel

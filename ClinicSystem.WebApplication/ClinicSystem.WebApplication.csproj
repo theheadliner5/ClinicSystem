@@ -221,6 +221,7 @@
     <Compile Include="Interfaces\IManageValidationService.cs" />
     <Compile Include="Interfaces\IMedicineRepository.cs" />
     <Compile Include="Interfaces\IVisitRepository.cs" />
+    <Compile Include="Interfaces\IVisitValidationService.cs" />
     <Compile Include="Models\ClinicViewModels.cs" />
     <Compile Include="Models\DoctorViewModels.cs" />
     <Compile Include="Models\ExaminationViewModels.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Repositories\VisitRepository.cs" />
     <Compile Include="Services\ExaminationValidationService.cs" />
     <Compile Include="Services\ManageValidationService.cs" />
+    <Compile Include="Services\VisitValidationService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

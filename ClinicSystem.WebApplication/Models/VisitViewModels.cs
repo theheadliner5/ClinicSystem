@@ -26,7 +26,9 @@ namespace ClinicSystem.WebApplication.Models
 
     public class BookVisitSecondStepViewModel
     {
+        public string ValidationMessage { get; set; }
         [Required(ErrorMessage = "Wprowadź wartość w polu 'Data wizyty'")]
+        [RegularExpression(@"(.*?)(09|1[0-6]):[3|0][0]$", ErrorMessage = "Wprowadzona godzina musi kończyć się na :00 lub :30, w przedziale od 09:00 do 16:30")]
         [Display(Name = "Data wizyty")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]

@@ -11,6 +11,11 @@
     @Html.AntiForgeryToken()
     <h4>Umów wizytę w jednej z przychodni Luxcover</h4>
     <hr />
+    if (!string.IsNullOrEmpty(Model.ValidationMessage))
+    {
+        <h4 style="color: red">@Model.ValidationMessage</h4>
+        <br />
+    }
     @Html.ValidationSummary("", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.ClinicId)
     <div class="form-group">
@@ -22,7 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Minutes, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Minutes, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Minutes, new { @class = "form-control", @readonly = true })
         </div>
     </div>
     <div class="form-group">

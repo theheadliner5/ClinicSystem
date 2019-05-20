@@ -24,10 +24,10 @@ namespace ClinicSystem.WebApplication.Models
 
     public class AddDiseaseViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Kod'")]
         [Display(Name = "Kod")]
         public string Code { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Opis'")]
         [Display(Name = "Opis")]
         public string Description { get; set; }
     }
@@ -44,10 +44,10 @@ namespace ClinicSystem.WebApplication.Models
     {
         public long VisitId { get; set; }
         public IEnumerable<DISEASE> Diseases { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Choroba'")]
         [Display(Name = "Choroba")]
         public long DiseaseId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Diagnoza'")]
         [Display(Name = "Diagnoza")]
         public string Diagnose { get; set; }
     }
@@ -55,13 +55,13 @@ namespace ClinicSystem.WebApplication.Models
     public class AddExaminationViewModel
     {
         public long VisitId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Nazwa badania'")]
         [Display(Name = "Nazwa badania")]
         public string ExaminationName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Koszt'")]
         [Display(Name = "Koszt")]
         public decimal Cost { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data badania'")]
         [Display(Name = "Data badania")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -72,13 +72,13 @@ namespace ClinicSystem.WebApplication.Models
     {
         public long VisitId { get; set; }
         public IEnumerable<MedicineDto> MedicineDtos { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Lek'")]
         [Display(Name = "Lek")]
         public long TypeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Dawkowanie'")]
         [Display(Name = "Dawkowanie")]
         public string Dose { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data leczenia'")]
         [Display(Name = "Data leczenia")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

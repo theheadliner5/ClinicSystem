@@ -15,10 +15,10 @@ namespace ClinicSystem.WebApplication.Models
 
     public class AddMedicineTypeViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Nazwa'")]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Aktywny składnik'")]
         [Display(Name = "Aktywny składnik")]
         public string ActiveIngredient { get; set; }
     }
@@ -26,16 +26,16 @@ namespace ClinicSystem.WebApplication.Models
     public class AddMedicineViewModel
     {
         public IEnumerable<MEDICINE_TYPE> MedicineTypes { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Typ'")]
         [Display(Name = "Typ")]
         public long MedicineTypeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Seria'")]
         [Display(Name = "Seria")]
         public string BatchSeries { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Cena'")]
         [Display(Name = "Cena")]
         public decimal? Cost { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data przydatności'")]
         [Display(Name = "Data przydatności")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

@@ -18,27 +18,13 @@ namespace ClinicSystem.WebApplication.Models
         public IEnumerable<RegisteredUserDto> RegisteredUsers { get; set; }
     }
 
-    public class SetPasswordViewModel
-    {
-        [Required]
-        [StringLength(100, ErrorMessage = "{0} musi posiadać przynajmniej {2} znaków.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Nowe hasło")]
-        public string NewPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Potwierdź nowe hasło")]
-        [Compare("NewPassword", ErrorMessage = "Nowe hasło i potwierdzenie są różne.")]
-        public string ConfirmPassword { get; set; }
-    }
-
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Aktualne hasło'")]
         [DataType(DataType.Password)]
         [Display(Name = "Aktualne hasło")]
         public string OldPassword { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Nowe hasło'")]
         [StringLength(100, ErrorMessage = "{0} musi posiadać przynajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Nowe hasło")]
@@ -59,37 +45,36 @@ namespace ClinicSystem.WebApplication.Models
 
     public class RegisterEmployeeViewModel
     {
-        [Required]
         public long PersonId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Imię'")]
         [Display(Name = "Imię")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Nazwisko'")]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data zatrudnienia'")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Data zatrudnienia")]
         public DateTime HireDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Wynagrodzenie'")]
         [Display(Name = "Wynagrodzenie")]
         public decimal Salary { get; set; }
         [Display(Name = "Aktualny oddział")]
         public string UnitName { get; set; }
         public IEnumerable<UnitDto> UnitDtos { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Oddział'")]
         [Display(Name = "Oddział")]
         public long UnitId { get; set; }
         public IEnumerable<ManagerDto> ManagerDtos { get; set; }
         [Display(Name = "Przełożony")]
         public long? ManagerId { get; set; }
         public IEnumerable<EMPLACEMENT> Emplacements { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Stanowisko'")]
         [Display(Name = "Stanowisko")]
         public long EmplacementId { get; set; }
         public IEnumerable<ASPNETROLES> Roles { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Uprawnienia'")]
         [Display(Name = "Uprawnienia")]
         public string RoleId { get; set; }
 
@@ -108,11 +93,11 @@ namespace ClinicSystem.WebApplication.Models
     public class AddUnitViewModel
     {
         public IEnumerable<CLINIC> Clinics { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Przychodnia'")]
         [Display(Name = "Przychodnia")]
         public long ClinicId { get; set; }
         public IEnumerable<UNIT_TYPE> UnitTypes { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Typ oddziału'")]
         [Display(Name = "Typ oddziału")]
         public long UnitTypeId { get; set; }
         public IEnumerable<UNIT_TYPE> ParentUnitTypes { get; set; }
@@ -137,21 +122,21 @@ namespace ClinicSystem.WebApplication.Models
     public class AddUnitPlanViewModel
     {
         public IEnumerable<UnitDto> UnitDtos { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Oddział'")]
         [Display(Name = "Oddział")]
         public long UnitId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Typ budżetu'")]
         [Display(Name = "Typ budżetu")]
         public string BudgetType { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Wartość'")]
         [Display(Name = "Wartość")]
         public decimal Value { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data od'")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Data od")]
         public DateTime? DateFrom { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Data do'")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Data do")]

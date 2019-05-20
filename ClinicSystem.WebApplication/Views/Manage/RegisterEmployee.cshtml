@@ -28,7 +28,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.HireDate, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.HireDate, "{0:yyyy-MM-dd}", new { @class = "form-control", data_val_date = "Pole Data urodzenia posiada niewłaściwy format daty" })
+            @Html.TextBoxFor(m => m.HireDate, new { @class = "datepicker, form-control", @type = "date" })
         </div>
     </div>
     <div class="form-group">

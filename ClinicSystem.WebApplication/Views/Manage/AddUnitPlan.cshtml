@@ -24,13 +24,13 @@
     <div class="form-group">
         @Html.LabelFor(m => m.DateFrom, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DateFrom, "{0:yyyy-MM-dd}", new { @class = "form-control", placeholder = "rrrr-MM-dd" })
+            @Html.TextBoxFor(m => m.DateFrom, new { @class = "datepicker, form-control", @type = "date" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.DateTo, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DateTo, "{0:yyyy-MM-dd}", new { @class = "form-control", placeholder = "rrrr-MM-dd" })
+            @Html.TextBoxFor(m => m.DateTo, new { @class = "datepicker, form-control", @type = "date" })
         </div>
     </div>
     <div class="form-group">

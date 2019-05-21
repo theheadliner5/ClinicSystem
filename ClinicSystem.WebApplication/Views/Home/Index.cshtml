@@ -2,7 +2,7 @@
     ViewBag.Title = "Strona domowa";
 }
 
-<div class="jumbotron">
+<div class="jumbotron" style="opacity: 0.9">
     <h1>Sieć przychodni Luxcover</h1>
     <p class="lead">Już od ponad 25 lat dbamy o zdrowie naszych pacjentów. Każdego dnia dokładamy wszelkich starań, aby osoby znajdujące się pod naszą opieką były zadowolone ze świadczonych przez nas usług, czuły się bezpiecznie i wiedziały, że mogą liczyć na pomoc i poradę doświadczonych specjalistów.</p>
     @if (!User.Identity.IsAuthenticated)
@@ -31,3 +31,11 @@
         @Html.ActionLink("Sprawdź »", "Index", "Doctor", null, new { @class = "btn btn-default", @role = "button" })
     </div>
 </div>
+
+<style>
+    body {
+        background-image: url(../../Content/Images/BackgroundImage.jpg);
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
+</style>

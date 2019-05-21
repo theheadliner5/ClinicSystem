@@ -230,35 +230,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddEmplacementSuccess });
         }
-
-        public ActionResult AddUnitPlan()
-        {
-            var model = new AddUnitPlanViewModel
-            {
-                UnitDtos = _manageRepository.GetUnitDtos()
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult AddUnitPlan(AddUnitPlanViewModel model)
-        {
-            var unitPlan = new UNIT_PLAN
-            {
-                LAST_MOD_DATE = DateTime.Now,
-                BUDGET_TYPE = model.BudgetType,
-                DATE_FROM = model.DateFrom.GetValueOrDefault(),
-                DATE_TO = model.DateTo.GetValueOrDefault(),
-                UNIT_ID = model.UnitId,
-                VALUE = model.Value
-            };
-
-            _manageRepository.CreateUnitPlan(unitPlan);
-
-            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitPlanSuccess });
-        }
-
+        
         public ActionResult Diseases(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -295,17 +267,6 @@ namespace ClinicSystem.WebApplication.Controllers
         }
 
         [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
-        public ActionResult RemoveDisease(long diseaseId)
-        {
-            var removed = _manageRepository.RemoveDisease(diseaseId);
-
-            return RedirectToAction("Diseases",
-                removed
-                    ? new { Message = ManageMessageId.RemoveDiseaseSuccess }
-                    : new { Message = ManageMessageId.RemoveDiseaseFail });
-        }
-
-        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
         [HttpPost]
         public ActionResult AddDisease(AddDiseaseViewModel model)
         {
@@ -323,6 +284,78 @@ namespace ClinicSystem.WebApplication.Controllers
             }
 
             return RedirectToAction("Diseases", new { Message = ManageMessageId.AddDiseaseSuccess });
+        }
+
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        public ActionResult RemoveDisease(long diseaseId)
+        {
+            var removed = _manageRepository.RemoveDisease(diseaseId);
+
+            return RedirectToAction("Diseases",
+                removed
+                    ? new { Message = ManageMessageId.RemoveDiseaseSuccess }
+                    : new { Message = ManageMessageId.RemoveDiseaseFail });
+        }
+
+        public ActionResult UnitPlans(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.AddUnitPlanSuccess ? "Poprawnie dodano/edytowano plan budżetowy" :
+                "";
+
+            var model = new UnitPlansViewModel
+            {
+                UnitPlanDtos = _manageRepository.GetUnitPlanDtos()
+            };
+
+            return View(model);
+        }
+
+        public ActionResult AddUnitPlan(long? unitPlanId)
+        {
+            var model = new AddUnitPlanViewModel();
+
+            if (unitPlanId.HasValue)
+            {
+                var existingUnitPlan = _manageRepository.GetUnitPlanById(unitPlanId.Value);
+
+                model.UnitPlanId = existingUnitPlan.UNIT_ID;
+                model.BudgetType = existingUnitPlan.BUDGET_TYPE;
+                model.DateFrom = existingUnitPlan.DATE_FROM;
+                model.DateTo = existingUnitPlan.DATE_TO;
+                model.Value = existingUnitPlan.VALUE;
+                model.UnitId = existingUnitPlan.UNIT_ID;
+            }
+
+            model.UnitDtos = _manageRepository.GetUnitDtos();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUnitPlan(AddUnitPlanViewModel model)
+        {
+            if (model.UnitPlanId.HasValue)
+            {
+                _manageRepository.UpdateUnitPlan(model.UnitPlanId.Value, model.BudgetType, model.DateFrom.Value,
+                    model.DateTo.Value, model.UnitId, model.Value);
+            }
+            else
+            {
+                var unitPlan = new UNIT_PLAN
+                {
+                    LAST_MOD_DATE = DateTime.Now,
+                    BUDGET_TYPE = model.BudgetType,
+                    DATE_FROM = model.DateFrom.GetValueOrDefault(),
+                    DATE_TO = model.DateTo.GetValueOrDefault(),
+                    UNIT_ID = model.UnitId,
+                    VALUE = model.Value
+                };
+
+                _manageRepository.CreateUnitPlan(unitPlan);
+            }
+
+            return RedirectToAction("UnitPlans", new { Message = ManageMessageId.AddUnitPlanSuccess });
         }
 
         protected override void Dispose(bool disposing)

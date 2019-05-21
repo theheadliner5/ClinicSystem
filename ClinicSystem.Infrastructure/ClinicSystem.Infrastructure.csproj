@@ -57,6 +57,7 @@
     <Compile Include="Dtos\MedicineDto.cs" />
     <Compile Include="Dtos\RegisteredUserDto.cs" />
     <Compile Include="Dtos\UnitDto.cs" />
+    <Compile Include="Dtos\UnitPlanDto.cs" />
     <Compile Include="Dtos\VisitDto.cs" />
     <Compile Include="Interfaces\IClinicSystemDbContext.cs" />
     <Compile Include="Model\ASPNETROLES.cs">

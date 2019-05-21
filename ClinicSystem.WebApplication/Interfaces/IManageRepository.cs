@@ -34,5 +34,8 @@ namespace ClinicSystem.WebApplication.Interfaces
         DISEASE GetDiseaseById(long diseaseId);
         void UpdateDisease(long diseaseId, string code, string description);
         bool RemoveDisease(long diseaseId);
+        IEnumerable<UnitPlanDto> GetUnitPlanDtos();
+        UNIT_PLAN GetUnitPlanById(long unitPlanId);
+        void UpdateUnitPlan(long unitPlanId, string budgetType, DateTime dateFrom, DateTime dateTo, long unitId, decimal value);
     }
 }

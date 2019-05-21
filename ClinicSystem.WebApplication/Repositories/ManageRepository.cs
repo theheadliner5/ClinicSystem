@@ -198,6 +198,7 @@ namespace ClinicSystem.WebApplication.Repositories
             {
                 existingDisease.CODE = code;
                 existingDisease.CODE_DESCRIPTION = description;
+                existingDisease.LAST_MOD_DATE = DateTime.Now;
             }
 
             _db.SaveChanges();
@@ -215,6 +216,41 @@ namespace ClinicSystem.WebApplication.Repositories
             }
 
             return false;
+        }
+
+        public IEnumerable<UnitPlanDto> GetUnitPlanDtos()
+        {
+            return _db.UNIT_PLAN.ToList().Select(e => new UnitPlanDto
+            {
+                Id = e.ID,
+                BudgetType = e.BUDGET_TYPE,
+                DateFrom = e.DATE_FROM,
+                DateTo = e.DATE_TO,
+                UnitDetails = e.UNIT.UNIT_TYPE.UNIT_NAME + ", " + e.UNIT.CLINIC.NAME + ", " + e.UNIT.CLINIC.ADDRESS,
+                Value = e.VALUE
+            });
+        }
+
+        public UNIT_PLAN GetUnitPlanById(long unitPlanId)
+        {
+            return _db.UNIT_PLAN.FirstOrDefault(e => e.ID == unitPlanId);
+        }
+
+        public void UpdateUnitPlan(long unitPlanId, string budgetType, DateTime dateFrom, DateTime dateTo, long unitId, decimal value)
+        {
+            var existingUnitPlan = _db.UNIT_PLAN.FirstOrDefault(e => e.ID == unitPlanId);
+
+            if (existingUnitPlan != null)
+            {
+                existingUnitPlan.LAST_MOD_DATE = DateTime.Now;
+                existingUnitPlan.BUDGET_TYPE = budgetType;
+                existingUnitPlan.DATE_FROM = dateFrom;
+                existingUnitPlan.DATE_TO = dateTo;
+                existingUnitPlan.UNIT_ID = unitId;
+                existingUnitPlan.VALUE = value;
+            }
+
+            _db.SaveChanges();
         }
     }
 }

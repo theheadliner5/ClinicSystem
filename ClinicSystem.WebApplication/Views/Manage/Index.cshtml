@@ -28,6 +28,9 @@
             [ @Html.ActionLink("Wyświetl słownik chorób", "Diseases") ]
         </dd>
         <dd>
+            [ @Html.ActionLink("Wyświetl plany budżetowe", "UnitPlans") ]
+        </dd>
+        <dd>
             <br />
         </dd>
         @if (User.IsInRole("MANAGER") || User.IsInRole("ADMINISTRATOR"))
@@ -58,7 +61,6 @@
             <dd>
                 @Html.ActionLink("Dodaj przychodnię", "AddClinic", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
                 @Html.ActionLink("Dodaj oddział dla przychodni", "AddUnit", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                @Html.ActionLink("Dodaj plan budżetowy oddziału", "AddUnitPlan", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
                 @Html.ActionLink("Dodaj typ oddziału", "AddUnitType", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
                 @Html.ActionLink("Dodaj stanowisko pracownika", "AddEmplacement", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
             </dd>

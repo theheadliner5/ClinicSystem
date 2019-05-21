@@ -119,8 +119,14 @@ namespace ClinicSystem.WebApplication.Models
         public string Name { get; set; }
     }
 
+    public class UnitPlansViewModel
+    {
+        public IEnumerable<UnitPlanDto> UnitPlanDtos { get; set; }
+    }
+
     public class AddUnitPlanViewModel
     {
+        public long? UnitPlanId { get; set; }
         public IEnumerable<UnitDto> UnitDtos { get; set; }
         [Required(ErrorMessage = "Wprowadź wartość w polu 'Oddział'")]
         [Display(Name = "Oddział")]

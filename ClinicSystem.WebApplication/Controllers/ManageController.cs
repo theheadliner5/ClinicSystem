@@ -346,6 +346,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.AddUnitPlanSuccess ? "Poprawnie dodano/edytowano plan budżetowy" :
+                message == ManageMessageId.AddUnitPlanFail ? "Wprowadzony zakres dat zawiera się w już istniejącym planie budżetowym oraz 'data od' musi być wcześniejsza od 'daty do'" :
                 message == ManageMessageId.RemoveUnitPlanSuccess ? "Poprawnie usunięto plan budżetowy" :
                 message == ManageMessageId.RemoveUnitPlanFail ? "Nie udało się usunąć planu budżetowego, dane są używane w innych obiektach aplikacji" :
                 "";
@@ -382,27 +383,32 @@ namespace ClinicSystem.WebApplication.Controllers
         [HttpPost]
         public ActionResult AddUnitPlan(AddUnitPlanViewModel model)
         {
-            if (model.UnitPlanId.HasValue)
+            if (_validationService.IsUnitPlanValid(model.UnitId, model.DateFrom.Value, model.DateTo.Value))
             {
-                _manageRepository.UpdateUnitPlan(model.UnitPlanId.Value, model.BudgetType, model.DateFrom.Value,
-                    model.DateTo.Value, model.UnitId, model.Value);
-            }
-            else
-            {
-                var unitPlan = new UNIT_PLAN
+                if (model.UnitPlanId.HasValue)
                 {
-                    LAST_MOD_DATE = DateTime.Now,
-                    BUDGET_TYPE = model.BudgetType,
-                    DATE_FROM = model.DateFrom.GetValueOrDefault(),
-                    DATE_TO = model.DateTo.GetValueOrDefault(),
-                    UNIT_ID = model.UnitId,
-                    VALUE = model.Value
-                };
+                    _manageRepository.UpdateUnitPlan(model.UnitPlanId.Value, model.BudgetType, model.DateFrom.Value,
+                        model.DateTo.Value, model.UnitId, model.Value);
+                }
+                else
+                {
+                    var unitPlan = new UNIT_PLAN
+                    {
+                        LAST_MOD_DATE = DateTime.Now,
+                        BUDGET_TYPE = model.BudgetType,
+                        DATE_FROM = model.DateFrom.GetValueOrDefault(),
+                        DATE_TO = model.DateTo.GetValueOrDefault(),
+                        UNIT_ID = model.UnitId,
+                        VALUE = model.Value
+                    };
 
-                _manageRepository.CreateUnitPlan(unitPlan);
+                    _manageRepository.CreateUnitPlan(unitPlan);
+                }
+
+                return RedirectToAction("UnitPlans", new { Message = ManageMessageId.AddUnitPlanSuccess });
             }
 
-            return RedirectToAction("UnitPlans", new { Message = ManageMessageId.AddUnitPlanSuccess });
+            return RedirectToAction("UnitPlans", new { Message = ManageMessageId.AddUnitPlanFail });
         }
 
         [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
@@ -465,7 +471,8 @@ namespace ClinicSystem.WebApplication.Controllers
             RemoveUnitPlanSuccess,
             RemoveUnitPlanFail,
             RemoveClinicSuccess,
-            RemoveClinicFail
+            RemoveClinicFail,
+            AddUnitPlanFail
         }
 
         #endregion

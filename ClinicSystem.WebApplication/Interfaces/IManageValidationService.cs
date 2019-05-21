@@ -10,5 +10,6 @@ namespace ClinicSystem.WebApplication.Interfaces
     public interface IManageValidationService
     {
         bool IsEditedEmployeesManagerValid(long unitId, long? managerId);
+        bool IsUnitPlanValid(long unitId, DateTime dateFrom, DateTime dateTo);
     }
 }

@@ -259,6 +259,72 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitPlanSuccess });
         }
 
+        public ActionResult Diseases(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.AddDiseaseSuccess ? "Poprawnie dodano/edytowano chorobę" :
+                message == ManageMessageId.RemoveDiseaseSuccess ? "Poprawnie usunięto chorobę" :
+                message == ManageMessageId.RemoveDiseaseFail ? "Nie udało się usunąć choroby, dane są używane w innych obiektach aplikacji" :
+                    "";
+
+            var model = new DiseasesViewModel
+            {
+                Diseases = _manageRepository.GetAllDiseases()
+            };
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        public ActionResult AddDisease(long? diseaseId)
+        {
+            if (diseaseId.HasValue)
+            {
+                var disease = _manageRepository.GetDiseaseById(diseaseId.Value);
+                var model = new AddDiseaseViewModel
+                {
+                    DiseaseId = diseaseId,
+                    Code = disease.CODE,
+                    Description = disease.CODE_DESCRIPTION
+                };
+
+                return View(model);
+            }
+
+            return View();
+        }
+
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        public ActionResult RemoveDisease(long diseaseId)
+        {
+            var removed = _manageRepository.RemoveDisease(diseaseId);
+
+            return RedirectToAction("Diseases",
+                removed
+                    ? new { Message = ManageMessageId.RemoveDiseaseSuccess }
+                    : new { Message = ManageMessageId.RemoveDiseaseFail });
+        }
+
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        [HttpPost]
+        public ActionResult AddDisease(AddDiseaseViewModel model)
+        {
+            if (model.DiseaseId.HasValue)
+            {
+                _manageRepository.UpdateDisease(model.DiseaseId.Value, model.Code, model.Description);
+            }
+            else
+            {
+                _manageRepository.SaveDisease(new DISEASE
+                {
+                    CODE = model.Code,
+                    CODE_DESCRIPTION = model.Description
+                });
+            }
+
+            return RedirectToAction("Diseases", new { Message = ManageMessageId.AddDiseaseSuccess });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -301,7 +367,10 @@ namespace ClinicSystem.WebApplication.Controllers
             AddUnitSuccess,
             AddEmplacementSuccess,
             AddUnitPlanSuccess,
-            Error
+            Error,
+            AddDiseaseSuccess,
+            RemoveDiseaseSuccess,
+            RemoveDiseaseFail
         }
 
         #endregion

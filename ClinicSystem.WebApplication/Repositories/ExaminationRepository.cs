@@ -18,17 +18,6 @@ namespace ClinicSystem.WebApplication.Repositories
             _db = db;
         }
 
-        public IEnumerable<DISEASE> GetAllDiseases()
-        {
-            return _db.DISEASE.ToList();
-        }
-
-        public void SaveDisease(DISEASE disease)
-        {
-            _db.DISEASE.Add(disease);
-            _db.SaveChanges();
-        }
-
         public PERSON GetLoggedPersonByUserName(string userName)
         {
             var user = _db.ASPNETUSERS.SingleOrDefault(e => e.USERNAME == userName);
@@ -219,6 +208,11 @@ namespace ClinicSystem.WebApplication.Repositories
 
             _db.PATIENT_DIAGNOSE.Add(patientDiagnose);
             _db.SaveChanges();
+        }
+
+        public IEnumerable<DISEASE> GetAllDiseases()
+        {
+            return _db.DISEASE.ToList();
         }
     }
 }

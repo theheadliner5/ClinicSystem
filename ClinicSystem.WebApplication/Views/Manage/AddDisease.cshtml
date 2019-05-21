@@ -6,12 +6,13 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("AddDisease", "Examination", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddDisease", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     <h4>Formularz dodawania nowej przychodni</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.DiseaseId)
     <div class="form-group">
         @Html.LabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

@@ -17,21 +17,6 @@ namespace ClinicSystem.WebApplication.Models
         public IEnumerable<PATIENT_DIAGNOSE> PatientDiagnoses { get; set; }
     }
 
-    public class DiseasesViewModel
-    {
-        public IEnumerable<DISEASE> Diseases { get; set; }
-    }
-
-    public class AddDiseaseViewModel
-    {
-        [Required(ErrorMessage = "Wprowadź wartość w polu 'Kod'")]
-        [Display(Name = "Kod")]
-        public string Code { get; set; }
-        [Required(ErrorMessage = "Wprowadź wartość w polu 'Opis'")]
-        [Display(Name = "Opis")]
-        public string Description { get; set; }
-    }
-
     public class VisitDetailsViewModel
     {
         public VisitDto VisitDto { get; set; }

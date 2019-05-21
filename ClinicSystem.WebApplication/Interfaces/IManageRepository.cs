@@ -29,5 +29,10 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<ASPNETROLES> GetAssignableRoles();
         void CreateUnitPlan(UNIT_PLAN unitPlan);
         IEnumerable<RegisteredUserDto> GetAllRegisteredUsers();
+        IEnumerable<DISEASE> GetAllDiseases();
+        void SaveDisease(DISEASE disease);
+        DISEASE GetDiseaseById(long diseaseId);
+        void UpdateDisease(long diseaseId, string code, string description);
+        bool RemoveDisease(long diseaseId);
     }
 }

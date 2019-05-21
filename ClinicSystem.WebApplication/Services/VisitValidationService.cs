@@ -43,7 +43,7 @@ namespace ClinicSystem.WebApplication.Services
 
                 var startFrom = new DateTime(patientVisit.DATE_FROM.Year, patientVisit.DATE_FROM.Month, patientVisit.DATE_FROM.Day, 9, 0, 0);
                 var validHours = "";
-                validationResult = $"Wskazana godzina jest już zarezerwowana. Pozostałe dostępne godziny dnia { startFrom.ToString("dd.MM.yyyy") }: ";
+                validationResult = $"Wskazana godzina jest już zarezerwowana. Pozostałe dostępne godziny dnia { startFrom :dd.MM.yyyy}: ";
 
                 while (startFrom < new DateTime(patientVisit.DATE_FROM.Year, patientVisit.DATE_FROM.Month,
                            patientVisit.DATE_FROM.Day, 17, 0, 0))

@@ -10,8 +10,6 @@ namespace ClinicSystem.WebApplication.Interfaces
 {
     public interface IExaminationRepository
     {
-        IEnumerable<DISEASE> GetAllDiseases();
-        void SaveDisease(DISEASE disease);
         PERSON GetLoggedPersonByUserName(string userName);
         EMPLOYEE GetEmployeeByPersonId(long personId);
         IEnumerable<VisitDto> GetUnitVisitDtosByUnitId(long unitId);
@@ -30,5 +28,6 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<MedicineDto> GetAllMedicineDtos();
         void CreatePatientMedicine(long typeId, string dose, DateTime treatmentDate, long visitId);
         void CreateDiagnose(long visitId, long diseaseId, string diagnose);
+        IEnumerable<DISEASE> GetAllDiseases();
     }
 }

@@ -13,10 +13,6 @@
     <dl class="dl-horizontal">
         @if (User.IsInRole("DOCTOR") || User.IsInRole("ADMINISTRATOR") || User.IsInRole("MANAGER"))
         {
-            <dt>Słowniki:</dt>
-            <dd>
-                [ @Html.ActionLink("Wyświetl słownik chorób", "Diseases") ]
-            </dd>
             <dd>
                 <br />
             </dd>

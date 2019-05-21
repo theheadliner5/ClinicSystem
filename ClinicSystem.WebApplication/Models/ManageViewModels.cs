@@ -142,4 +142,20 @@ namespace ClinicSystem.WebApplication.Models
         [Display(Name = "Data do")]
         public DateTime? DateTo { get; set; }
     }
+
+    public class DiseasesViewModel
+    {
+        public IEnumerable<DISEASE> Diseases { get; set; }
+    }
+
+    public class AddDiseaseViewModel
+    {
+        public long? DiseaseId { get; set; }
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Kod'")]
+        [Display(Name = "Kod")]
+        public string Code { get; set; }
+        [Required(ErrorMessage = "Wprowadź wartość w polu 'Opis'")]
+        [Display(Name = "Opis")]
+        public string Description { get; set; }
+    }
 }

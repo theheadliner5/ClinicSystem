@@ -52,39 +52,6 @@ namespace ClinicSystem.WebApplication.Controllers
             return View(model);
         }
 
-        public ActionResult Diseases(ExaminationMessageId? message)
-        {
-            ViewBag.StatusMessage =
-                message == ExaminationMessageId.AddDiseaseSuccess ? "Poprawnie dodano chorobę do słownika" :
-                    "";
-
-            var model = new DiseasesViewModel
-            {
-                Diseases = _examinationRepository.GetAllDiseases()
-            };
-
-            return View(model);
-        }
-
-        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
-        public ActionResult AddDisease()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
-        [HttpPost]
-        public ActionResult AddDisease(AddDiseaseViewModel model)
-        {
-            _examinationRepository.SaveDisease(new DISEASE
-            {
-                CODE = model.Code,
-                CODE_DESCRIPTION = model.Description
-            });
-
-            return RedirectToAction("Diseases", new { Message = ExaminationMessageId.AddDiseaseSuccess });
-        }
-
         public ActionResult VisitDetails(long visitId, ExaminationMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -183,7 +150,6 @@ namespace ClinicSystem.WebApplication.Controllers
 
         public enum ExaminationMessageId
         {
-            AddDiseaseSuccess,
             AddExaminationSuccess,
             AddExaminationFail,
             AddDiagnoseSuccess,

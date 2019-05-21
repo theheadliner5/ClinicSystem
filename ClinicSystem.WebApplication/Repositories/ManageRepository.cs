@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Interfaces;
@@ -171,6 +172,49 @@ namespace ClinicSystem.WebApplication.Repositories
                 UserName = e.ASPNETUSERS.USERNAME,
                 RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME
             });
+        }
+
+        public IEnumerable<DISEASE> GetAllDiseases()
+        {
+            return _db.DISEASE.ToList();
+        }
+
+        public void SaveDisease(DISEASE disease)
+        {
+            _db.DISEASE.Add(disease);
+            _db.SaveChanges();
+        }
+
+        public DISEASE GetDiseaseById(long diseaseId)
+        {
+            return _db.DISEASE.SingleOrDefault(e => e.ID == diseaseId);
+        }
+
+        public void UpdateDisease(long diseaseId, string code, string description)
+        {
+            var existingDisease = _db.DISEASE.FirstOrDefault(e => e.ID == diseaseId);
+
+            if (existingDisease != null)
+            {
+                existingDisease.CODE = code;
+                existingDisease.CODE_DESCRIPTION = description;
+            }
+
+            _db.SaveChanges();
+        }
+
+        public bool RemoveDisease(long diseaseId)
+        {
+            var disease = _db.DISEASE.FirstOrDefault(e => e.ID == diseaseId);
+
+            if (disease != null && !disease.PATIENT_DIAGNOSE.Any())
+            {
+                _db.DISEASE.Remove(disease);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }

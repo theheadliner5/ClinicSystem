@@ -23,18 +23,21 @@
         <dd>
             <br />
         </dd>
-        <dt>Słowniki:</dt>
-        <dd>
-            [ @Html.ActionLink("Wyświetl słownik chorób", "Diseases") ]
-        </dd>
-        <dd>
-            [ @Html.ActionLink("Wyświetl plany budżetowe", "UnitPlans") ]
-        </dd>
-        <dd>
-            <br />
-        </dd>
+        @if (User.IsInRole("DOCTOR") || User.IsInRole("MANAGER") || User.IsInRole("ADMINISTRATOR"))
+        {
+            <dt>Słowniki:</dt>
+            <dd>
+                [ @Html.ActionLink("Wyświetl słownik chorób", "Diseases") ]
+            </dd>
+        }
         @if (User.IsInRole("MANAGER") || User.IsInRole("ADMINISTRATOR"))
         {
+            <dd>
+                [ @Html.ActionLink("Wyświetl plany budżetowe", "UnitPlans") ]
+            </dd>
+            <dd>
+                <br />
+            </dd>
             <dt>Zarejestrowani użytkownicy:</dt>
             <dd>
                 @if (Model.RegisteredUsers.Any())

@@ -1,7 +1,7 @@
 ﻿@model ClinicSystem.WebApplication.Models.AddUnitPlanViewModel
 
 @{
-    ViewBag.Title = "Dodaj plan budżetu";
+    ViewBag.Title = "Dodaj/edytuj plan budżetu";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -9,7 +9,7 @@
 @using (Html.BeginForm("AddUnitPlan", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Formularz dodawania planu budżetu dla przychodni</h4>
+    <h4>Formularz dodawania/edytowania planu budżetu dla przychodni</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.UnitPlanId)

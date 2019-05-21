@@ -130,6 +130,26 @@ namespace ClinicSystem.WebApplication.Repositories
 
             var employeeId = employee?.ID ?? _db.EMPLOYEE.FirstOrDefault()?.ID;
 
+            var existingEmployeeCost = _db.EMPLOYEE_COST.FirstOrDefault(e => e.UNIT_PLAN_ID == unitPlan.ID);
+
+            if (existingEmployeeCost != null)
+            {
+                existingEmployeeCost.EMPLOYEE_COST1 += cost;
+                existingEmployeeCost.LAST_MOD_DATE = DateTime.Now;
+                existingEmployeeCost.REALIZATION_DATE = DateTime.Now;
+            }
+            else
+            {
+                _db.EMPLOYEE_COST.Add(new EMPLOYEE_COST
+                {
+                    LAST_MOD_DATE = DateTime.Now,
+                    EMPLOYEE = employee,
+                    EMPLOYEE_COST1 = cost,
+                    REALIZATION_DATE = DateTime.Now,
+                    UNIT_PLAN = unitPlan
+                });
+            }
+
             var diagnostics = new DIAGNOSTICS
             {
                 LAST_MOD_DATE = DateTime.Now,

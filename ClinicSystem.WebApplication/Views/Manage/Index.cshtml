@@ -36,6 +36,9 @@
                 [ @Html.ActionLink("Wyświetl plany budżetowe", "UnitPlans") ]
             </dd>
             <dd>
+                [ @Html.ActionLink("Wyświetl przychodnie i oddziały", "Clinics") ]
+            </dd>
+            <dd>
                 <br />
             </dd>
             <dt>Zarejestrowani użytkownicy:</dt>
@@ -49,6 +52,7 @@
                         columns.Add(c => c.UserName).Titled("Login");
                         columns.Add(c => c.Pesel).Titled("PESEL");
                         columns.Add(c => c.RoleName).Titled("Rola");
+                        columns.Add(c => c.EmplacementName).Titled("Stanowisko");
                         columns.Add().Sanitized(false).Encoded(false).RenderValueAs(user => Html.ActionLink("Zarejestruj/edytuj pracownika", "RegisterEmployee", new { personId = user.PersonId }, null).ToHtmlString());
                     }).WithPaging(10).Sortable(true).Filterable(true)
                 }
@@ -60,12 +64,10 @@
             <dd>
                 <br />
             </dd>
-            <dt>Operacje:</dt>
             <dd>
-                @Html.ActionLink("Dodaj przychodnię", "AddClinic", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                @Html.ActionLink("Dodaj oddział dla przychodni", "AddUnit", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                @Html.ActionLink("Dodaj typ oddziału", "AddUnitType", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
-                @Html.ActionLink("Dodaj stanowisko pracownika", "AddEmplacement", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                <div align="right">
+                    @Html.ActionLink("Dodaj stanowisko", "AddEmplacement", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })
+                </div>
             </dd>
         }
     </dl>

@@ -170,7 +170,8 @@ namespace ClinicSystem.WebApplication.Repositories
                 LastName = e.LAST_NAME,
                 Pesel = e.PESEL,
                 UserName = e.ASPNETUSERS.USERNAME,
-                RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME
+                RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME,
+                EmplacementName = _db.EMPLOYEE.FirstOrDefault(q => q.PERSON_ID == e.ID)?.EMPLACEMENT?.EMPLACEMENT_NAME ?? "Nie dotyczy"
             });
         }
 
@@ -251,6 +252,69 @@ namespace ClinicSystem.WebApplication.Repositories
             }
 
             _db.SaveChanges();
+        }
+
+        public bool RemoveUnitPlan(long unitPlanId)
+        {
+            var unitPlan = _db.UNIT_PLAN.FirstOrDefault(e => e.ID == unitPlanId);
+
+            if (unitPlan != null && !unitPlan.DIAGNOSTICS.Any() && !unitPlan.EMPLOYEE_COST.Any())
+            {
+                _db.UNIT_PLAN.Remove(unitPlan);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public IEnumerable<ClinicDto> GetAllClinicDtos()
+        {
+            return _db.CLINIC.ToList().Select(e => new ClinicDto
+            {
+                Id = e.ID,
+                Name = e.NAME,
+                Address = e.ADDRESS,
+                Units = string.Join(", ", GetAllUnitsNamesForClinic(e.ID))
+            });
+        }
+
+        public CLINIC GetClinicById(long clinicId)
+        {
+            return _db.CLINIC.FirstOrDefault(e => e.ID == clinicId);
+        }
+
+        public void UpdateClinic(long clinicId, string name, string address)
+        {
+            var existingClinic = _db.CLINIC.FirstOrDefault(e => e.ID == clinicId);
+
+            if (existingClinic != null)
+            {
+                existingClinic.LAST_MOD_DATE = DateTime.Now;
+                existingClinic.NAME = name;
+                existingClinic.ADDRESS = address;
+            }
+
+            _db.SaveChanges();
+        }
+
+        public bool RemoveClinic(long clinicId)
+        {
+            var clinic = _db.CLINIC.FirstOrDefault(e => e.ID == clinicId);
+
+            if (clinic != null && !clinic.PATIENT_VISIT.Any() && !clinic.UNIT.Any())
+            {
+                _db.CLINIC.Remove(clinic);
+                _db.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        private string[] GetAllUnitsNamesForClinic(long clinicId)
+        {
+            return _db.UNIT.Where(e => e.CLINIC_ID == clinicId).ToList().Select(e => e.UNIT_TYPE.UNIT_NAME).ToArray();
         }
     }
 }

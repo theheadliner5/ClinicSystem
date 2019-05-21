@@ -34,12 +34,8 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Hasło zostało zmienione."
-                : message == ManageMessageId.AddClinicSuccess ? "Przychodnia została dodana."
                 : message == ManageMessageId.AddEmployeeSuccess ? "Pracownik dodany/edytowany poprawnie"
-                : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
-                : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
                 : message == ManageMessageId.AddEmplacementSuccess ? "Stanowisko dodane poprawnie"
-                : message == ManageMessageId.AddUnitTypeSuccess ? "Plan budżetu dodany poprawnie"
                 : message == ManageMessageId.Error ? "Wystąpił nieoczekiwany błąd."
                 : "";
 
@@ -145,24 +141,73 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.AddEmployeeSuccess });
         }
 
-        public ActionResult AddClinic()
+        public ActionResult Clinics(ManageMessageId? message)
         {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.AddClinicSuccess ? "Poprawnie dodano/edytowano przychodnię"
+                : message == ManageMessageId.AddUnitTypeSuccess ? "Typ oddziału dodany poprawnie"
+                : message == ManageMessageId.AddUnitSuccess ? "Oddział dodany poprawnie"
+                : message == ManageMessageId.RemoveClinicSuccess ? "Przychodnia usunięta poprawnie"
+                : message == ManageMessageId.RemoveClinicFail ? "Nie udało się usunąć przychodni, dane są używane w innych obiektach aplikacji"
+                : "";
+
+            var model = new ClinicsViewModel
+            {
+                ClinicDtos = _manageRepository.GetAllClinicDtos()
+            };
+
+            return View(model);
+        }
+
+        public ActionResult AddClinic(long? clinicId)
+        {
+            if (clinicId.HasValue)
+            {
+                var clinic = _manageRepository.GetClinicById(clinicId.Value);
+                var model = new AddClinicViewModel
+                {
+                    ClinicId = clinic.ID,
+                    Name = clinic.NAME,
+                    Address = clinic.ADDRESS,
+                };
+
+                return View(model);
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult AddClinic(AddClinicViewModel model)
         {
-            var clinic = new CLINIC
+            if (model.ClinicId.HasValue)
             {
-                LAST_MOD_DATE = DateTime.Now,
-                ADDRESS = model.Address,
-                NAME = model.Name
-            };
+                _manageRepository.UpdateClinic(model.ClinicId.Value, model.Name, model.Address);
+            }
+            else
+            {
+                var clinic = new CLINIC
+                {
+                    LAST_MOD_DATE = DateTime.Now,
+                    ADDRESS = model.Address,
+                    NAME = model.Name
+                };
 
-            _manageRepository.CreateClinic(clinic);
+                _manageRepository.CreateClinic(clinic);
+            }
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.AddClinicSuccess });
+            return RedirectToAction("Clinics", new { Message = ManageMessageId.AddClinicSuccess });
+        }
+
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        public ActionResult RemoveClinic(long clinicId)
+        {
+            var removed = _manageRepository.RemoveClinic(clinicId);
+
+            return RedirectToAction("Clinics",
+                removed
+                    ? new { Message = ManageMessageId.RemoveClinicSuccess }
+                    : new { Message = ManageMessageId.RemoveClinicFail });
         }
 
         public ActionResult AddUnit()
@@ -190,7 +235,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             _manageRepository.CreateUnit(unit);
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitSuccess }); ;
+            return RedirectToAction("Clinics", new { Message = ManageMessageId.AddUnitSuccess }); ;
         }
 
         public ActionResult AddUnitType()
@@ -209,7 +254,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             _manageRepository.CreateUnitType(unitType);
 
-            return RedirectToAction("Index", new { Message = ManageMessageId.AddUnitTypeSuccess }); ;
+            return RedirectToAction("Clinics", new { Message = ManageMessageId.AddUnitTypeSuccess }); ;
         }
 
         public ActionResult AddEmplacement()
@@ -230,7 +275,7 @@ namespace ClinicSystem.WebApplication.Controllers
 
             return RedirectToAction("Index", new { Message = ManageMessageId.AddEmplacementSuccess });
         }
-        
+
         public ActionResult Diseases(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -301,6 +346,8 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.AddUnitPlanSuccess ? "Poprawnie dodano/edytowano plan budżetowy" :
+                message == ManageMessageId.RemoveUnitPlanSuccess ? "Poprawnie usunięto plan budżetowy" :
+                message == ManageMessageId.RemoveUnitPlanFail ? "Nie udało się usunąć planu budżetowego, dane są używane w innych obiektach aplikacji" :
                 "";
 
             var model = new UnitPlansViewModel
@@ -358,6 +405,17 @@ namespace ClinicSystem.WebApplication.Controllers
             return RedirectToAction("UnitPlans", new { Message = ManageMessageId.AddUnitPlanSuccess });
         }
 
+        [Authorize(Roles = "ADMINISTRATOR, MANAGER, DOCTOR")]
+        public ActionResult RemoveUnitPlan(long unitPlanId)
+        {
+            var removed = _manageRepository.RemoveUnitPlan(unitPlanId);
+
+            return RedirectToAction("UnitPlans",
+                removed
+                    ? new { Message = ManageMessageId.RemoveUnitPlanSuccess }
+                    : new { Message = ManageMessageId.RemoveUnitPlanFail });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -403,7 +461,11 @@ namespace ClinicSystem.WebApplication.Controllers
             Error,
             AddDiseaseSuccess,
             RemoveDiseaseSuccess,
-            RemoveDiseaseFail
+            RemoveDiseaseFail,
+            RemoveUnitPlanSuccess,
+            RemoveUnitPlanFail,
+            RemoveClinicSuccess,
+            RemoveClinicFail
         }
 
         #endregion

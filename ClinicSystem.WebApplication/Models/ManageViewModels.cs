@@ -82,6 +82,7 @@ namespace ClinicSystem.WebApplication.Models
 
     public class AddClinicViewModel
     {
+        public long? ClinicId { get; set; }
         [Required(ErrorMessage = "Pole Nazwa jest wymagane")]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
@@ -163,5 +164,10 @@ namespace ClinicSystem.WebApplication.Models
         [Required(ErrorMessage = "Wprowadź wartość w polu 'Opis'")]
         [Display(Name = "Opis")]
         public string Description { get; set; }
+    }
+
+    public class ClinicsViewModel
+    {
+        public IEnumerable<ClinicDto> ClinicDtos { get; set; }
     }
 }

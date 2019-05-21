@@ -18,6 +18,7 @@
     columns.Add(c => c.Value).Titled("Wartość");
     columns.Add(c => c.UnitDetails).Titled("Dane oddziału");
     columns.Add().Sanitized(false).Encoded(false).RenderValueAs(unitPlan => Html.ActionLink("Edytuj", "AddUnitPlan", new { unitPlanId = unitPlan.Id }, null).ToHtmlString());
+    columns.Add().Sanitized(false).Encoded(false).RenderValueAs(unitPlan => Html.ActionLink("Usuń", "RemoveUnitPlan", new { unitPlanId = unitPlan.Id }, null).ToHtmlString());
 }).WithPaging(10).Sortable(true).Filterable(true)
     <br />
     @Html.ActionLink("Dodaj plan budżetowy oddziału", "AddUnitPlan", "Manage", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })

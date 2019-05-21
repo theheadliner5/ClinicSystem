@@ -8,6 +8,7 @@ namespace ClinicSystem.Infrastructure.Dtos
 {
     public class ClinicDto
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Units { get; set; }

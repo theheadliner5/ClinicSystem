@@ -14,5 +14,6 @@ namespace ClinicSystem.Infrastructure.Dtos
         public string UserName { get; set; }
         public string Pesel { get; set; }
         public string RoleName { get; set; }
+        public string EmplacementName { get; set; }
     }
 }

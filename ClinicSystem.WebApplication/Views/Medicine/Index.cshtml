@@ -11,14 +11,14 @@
     <h4>Zarządzanie danymi lekarstw</h4>
     <hr />
     @Html.Grid(Model.MedicineDtos.ToList()).Columns(columns =>
-    {
-        columns.Add(c => c.Name).Titled("Nazwa");
-        columns.Add(c => c.ActiveIngredient).Titled("Składniki");
-        columns.Add(c => c.Cost).Titled("Cena");
-        columns.Add(c => c.BatchSeries).Titled("Seria");
-        columns.Add(c => c.ExpirationDate).Titled("Data przydatności");
-        columns.Add(c => c.Amount).Titled("Ilość");
-    }).WithPaging(10).Sortable(true).Filterable(true)
+{
+    columns.Add(c => c.Name).Titled("Nazwa");
+    columns.Add(c => c.ActiveIngredient).Titled("Składniki");
+    columns.Add(c => c.Cost).Titled("Cena");
+    columns.Add(c => c.BatchSeries).Titled("Seria");
+    columns.Add(c => c.ExpirationDate).Titled("Data przydatności").Format("{0:dd.MM.yyyy}"); ;
+    columns.Add(c => c.Amount).Titled("Ilość");
+}).WithPaging(10).Sortable(true).Filterable(true)
     <br/>
     <h4>Operacje:</h4>
     @Html.ActionLink("Dodaj lek", "AddMedicine", "Medicine", htmlAttributes: new { @class = "btn btn-primary", @role = "button" })

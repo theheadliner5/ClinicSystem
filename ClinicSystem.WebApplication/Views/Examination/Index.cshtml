@@ -28,14 +28,14 @@
                 @if (Model.UnitVisitDtos.Any())
                 {
                     @Html.Grid(Model.UnitVisitDtos).Columns(columns =>
-                    {
-                        columns.Add(c => c.DateFrom).Titled("Data od");
-                        columns.Add(c => c.DateTo).Titled("Data do");
-                        columns.Add(c => c.PersonName).Titled("Pacjent");
-                        columns.Add(c => c.PersonPesel).Titled("PESEL");
-                        columns.Add(c => c.PersonAddress).Titled("Adres");
-                        columns.Add().Sanitized(false).Encoded(false).RenderValueAs(visit => Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null).ToHtmlString());
-                    }).WithPaging(10).Sortable(true).Filterable(true)
+               {
+                   columns.Add(c => c.DateFrom).Titled("Data od").Format("{0:dd.MM.yyyy HH:mm}");
+                   columns.Add(c => c.DateTo).Titled("Data do").Format("{0:dd.MM.yyyy HH:mm}");
+                   columns.Add(c => c.PersonName).Titled("Pacjent");
+                   columns.Add(c => c.PersonPesel).Titled("PESEL");
+                   columns.Add(c => c.PersonAddress).Titled("Adres");
+                   columns.Add().Sanitized(false).Encoded(false).RenderValueAs(visit => Html.ActionLink("Szczegóły", "VisitDetails", new { visitId = visit.Id }, null).ToHtmlString());
+               }).WithPaging(10).Sortable(true).Filterable(true)
                 }
                 else
                 {

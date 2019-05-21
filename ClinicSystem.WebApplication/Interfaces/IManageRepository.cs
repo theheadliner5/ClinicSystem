@@ -37,5 +37,10 @@ namespace ClinicSystem.WebApplication.Interfaces
         IEnumerable<UnitPlanDto> GetUnitPlanDtos();
         UNIT_PLAN GetUnitPlanById(long unitPlanId);
         void UpdateUnitPlan(long unitPlanId, string budgetType, DateTime dateFrom, DateTime dateTo, long unitId, decimal value);
+        bool RemoveUnitPlan(long unitPlanId);
+        IEnumerable<ClinicDto> GetAllClinicDtos();
+        CLINIC GetClinicById(long clinicId);
+        void UpdateClinic(long clinicId, string name, string address);
+        bool RemoveClinic(long clinicId);
     }
 }

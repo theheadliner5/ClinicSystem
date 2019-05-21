@@ -24,8 +24,8 @@
                 <td>@Model.VisitDto.PersonName</td>
                 <td>@Model.VisitDto.PersonAddress</td>
                 <td>@Model.VisitDto.PersonPesel</td>
-                <td>@Model.VisitDto.DateFrom</td>
-                <td>@Model.VisitDto.DateTo</td>
+                <td>@Model.VisitDto.DateFrom.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@Model.VisitDto.DateTo.ToString("dd.MM.yyyy HH:mm")</td>
             </tr>
         </tbody>
     </table>
@@ -67,7 +67,7 @@
                     <td>@diagnostic.EXAMINATION.EXAMINATION_NAME</td>
                     <td>@diagnostic.EXAMINATION.COST</td>
                     <td>@(diagnostic.EMPLOYEE.PERSON.NAME + " " + diagnostic.EMPLOYEE.PERSON.LAST_NAME)</td>
-                    <td>@diagnostic.EXAMINATION_DATE.ToString("d")</td>
+                    <td>@diagnostic.EXAMINATION_DATE.ToString("dd.MM.yyyy")</td>
                 </tr>
             }
         </tbody>
@@ -88,7 +88,7 @@
             {
                 <tr>
                     <td>@medicine.DOSE</td>
-                    <td>@medicine.TREATMENT_DATE</td>
+                    <td>@medicine.TREATMENT_DATE.ToString("dd.MM.yyyy")</td>
                     <td>@medicine.MEDICINE_ORDER.MEDICINE_TYPE.MEDICINE_NAME</td>
                     <td>@medicine.MEDICINE_ORDER.MEDICINE_TYPE.ACTIVE_INGREDIENT</td>
                     <td>@medicine.MEDICINE_ORDER.COST</td>

@@ -62,7 +62,7 @@ namespace ClinicSystem.WebApplication.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Niepoprawny login lub hasło.");
                     return View(model);
             }
         }

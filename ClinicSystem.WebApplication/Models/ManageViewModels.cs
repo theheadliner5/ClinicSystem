@@ -159,6 +159,7 @@ namespace ClinicSystem.WebApplication.Models
     {
         public long? DiseaseId { get; set; }
         [Required(ErrorMessage = "Wprowadź wartość w polu 'Kod'")]
+        [StringLength(10, ErrorMessage = "Wartość w polu 'Kod' może mieć maksymalnie 10 znaków długości")]
         [Display(Name = "Kod")]
         public string Code { get; set; }
         [Required(ErrorMessage = "Wprowadź wartość w polu 'Opis'")]

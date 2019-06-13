@@ -266,6 +266,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Grid.mvc.readme" />
+    <None Include="Properties\PublishProfiles\clinic-system - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\clinic-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

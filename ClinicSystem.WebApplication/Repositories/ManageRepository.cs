@@ -178,8 +178,7 @@ namespace ClinicSystem.WebApplication.Repositories
                             employee?.EMPLOYEE2?.PERSON?.NAME + " " +
                             employee?.EMPLOYEE2?.PERSON?.LAST_NAME,
                         EmplacementName =
-                            employee?.EMPLACEMENT?.EMPLACEMENT_NAME ??
-                            "Nie dotyczy"
+                            employee?.EMPLACEMENT?.EMPLACEMENT_NAME
                     };
                 });
         }

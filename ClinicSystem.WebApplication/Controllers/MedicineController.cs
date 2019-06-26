@@ -67,6 +67,7 @@ namespace ClinicSystem.WebApplication.Controllers
         {
             var medicine = new MEDICINE_ORDER
             {
+                LAST_MOD_DATE = DateTime.Now,
                 MEDICINE_TYPE_ID = model.MedicineTypeId,
                 MEDICINE_BATCH_SERIES = model.BatchSeries,
                 COST = model.Cost ?? 0,

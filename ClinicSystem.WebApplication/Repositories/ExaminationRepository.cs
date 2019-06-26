@@ -56,7 +56,8 @@ namespace ClinicSystem.WebApplication.Repositories
                 DateFrom = e.DATE_FROM,
                 DateTo = e.DATE_TO.GetValueOrDefault(),
                 PersonAddress = e.PERSON.ADDRESS,
-                PersonPesel = e.PERSON.PESEL
+                PersonPesel = e.PERSON.PESEL,
+                ClinicNameAndAddress = e.CLINIC.NAME + ", " + e.CLINIC.ADDRESS
             });
         }
 

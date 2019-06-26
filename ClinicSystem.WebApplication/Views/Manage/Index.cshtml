@@ -53,6 +53,8 @@
                         columns.Add(c => c.Pesel).Titled("PESEL");
                         columns.Add(c => c.RoleName).Titled("Rola");
                         columns.Add(c => c.EmplacementName).Titled("Stanowisko");
+                        columns.Add(c => c.ClinicName).Titled("Przychodnia");
+                        columns.Add(c => c.SupervisorName).Titled("Przełożony");
                         columns.Add().Sanitized(false).Encoded(false).RenderValueAs(user => Html.ActionLink("Zarejestruj/edytuj pracownika", "RegisterEmployee", new { personId = user.PersonId }, null).ToHtmlString());
                     }).WithPaging(10).Sortable(true).Filterable(true)
                 }

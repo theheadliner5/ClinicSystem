@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Web;
 using ClinicSystem.Infrastructure.Dtos;
 using ClinicSystem.Infrastructure.Interfaces;
 using ClinicSystem.Infrastructure.Model;
@@ -163,16 +161,27 @@ namespace ClinicSystem.WebApplication.Repositories
         public IEnumerable<RegisteredUserDto> GetAllRegisteredUsers()
         {
             return _db.PERSON.Where(e => e.ASPNETUSERS.ASPNETROLES.All(q => q.NAME != "ADMINISTRATOR"))
-                .ToList().Select(e => new RegisteredUserDto
-            {
-                PersonId = e.ID,
-                Name = e.NAME,
-                LastName = e.LAST_NAME,
-                Pesel = e.PESEL,
-                UserName = e.ASPNETUSERS.USERNAME,
-                RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME,
-                EmplacementName = _db.EMPLOYEE.FirstOrDefault(q => q.PERSON_ID == e.ID)?.EMPLACEMENT?.EMPLACEMENT_NAME ?? "Nie dotyczy"
-            });
+                .ToList().Select(e =>
+                {
+                    var employee = _db.EMPLOYEE.FirstOrDefault(q => q.PERSON_ID == e.ID);
+
+                    return new RegisteredUserDto
+                    {
+                        PersonId = e.ID,
+                        Name = e.NAME,
+                        LastName = e.LAST_NAME,
+                        Pesel = e.PESEL,
+                        UserName = e.ASPNETUSERS.USERNAME,
+                        RoleName = e.ASPNETUSERS.ASPNETROLES.SingleOrDefault()?.NAME,
+                        ClinicName = employee?.UNIT?.CLINIC?.NAME,
+                        SupervisorName =
+                            employee?.EMPLOYEE2?.PERSON?.NAME + " " +
+                            employee?.EMPLOYEE2?.PERSON?.LAST_NAME,
+                        EmplacementName =
+                            employee?.EMPLACEMENT?.EMPLACEMENT_NAME ??
+                            "Nie dotyczy"
+                    };
+                });
         }
 
         public IEnumerable<DISEASE> GetAllDiseases()

@@ -323,6 +323,7 @@ namespace ClinicSystem.WebApplication.Controllers
             {
                 _manageRepository.SaveDisease(new DISEASE
                 {
+                    LAST_MOD_DATE = DateTime.Now,
                     CODE = model.Code,
                     CODE_DESCRIPTION = model.Description
                 });
